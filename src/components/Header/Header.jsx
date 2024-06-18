@@ -19,14 +19,10 @@ function Header({ isLoggedIn }) {
               <button className="header__buttons-articals" type="button">
                 Saved articles
               </button>
-              <button className="header__buttons-elise" type="button">
-                Elise
-              </button>
-              <img
-                src="../../images/logout.svg"
-                className="header__buttons-elise-image"
-                alt="img"
-              />
+              <div className="header__elise">
+                <p className="header__elise-title">Elise</p>
+                <button className="header__elise-button" type="button"></button>
+              </div>
             </div>
           </>
         ) : (

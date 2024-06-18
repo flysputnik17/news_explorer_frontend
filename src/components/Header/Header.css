@@ -25,6 +25,8 @@
 .header__buttons {
   align-self: center;
   padding: 0;
+  display: flex;
+  align-items: center;
 }
 
 .header__buttons-homeButton {
@@ -67,7 +69,8 @@
   color: white;
 }
 
-.header__buttons-elise {
+.header__elise {
+  display: flex;
   width: 112px;
   height: 48px;
   padding: 0;
@@ -75,12 +78,28 @@
   margin-left: 64px;
   border: 1px outset;
   border-radius: 30px;
-  background-color: transparent;
   color: white;
 }
-
-.header__buttons-elise-image {
+.header__elise-title {
+  margin: 12px 0 12px 19px;
+  padding: 0;
+  width: 56px;
+  height: 24px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
+.header__elise-button {
+  padding: 0;
+  margin: 12px 15px 12px 0;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
   color: white;
+  background-image: url("../../images/logout.svg");
+  background-repeat: no-repeat;
+  background-position: right;
 }
 
 .header__buttons-homeButton:hover {
@@ -97,7 +116,8 @@
   cursor: pointer;
   transform: scale(1.1, 1.1);
 }
-.header__buttons-elise:hover {
+
+.header__elise:hover {
   cursor: pointer;
   transform: scale(1.1, 1.1);
 }

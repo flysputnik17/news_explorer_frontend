@@ -1,0 +1,10 @@
+.main {
+  max-width: 1440px;
+  max-height: 80px;
+  background-color: transparent;
+  border-bottom: 1px solid #c4c4c403;
+}
+.main__unsinged {
+  display: flex;
+  justify-content: space-between;
+}
