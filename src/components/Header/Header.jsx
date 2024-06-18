@@ -1,7 +1,7 @@
 // import { Link } from "react-router-dom";
 import "./Header.css";
 
-function Header({ isLoggedIn }) {
+const Header = ({ isLoggedIn }) => {
   return (
     <header className="header">
       <div className="header__content">
@@ -43,6 +43,6 @@ function Header({ isLoggedIn }) {
       </div>
     </header>
   );
-}
+};
 
 export default Header;

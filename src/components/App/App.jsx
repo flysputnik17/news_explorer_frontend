@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import About from "../About/About";
 
 import "./App.css";
 import Header from "../Header/Header";
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/"></Route>
         </Routes> */}
       </div>
+      <About />
     </div>
   );
 }

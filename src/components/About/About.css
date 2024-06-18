@@ -1,0 +1,8 @@
+.about {
+  max-width: 1440px;
+  max-height: 100%;
+}
+.about__img {
+  width: 464px;
+  height: 464px;
+}
