@@ -1,14 +1,13 @@
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 const Header = ({ isLoggedIn }) => {
   return (
     <header className="header">
       <div className="header__content">
-        {/* <Link to="/">
-          
-        </Link> */}
-        <h1 className="header__title">NewsExplorer</h1>
+        <Link to="/" className="header__title">
+          NewsExplorer
+        </Link>
 
         {isLoggedIn ? (
           <>

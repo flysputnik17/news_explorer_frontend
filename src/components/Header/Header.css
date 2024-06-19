@@ -3,6 +3,7 @@
   max-height: 80px;
   background-color: transparent;
   border-bottom: 1px solid #ffffff33;
+  font-family: "roboto";
 }
 
 .header__content {
@@ -11,6 +12,8 @@
 }
 
 .header__title {
+  text-decoration: none;
+  font-family: "roboto slab";
   width: 200px;
   height: 24px;
   font-weight: 700;

@@ -1,0 +1,78 @@
+.search {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+}
+
+.search__text {
+  width: 608px;
+  margin: 80px auto 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.search__text-title {
+  font-family: "roboto slab";
+  margin: 0;
+  font-weight: 400;
+  font-size: 60px;
+  line-height: 64px;
+  display: inline-block;
+  text-align: start;
+}
+
+.search__text-paragraph {
+  font-family: "roboto";
+  margin: 32px 0 0 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.search__searchBar {
+  margin: 88px auto 80px;
+  width: 608px;
+  height: 64px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 30px;
+}
+
+.search__searchBar-input {
+  padding: 0;
+  width: 376px;
+  height: 22px;
+  border: none;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  position: absolute;
+  left: 0;
+  margin: 21px 208px 21px 24px;
+}
+
+.search__searchBar-button {
+  font-family: "roboto";
+  padding: 0;
+  width: 168px;
+  height: 64px;
+  background-color: #2f71e5;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  position: absolute;
+  right: 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+}
+.search__searchBar-button:hover {
+  cursor: pointer;
+}

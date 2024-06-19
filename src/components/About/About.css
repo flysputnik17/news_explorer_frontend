@@ -1,8 +1,40 @@
 .about {
   max-width: 1440px;
-  max-height: 100%;
+  max-height: 624px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 .about__img {
   width: 464px;
   height: 464px;
+  background-image: url("../../images/avatar.svg");
+  margin: 80px 56px 80px 104px;
+}
+
+.about__text {
+  width: 600px;
+  margin-top: 131px;
+  margin-bottom: 303px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: #1a1b22;
+}
+.about__text-title {
+  margin: 0;
+  height: 46px;
+  font-family: "roboto slab";
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
+}
+.about__text-paragraph {
+  margin: 0;
+  margin-top: 24px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: start;
+  font-family: "roboto";
 }

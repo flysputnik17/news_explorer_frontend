@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "roboto slab";
+  src: url("./roboto-slab-700.woff") format("woff2");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "roboto";
+  src: url("./roboto-500.woff2") format("woff2");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "roboto slab";
+  src: url("./roboto-slab-400-regular.woff2") format("woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "roboto";
+  src: url("./roboto-400-regular.woff2") format("woff2");
+  font-weight: 400;
+}
