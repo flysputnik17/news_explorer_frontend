@@ -8,8 +8,8 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [mainRoute, setMainRoute] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [mainRoute, setMainRoute] = useState(false);
 
   const homeButtonClick = () => {
     if (mainRoute === true) {

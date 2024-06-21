@@ -26,3 +26,9 @@
   src: url("./roboto-400-regular.woff2") format("woff2");
   font-weight: 400;
 }
+
+@font-face {
+  font-family: "roboto";
+  src: url("./roboto-500.woff2") format("woff2");
+  font-weight: 500;
+}

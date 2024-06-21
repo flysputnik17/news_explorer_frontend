@@ -1,0 +1,120 @@
+.newsCard {
+  max-width: 400px;
+  max-height: 576px;
+  border: none;
+  border-radius: 19px;
+  background-color: white;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  position: relative;
+}
+.newsCard-img {
+  width: 400px;
+  height: 272px;
+  background-image: url("../../images/image_08.svg");
+  background-color: transparent;
+  object-fit: cover;
+  margin: 0 auto;
+}
+.newsCard__saveButton {
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  background-image: url("../../images/Rectangle8.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  border: none;
+  border-radius: 10px;
+}
+
+.newsCard-date {
+  width: 149px;
+  height: 24px;
+  margin: 20px auto 12px 24px;
+  font-family: "roboto";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #b6bcbf;
+}
+.newsCard-title {
+  width: 352px;
+  height: 60px;
+  margin: 0 24px 16px 24px;
+  text-align: start;
+  font-family: "roboto slab";
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30px;
+  color: #1a1b22;
+}
+.newsCard-text {
+  margin: 0;
+  width: 352px;
+  text-align: start;
+  font-family: "roboto slab";
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 22px;
+  color: #1a1b22;
+}
+
+.newsCard-sorce {
+  margin: 18px auto 24px 24px;
+  font-family: "roboto slab";
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  color: #b6bcbf;
+}
+
+.newsCard__saveBlock {
+  visibility: visible;
+  width: 142px;
+  height: 40px;
+  background: #ffffff;
+  border-radius: 10px;
+  position: absolute;
+  right: 68px;
+  top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.newsCard__saveArtical {
+  margin: 0;
+  padding: 0;
+  color: black;
+  font-family: "roboto";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+}
+
+.newsCard__saveButton:hover {
+  background-image: url("../../images/Rectangle7.svg");
+  cursor: pointer;
+}
+.newsCard__saveBlock-hidden {
+  visibility: hidden;
+  width: 142px;
+  height: 40px;
+  background: #ffffff;
+  border-radius: 10px;
+  position: absolute;
+  right: 68px;
+  top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.newsCard__saveButton-clicked {
+  background-image: url("../../images/Rectanglesaved.svg");
+}

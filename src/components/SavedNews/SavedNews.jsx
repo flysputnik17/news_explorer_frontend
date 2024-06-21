@@ -1,4 +1,5 @@
 import "./SavedNews.css";
+import NewsCard from "../NewsCard/NewsCard";
 
 const SavedNews = () => {
   return (
@@ -8,6 +9,7 @@ const SavedNews = () => {
         <h3 className="saved__username">Elise, you have 5 saved articles</h3>
         <h4 className="saved__cate">Elise, you have 5 saved articles</h4>
       </div>
+
       <div></div>
     </div>
   );
