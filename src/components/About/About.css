@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  background-color: white;
 }
 .about__img {
   width: 464px;

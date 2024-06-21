@@ -1,5 +1,6 @@
 import "./Main.css";
 import SearchSection from "../Search/Search";
+import About from "../About/About";
 
 const Main = ({ isLoggedIn }) => {
   return (
@@ -7,10 +8,12 @@ const Main = ({ isLoggedIn }) => {
       {isLoggedIn ? (
         <>
           <SearchSection />
+          <About />
         </>
       ) : (
         <>
           <SearchSection />
+          <About />
         </>
       )}
     </main>

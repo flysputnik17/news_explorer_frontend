@@ -10,7 +10,6 @@
   margin: 0 auto;
   background-color: transparent;
   background-image: url("../../images/background.svg");
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
-  background-position: center;
 }

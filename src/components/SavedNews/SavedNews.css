@@ -1,0 +1,45 @@
+.saved {
+  background-color: white;
+  max-width: 1440px;
+  display: flex;
+  flex-direction: column;
+}
+.saved__title {
+  max-width: 712px;
+  display: flex;
+  flex-direction: column;
+  margin: 40px auto 56px 104px;
+  text-align: start;
+}
+
+.saved__articals {
+  width: 712px;
+  height: 24px;
+  margin: 0;
+  font-family: "roboto";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1a1b2280;
+}
+
+.saved__username {
+  width: 530px;
+  height: 92px;
+  margin: 28px 182px 30px 0;
+  font-family: "roboto slab";
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 46px;
+  color: #1a1b22;
+}
+.saved__cate {
+  margin: 0;
+  width: 712px;
+  height: 24px;
+  font-family: "roboto";
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 24px;
+  color: #1a1b22;
+}

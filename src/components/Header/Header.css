@@ -33,6 +33,7 @@
 }
 
 .header__buttons-homeButton {
+  text-decoration: none;
   width: 49px;
   height: 24px;
   font-weight: 500;
@@ -45,6 +46,7 @@
 }
 
 .header__buttons-articals {
+  text-decoration: none;
   width: 114px;
   height: 24px;
   font-weight: 500;
@@ -123,4 +125,85 @@
 .header__elise:hover {
   cursor: pointer;
   transform: scale(1.1, 1.1);
+}
+
+.header__saved {
+  max-width: 1440px;
+  max-height: 80px;
+  background-color: white;
+  border-bottom: 1px solid #ffffff33;
+  font-family: "roboto";
+}
+
+.header__saved-title {
+  text-decoration: none;
+  font-family: "roboto slab";
+  width: 200px;
+  height: 24px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: rgb(0, 0, 0);
+  margin: 30px 0 26px 104px;
+  padding: 0;
+  cursor: pointer;
+}
+.header__saved-buttons {
+  align-self: center;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.header__saved-buttons-homeButton {
+  text-decoration: none;
+  width: 49px;
+  height: 24px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: black;
+  cursor: pointer;
+}
+.header__saved-buttons-articals {
+  text-decoration: none;
+  width: 114px;
+  height: 24px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: rgb(0, 0, 0);
+  margin-left: 76px;
+  cursor: pointer;
+}
+.header__saved-elise {
+  display: flex;
+  width: 112px;
+  height: 48px;
+  padding: 0;
+  margin-right: 104px;
+  margin-left: 64px;
+  border: 1px outset;
+  border-radius: 30px;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+.header__saved-elise-button {
+  padding: 0;
+  margin: 12px 15px 12px 0;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  color: rgb(0, 0, 0);
+  background-image: url("../../images/Union.svg");
+  background-repeat: no-repeat;
+  background-position: right;
+  cursor: pointer;
 }

@@ -3,6 +3,11 @@
   src: url("./roboto-slab-700.woff") format("woff2");
   font-weight: 700;
 }
+@font-face {
+  font-family: "roboto";
+  src: url("./roboto-700.woff2") format("woff2");
+  font-weight: 700;
+}
 
 @font-face {
   font-family: "roboto";
