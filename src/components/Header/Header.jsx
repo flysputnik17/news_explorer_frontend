@@ -8,6 +8,7 @@ const Header = ({
   homeButtonClick,
   logoButtonClick,
   savedNewsClick,
+  handleSignIn,
 }) => {
   const [headerStyle, setHeaderStyle] = useState("header");
   const [headerTitle, setHeaderTitle] = useState("header__title");
@@ -84,6 +85,7 @@ const Header = ({
                 Home
               </button>
               <button
+                onClick={handleSignIn}
                 className="header__unsigned-buttons-signInButton"
                 type="button"
               >

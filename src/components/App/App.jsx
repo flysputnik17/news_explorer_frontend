@@ -7,9 +7,32 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
+import SignupPopup from "../SignupPopup/SignupPopup";
+import SigninPopup from "../SigninPopup/SigninPopup";
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mainRoute, setMainRoute] = useState(false);
+  const [activeModal, setActiveModal] = useState("");
+
+  const handleSignUp = () => {
+    setActiveModal("sign-up");
+  };
+  const handleSignIn = () => {
+    setActiveModal("sign-in");
+  };
+
+  const handleSignupButton = () => {
+    closeActiveModal();
+    handleSignUp();
+  };
+  const handleSignInButton = () => {
+    closeActiveModal();
+    handleSignIn();
+  };
+
+  const closeActiveModal = () => {
+    setActiveModal("");
+  };
 
   const homeButtonClick = () => {
     if (mainRoute === true) {
@@ -43,6 +66,7 @@ function App() {
           homeButtonClick={homeButtonClick}
           logoButtonClick={logoButtonClick}
           savedNewsClick={savedNewsClick}
+          handleSignIn={handleSignIn}
         />
         <Routes>
           <Route
@@ -55,6 +79,20 @@ function App() {
       </div>
 
       <Footer />
+      {activeModal === "sign-up" && (
+        <SignupPopup
+          isOpen={activeModal === "sign-up"}
+          onClose={closeActiveModal}
+          handleSignInButton={handleSignInButton}
+        />
+      )}
+      {activeModal === "sign-in" && (
+        <SigninPopup
+          isOpen={activeModal === "sign-in"}
+          onClose={closeActiveModal}
+          handleSignupButton={handleSignupButton}
+        />
+      )}
     </div>
   );
 }

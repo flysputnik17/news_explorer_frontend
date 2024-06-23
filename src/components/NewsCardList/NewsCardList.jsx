@@ -1,7 +1,7 @@
-import "./SearchResults.css";
+import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 
-const SearchResults = ({ isLoggedIn }) => {
+const NewsCardList = ({ isLoggedIn }) => {
   return (
     <>
       <div className="searchResult">
@@ -20,4 +20,4 @@ const SearchResults = ({ isLoggedIn }) => {
     </>
   );
 };
-export default SearchResults;
+export default NewsCardList;

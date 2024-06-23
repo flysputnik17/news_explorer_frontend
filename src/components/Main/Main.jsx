@@ -1,7 +1,7 @@
 import "./Main.css";
-import SearchSection from "../Search/Search";
+import SearchSection from "../SearchForm/SearchForm";
 import About from "../About/About";
-import SearchResults from "../SearchResults/SearchResults";
+import NewsCardList from "../NewsCardList/NewsCardList";
 
 const Main = ({ isLoggedIn }) => {
   return (
@@ -9,13 +9,13 @@ const Main = ({ isLoggedIn }) => {
       {isLoggedIn ? (
         <>
           <SearchSection />
-          <SearchResults isLoggedIn={isLoggedIn} />
+          <NewsCardList isLoggedIn={isLoggedIn} />
           <About />
         </>
       ) : (
         <>
           <SearchSection />
-          <SearchResults isLoggedIn={isLoggedIn} />
+          <NewsCardList isLoggedIn={isLoggedIn} />
           <About />
         </>
       )}
