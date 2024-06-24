@@ -113,15 +113,16 @@
 }
 
 .Or-Sign-Up__button {
+  font-family: "inter";
   padding: 0;
-  margin-left: 12px;
   border: none;
-  color: #00000080;
+  color: #2f71e5;
   cursor: pointer;
-  font-weight: 700;
-  font-size: 16px;
-  line-height: 20px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
   background-color: transparent;
+  margin-bottom: 28px;
 }
 
 .SignUp__button {
@@ -135,9 +136,23 @@
   padding: 0;
   border: 1px outset;
   border-radius: 30px;
-  background-color: #e6e8eb;
-  color: rgb(0, 0, 0);
+  background-color: #2f71e5;
+  color: #ffffff;
   cursor: pointer;
+}
+.SignUp__button-disabled {
+  font-family: "roboto";
+  width: 360px;
+  height: 64px;
+  margin: 39px auto 16px auto;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 0;
+  border: 1px outset;
+  border-radius: 30px;
+  background-color: #e6e8eb;
+  color: #b6bcbf;
 }
 
 .Or-Login__button {
