@@ -9,10 +9,36 @@ import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 import SignupPopup from "../SignupPopup/SignupPopup";
 import SigninPopup from "../SigninPopup/SigninPopup";
+import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [mainRoute, setMainRoute] = useState(false);
+  const [mainRoute, setMainRoute] = useState(true);
   const [activeModal, setActiveModal] = useState("");
+
+  //for closing modals with the Escape button
+  useEffect(() => {
+    if (!activeModal) return;
+    const handleExit = (evt) => {
+      if (evt.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+    document.addEventListener("keydown", handleExit);
+    return () => document.removeEventListener("keydown", handleExit);
+  }, [activeModal]);
+
+  //for closing modals with the click on the overly
+  useEffect(() => {
+    if (!activeModal) return;
+    const handleOverly = (evt) => {
+      if (evt.target.classList.contains("modal_opened")) {
+        closeActiveModal();
+      }
+    };
+    document.addEventListener("mousedown", handleOverly);
+    return () => document.removeEventListener("mousedown", handleOverly);
+  }, [activeModal]);
 
   const handleSignUp = () => {
     setActiveModal("sign-up");
@@ -21,17 +47,28 @@ function App() {
     setActiveModal("sign-in");
   };
 
-  const handleSignupButton = () => {
-    closeActiveModal();
-    handleSignUp();
-  };
-  const handleSignInButton = () => {
-    closeActiveModal();
-    handleSignIn();
+  const handleConfirm = () => {
+    setActiveModal("confirmation");
   };
 
   const closeActiveModal = () => {
     setActiveModal("");
+  };
+  const handleSignUpSuccess = () => {
+    console.log("click");
+    closeActiveModal();
+    handleConfirm();
+  };
+
+  const handleSignupButton = () => {
+    console.log("click");
+    closeActiveModal();
+    handleSignUp();
+  };
+  const handleSignInButton = () => {
+    console.log("click");
+    closeActiveModal();
+    handleSignIn();
   };
 
   const homeButtonClick = () => {
@@ -84,6 +121,7 @@ function App() {
           isOpen={activeModal === "sign-up"}
           onClose={closeActiveModal}
           handleSignInButton={handleSignInButton}
+          handleSignUpSuccess={handleSignUpSuccess}
         />
       )}
       {activeModal === "sign-in" && (
@@ -91,6 +129,13 @@ function App() {
           isOpen={activeModal === "sign-in"}
           onClose={closeActiveModal}
           handleSignupButton={handleSignupButton}
+        />
+      )}
+      {activeModal === "confirmation" && (
+        <ConfirmationPopup
+          isOpen={activeModal === "confirmation"}
+          onClose={closeActiveModal}
+          handleSignInButton={handleSignInButton}
         />
       )}
     </div>
