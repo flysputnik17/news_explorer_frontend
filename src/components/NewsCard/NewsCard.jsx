@@ -2,12 +2,20 @@ import { useEffect, useState } from "react";
 import "./NewsCard.css";
 
 const NewsCard = ({ isLoggedIn }) => {
-  // const needSignInClass = ` ${
-  //   isLoggedIn ? "newsCard__saveBlock - visibal" : "newsCard__saveBlock-hidden"
-  //   }`;
   const [saveArticalClass, setSaveArticalClass] = useState(
     "newsCard__saveBlock-hidden"
   );
+
+  const [likedCard, setLikedCard] = useState("newsCard__saveButton");
+  const handleLikedCard = () => {
+    if (isLoggedIn === false) {
+      return;
+    } else if (isLoggedIn === true && likedCard === "newsCard__saveButton") {
+      setLikedCard("newsCard__saveButton-liked");
+    } else {
+      setLikedCard("newsCard__saveButton");
+    }
+  };
 
   useEffect(() => {
     const hoverSaveButton = (evt) => {
@@ -28,7 +36,11 @@ const NewsCard = ({ isLoggedIn }) => {
     <div className="newsCard">
       <div className="newsCard-img"></div>
 
-      <button type="button" className="newsCard__saveButton"></button>
+      <button
+        type="button"
+        className={likedCard}
+        onClick={handleLikedCard}
+      ></button>
       <div className={saveArticalClass}>
         <p className="newsCard__saveArtical">Sign in to save articles</p>
       </div>

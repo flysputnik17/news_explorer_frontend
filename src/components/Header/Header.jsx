@@ -9,6 +9,7 @@ const Header = ({
   logoButtonClick,
   savedNewsClick,
   handleSignIn,
+  logout,
 }) => {
   const [headerStyle, setHeaderStyle] = useState("header");
   const [headerTitle, setHeaderTitle] = useState("header__title");
@@ -74,7 +75,11 @@ const Header = ({
               </Link>
               <div className={headerElise}>
                 <p className="header__elise-title">Elise</p>
-                <button className={headerEliseButton} type="button"></button>
+                <button
+                  className={headerEliseButton}
+                  type="button"
+                  onClick={logout}
+                ></button>
               </div>
             </div>
           </>

@@ -33,6 +33,21 @@
   border: none;
   border-radius: 10px;
 }
+.newsCard__saveButton-liked {
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  background-image: url("../../images/Rectangle9.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  border: none;
+  border-radius: 10px;
+}
 
 .newsCard-date {
   width: 149px;
@@ -114,7 +129,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-.newsCard__saveButton-clicked {
-  background-image: url("../../images/Rectanglesaved.svg");
 }

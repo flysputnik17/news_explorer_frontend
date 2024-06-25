@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 
 import SavedNews from "../SavedNews/SavedNews";
 
@@ -15,6 +15,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mainRoute, setMainRoute] = useState(true);
   const [activeModal, setActiveModal] = useState("");
+  const navigate = useNavigate();
 
   //for closing modals with the Escape button
   useEffect(() => {
@@ -94,6 +95,17 @@ function App() {
     }
   };
 
+  const checkloggedIn = (e) => {
+    e.preventDefault();
+    setIsLoggedIn(true);
+    closeActiveModal();
+  };
+  const logout = () => {
+    setIsLoggedIn(false);
+    setMainRoute("");
+    navigate("/");
+  };
+
   return (
     <div className="page">
       <div className="page__upper-content">
@@ -104,6 +116,7 @@ function App() {
           logoButtonClick={logoButtonClick}
           savedNewsClick={savedNewsClick}
           handleSignIn={handleSignIn}
+          logout={logout}
         />
         <Routes>
           <Route
@@ -129,6 +142,7 @@ function App() {
           isOpen={activeModal === "sign-in"}
           onClose={closeActiveModal}
           handleSignupButton={handleSignupButton}
+          checkloggedIn={checkloggedIn}
         />
       )}
       {activeModal === "confirmation" && (
