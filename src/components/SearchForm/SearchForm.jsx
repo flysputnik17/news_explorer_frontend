@@ -1,6 +1,18 @@
+import { useEffect, useState } from "react";
 import "./SearchForm.css";
 
-const SearchForm = () => {
+const SearchForm = ({ handleNewsSearch }) => {
+  const [news, setNews] = useState("");
+
+  const newsInput = (e) => {
+    setNews(e.target.value);
+  };
+
+  const submitSearch = (e) => {
+    e.preventDefault();
+    handleNewsSearch({ news });
+  };
+
   return (
     <div className="search">
       <div className="search__text">
@@ -19,8 +31,15 @@ const SearchForm = () => {
           type="text"
           className="search__searchBar-input"
           placeholder="Enter topic"
+          onChange={newsInput}
+          name="news"
+          id="news"
         ></input>
-        <button type="button" className="search__searchBar-button">
+        <button
+          type="button"
+          className="search__searchBar-button"
+          onClick={submitSearch}
+        >
           Search
         </button>
       </div>

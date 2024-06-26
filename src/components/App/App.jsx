@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 
 import SavedNews from "../SavedNews/SavedNews";
-
+import { APIkey, to, from, pageSize } from "../../utils/constants";
+import Api from "../../utils/ThirdPartyApi";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -11,10 +12,16 @@ import SignupPopup from "../SignupPopup/SignupPopup";
 import SigninPopup from "../SigninPopup/SigninPopup";
 import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
 
+const api = new Api({
+  baseUrl: "http://localhost:3000",
+  headers: { "Content-Type": "application/json" },
+});
+
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mainRoute, setMainRoute] = useState(true);
   const [activeModal, setActiveModal] = useState("");
+  const [newsCards, setNewsCards] = useState([]);
   const navigate = useNavigate();
 
   //for closing modals with the Escape button
@@ -40,6 +47,16 @@ function App() {
     document.addEventListener("mousedown", handleOverly);
     return () => document.removeEventListener("mousedown", handleOverly);
   }, [activeModal]);
+
+  const handleNewsSearch = (keyword) => {
+    api
+      .getNews({ keyword, APIkey, from, to, pageSize })
+      .then((res) => {
+        setNewsCards(res);
+        console.log(res);
+      })
+      .catch(console.error);
+  };
 
   const handleSignUp = () => {
     setActiveModal("sign-up");
@@ -124,12 +141,20 @@ function App() {
           <Route
             exact
             path="/"
-            element={<Main isLoggedIn={isLoggedIn} />}
+            element={
+              <Main
+                isLoggedIn={isLoggedIn}
+                newsCards={newsCards}
+                handleNewsSearch={handleNewsSearch}
+              />
+            }
           ></Route>
           <Route
             exact
             path="/saved-news"
-            element={<SavedNews isLoggedIn={isLoggedIn} />}
+            element={
+              <SavedNews isLoggedIn={isLoggedIn} newsCards={newsCards} />
+            }
           ></Route>
         </Routes>
       </div>

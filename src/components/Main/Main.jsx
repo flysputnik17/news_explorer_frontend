@@ -1,20 +1,20 @@
 import "./Main.css";
-import SearchSection from "../SearchForm/SearchForm";
+import SearchForm from "../SearchForm/SearchForm";
 import About from "../About/About";
 import NewsCardList from "../NewsCardList/NewsCardList";
 
-const Main = ({ isLoggedIn }) => {
+const Main = ({ isLoggedIn, handleNewsSearch }) => {
   return (
     <main className="main">
       {isLoggedIn ? (
         <>
-          <SearchSection />
+          <SearchForm handleNewsSearch={handleNewsSearch} />
           <NewsCardList isLoggedIn={isLoggedIn} />
           <About />
         </>
       ) : (
         <>
-          <SearchSection />
+          <SearchForm handleNewsSearch={handleNewsSearch} />
           <NewsCardList isLoggedIn={isLoggedIn} />
           <About />
         </>
