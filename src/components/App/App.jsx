@@ -66,8 +66,10 @@ function App() {
     closeActiveModal();
     handleSignUp();
   };
-  const handleSignInButton = () => {
+  const handleSignInButton = (e) => {
+    e.preventDefault();
     console.log("click");
+
     closeActiveModal();
     handleSignIn();
   };
@@ -124,7 +126,11 @@ function App() {
             path="/"
             element={<Main isLoggedIn={isLoggedIn} />}
           ></Route>
-          <Route exact path="/saved-news" element={<SavedNews />}></Route>
+          <Route
+            exact
+            path="/saved-news"
+            element={<SavedNews isLoggedIn={isLoggedIn} />}
+          ></Route>
         </Routes>
       </div>
 
