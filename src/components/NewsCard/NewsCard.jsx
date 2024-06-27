@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./NewsCard.css";
 
-const NewsCard = ({ isLoggedIn }) => {
+const NewsCard = ({ isLoggedIn, newsData }) => {
   const [saveArticalClass, setSaveArticalClass] = useState(
     "newsCard__saveBlock-hidden"
   );
@@ -34,7 +34,7 @@ const NewsCard = ({ isLoggedIn }) => {
 
   return (
     <div className="newsCard">
-      <div className="newsCard-img"></div>
+      <img className="newsCard-img" src={newsData.urlToImage} alt="img"></img>
 
       <button
         type="button"
@@ -45,18 +45,10 @@ const NewsCard = ({ isLoggedIn }) => {
         <p className="newsCard__saveArtical">Sign in to save articles</p>
       </div>
 
-      <p className="newsCard-date">November 4, 2020</p>
-      <h2 className="newsCard-title">
-        Everyone Needs a Special
-        <br /> 'Sit Spot' in Nature
-      </h2>
-      <p className="newsCard-text">
-        Ever since I read Richard Louv's influential book, "Last Child in the
-        Woods," the idea of having a special "sit spot" has stuck with me. This
-        advice, which Louv attributes to nature educator Jon Young, is for both
-        adults and children to find...
-      </p>
-      <p className="newsCard-sorce">Treehugger</p>
+      <p className="newsCard-date">{newsData.publishedAt}</p>
+      <h2 className="newsCard-title">{newsData.title}</h2>
+      <p className="newsCard-text">{newsData.description}</p>
+      <p className="newsCard-sorce">{newsData.source}</p>
     </div>
   );
 };

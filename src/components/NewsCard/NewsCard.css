@@ -13,7 +13,7 @@
 .newsCard-img {
   width: 400px;
   height: 272px;
-  background-image: url("../../images/image_08.svg");
+  /* background-image: url("../../images/image_08.svg"); */
   background-color: transparent;
   object-fit: cover;
   margin: 0 auto;

@@ -1,26 +1,24 @@
-export default class Api {
-  constructor({ baseUrl, headers }) {
-    this.baseUrl = baseUrl;
-    this.headers = headers;
-  }
+import { APIkey, to, from } from "./constants";
 
-  checkResponse(res) {
+export const getSearchResults = (keyWord) => {
+  const checkResponse = (res) => {
     if (res.ok) {
-      return res.json(); //returning the JSON objet in case the res is ok
+      return res.json();
+    } else {
+      return Promise.reject(`Error: ${res.status}`);
     }
-    console.error(res.status);
-    return Promise.reject(`Error:${res.status}`); //returning Error status
-  }
+  };
 
-  getNews({ keyword, APIkey, from, to, pageSize }) {
-    return fetch(
-      `${this.baseUrl}/everything/${keyword}/${APIkey}/${from}/${to}/${pageSize}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    ).then(this.checkResponse);
-  }
-}
+  return fetch(
+    `https://newsapi.org/v2/everything?q=${keyWord}&from=${from}&to=${to}&sortBy=popularity&apiKey=${APIkey}`
+  ).then(checkResponse);
+};
+
+// export const filterNews = (data) => {
+//   const result = [];
+//   result.source = data.source;
+//   result.title = data.title;
+//   result.publishedAt = data.publishedAt;
+//   result.description = data.description;
+//   result.urlToImage = data.urlToImage;
+// };

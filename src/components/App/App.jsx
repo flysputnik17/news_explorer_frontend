@@ -3,7 +3,7 @@ import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 
 import SavedNews from "../SavedNews/SavedNews";
 import { APIkey, to, from, pageSize } from "../../utils/constants";
-import Api from "../../utils/ThirdPartyApi";
+import { getSearchResults } from "../../utils/ThirdPartyApi";
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -12,16 +12,22 @@ import SignupPopup from "../SignupPopup/SignupPopup";
 import SigninPopup from "../SigninPopup/SigninPopup";
 import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
 
-const api = new Api({
-  baseUrl: "http://localhost:3000",
-  headers: { "Content-Type": "application/json" },
-});
+// const api = new Api({
+//   baseUrl: "https://newsapi.org/v2",
+//   headers: { "Content-Type": "application/json" },
+// });
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mainRoute, setMainRoute] = useState(true);
   const [activeModal, setActiveModal] = useState("");
-  const [newsCards, setNewsCards] = useState([]);
+  const [newsData, setNewsData] = useState({
+    source: "",
+    title: "",
+    publishedAt: "",
+    description: "",
+    urlToImage: "",
+  });
   const navigate = useNavigate();
 
   //for closing modals with the Escape button
@@ -49,13 +55,22 @@ function App() {
   }, [activeModal]);
 
   const handleNewsSearch = (keyword) => {
-    api
-      .getNews({ keyword, APIkey, from, to, pageSize })
+    getSearchResults(keyword)
       .then((res) => {
-        setNewsCards(res);
-        console.log(res);
+        console.log("res:", res);
+        const result = res.articles;
+
+        result.source = res.articles[0].source.name;
+        result.title = res.articles[0].title;
+        result.publishedAt = res.articles[0].publishedAt;
+        result.description = res.articles[0].description;
+        result.urlToImage = res.articles[0].urlToImage;
+
+        setNewsData(result);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.log("error:", err);
+      });
   };
 
   const handleSignUp = () => {
@@ -144,7 +159,7 @@ function App() {
             element={
               <Main
                 isLoggedIn={isLoggedIn}
-                newsCards={newsCards}
+                newsData={newsData}
                 handleNewsSearch={handleNewsSearch}
               />
             }
@@ -152,9 +167,7 @@ function App() {
           <Route
             exact
             path="/saved-news"
-            element={
-              <SavedNews isLoggedIn={isLoggedIn} newsCards={newsCards} />
-            }
+            element={<SavedNews isLoggedIn={isLoggedIn} newsData={newsData} />}
           ></Route>
         </Routes>
       </div>
