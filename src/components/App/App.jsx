@@ -28,6 +28,9 @@ function App() {
     description: "",
     urlToImage: "",
   });
+  const [searchClicked, setSearchClicked] = useState(false);
+  const [emptySearch, setEmptySearch] = useState(true);
+
   const navigate = useNavigate();
 
   //for closing modals with the Escape button
@@ -54,23 +57,31 @@ function App() {
     return () => document.removeEventListener("mousedown", handleOverly);
   }, [activeModal]);
 
+  //if there is no keyword the emprySearch will be ture so the Nothing found will render
+  //if there is a keyword the newsCardList will be render with the the data from the get req
   const handleNewsSearch = (keyword) => {
-    getSearchResults(keyword)
-      .then((res) => {
-        console.log("res:", res);
-        const result = res.articles;
+    setSearchClicked(true);
+    if (keyword === "") {
+      setEmptySearch(true);
+    } else {
+      setEmptySearch(false);
+      getSearchResults(keyword)
+        .then((res) => {
+          console.log("res:", res);
+          const result = res.articles;
 
-        result.source = res.articles[0].source.name;
-        result.title = res.articles[0].title;
-        result.publishedAt = res.articles[0].publishedAt;
-        result.description = res.articles[0].description;
-        result.urlToImage = res.articles[0].urlToImage;
+          result.source = res.articles[0].source.name;
+          result.title = res.articles[0].title;
+          result.publishedAt = res.articles[0].publishedAt;
+          result.description = res.articles[0].description;
+          result.urlToImage = res.articles[0].urlToImage;
 
-        setNewsData(result);
-      })
-      .catch((err) => {
-        console.log("error:", err);
-      });
+          setNewsData(result);
+        })
+        .catch((err) => {
+          console.log("error:", err);
+        });
+    }
   };
 
   const handleSignUp = () => {
@@ -161,6 +172,8 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 newsData={newsData}
                 handleNewsSearch={handleNewsSearch}
+                searchClicked={searchClicked}
+                emptySearch={emptySearch}
               />
             }
           ></Route>

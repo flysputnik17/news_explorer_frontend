@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
+import NewsCardList from "../NewsCardList/NewsCardList";
 import "./SearchForm.css";
 
-const SearchForm = ({ handleNewsSearch }) => {
+const SearchForm = ({
+  isLoggedIn,
+  handleNewsSearch,
+  newsData,
+  searchClicked,
+  emptySearch,
+}) => {
   const [keyWord, setKeyWord] = useState("");
 
   const newsInput = (e) => {
@@ -43,6 +50,15 @@ const SearchForm = ({ handleNewsSearch }) => {
           Search
         </button>
       </div>
+      {searchClicked ? (
+        <NewsCardList
+          isLoggedIn={isLoggedIn}
+          newsData={newsData}
+          emptySearch={emptySearch}
+        />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

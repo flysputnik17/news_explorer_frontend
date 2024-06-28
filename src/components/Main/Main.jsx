@@ -3,22 +3,23 @@ import SearchForm from "../SearchForm/SearchForm";
 import About from "../About/About";
 import NewsCardList from "../NewsCardList/NewsCardList";
 
-const Main = ({ isLoggedIn, handleNewsSearch, newsData }) => {
+const Main = ({
+  isLoggedIn,
+  handleNewsSearch,
+  newsData,
+  searchClicked,
+  emptySearch,
+}) => {
   return (
     <main className="main">
-      {isLoggedIn ? (
-        <>
-          <SearchForm handleNewsSearch={handleNewsSearch} />
-          <NewsCardList isLoggedIn={isLoggedIn} newsData={newsData} />
-          <About />
-        </>
-      ) : (
-        <>
-          <SearchForm handleNewsSearch={handleNewsSearch} />
-          <NewsCardList isLoggedIn={isLoggedIn} newsData={newsData} />
-          <About />
-        </>
-      )}
+      <SearchForm
+        handleNewsSearch={handleNewsSearch}
+        searchClicked={searchClicked}
+        isLoggedIn={isLoggedIn}
+        newsData={newsData}
+        emptySearch={emptySearch}
+      />
+      <About />
     </main>
   );
 };

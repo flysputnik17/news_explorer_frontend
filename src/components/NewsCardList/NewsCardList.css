@@ -1,6 +1,5 @@
 .searchResult {
-  max-width: 1440px;
-
+  width: 1440px;
   display: flex;
   flex-direction: column;
   background-color: #f5f6f7;
@@ -38,4 +37,26 @@
   border: none;
   border-radius: 30px;
   cursor: pointer;
+}
+.searchResult__notfound-img {
+  width: 82.5px;
+  height: 82.5px;
+  background-image: url("../../images/not-found_v1.svg");
+  background-color: transparent;
+  margin: 0 auto 31.5px auto;
+}
+.searchResult__notfound-title {
+  font-family: "roboto slab";
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 30px;
+  color: #1a1b22;
+  margin-bottom: 16px;
+}
+.searchResult__notfound {
+  font-family: "roboto";
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  color: #b6bcbf;
 }

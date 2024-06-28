@@ -13,12 +13,3 @@ export const getSearchResults = (keyWord) => {
     `https://newsapi.org/v2/everything?q=${keyWord}&from=${from}&to=${to}&sortBy=popularity&apiKey=${APIkey}`
   ).then(checkResponse);
 };
-
-// export const filterNews = (data) => {
-//   const result = [];
-//   result.source = data.source;
-//   result.title = data.title;
-//   result.publishedAt = data.publishedAt;
-//   result.description = data.description;
-//   result.urlToImage = data.urlToImage;
-// };
