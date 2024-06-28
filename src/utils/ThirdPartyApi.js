@@ -1,4 +1,4 @@
-import { APIkey, to, from } from "./constants";
+import { APIkey, to, from, pageSize } from "./constants";
 
 export const getSearchResults = (keyWord) => {
   const checkResponse = (res) => {
@@ -10,6 +10,6 @@ export const getSearchResults = (keyWord) => {
   };
 
   return fetch(
-    `https://newsapi.org/v2/everything?q=${keyWord}&from=${from}&to=${to}&sortBy=popularity&apiKey=${APIkey}`
+    `https://newsapi.org/v2/everything?q=${keyWord}&from=${from}&to=${to}&sortBy=popularity&apiKey=${APIkey}&pageSize=${pageSize}`
   ).then(checkResponse);
 };

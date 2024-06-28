@@ -21,13 +21,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mainRoute, setMainRoute] = useState(true);
   const [activeModal, setActiveModal] = useState("");
-  const [newsData, setNewsData] = useState({
-    source: "",
-    title: "",
-    publishedAt: "",
-    description: "",
-    urlToImage: "",
-  });
+  const [newsData, setNewsData] = useState([]);
   const [searchClicked, setSearchClicked] = useState(false);
   const [emptySearch, setEmptySearch] = useState(true);
 
@@ -67,16 +61,16 @@ function App() {
       setEmptySearch(false);
       getSearchResults(keyword)
         .then((res) => {
-          console.log("res:", res);
-          const result = res.articles;
+          // const result = res.articles;
 
-          result.source = res.articles[0].source.name;
-          result.title = res.articles[0].title;
-          result.publishedAt = res.articles[0].publishedAt;
-          result.description = res.articles[0].description;
-          result.urlToImage = res.articles[0].urlToImage;
+          // result.source = res.articles.source.name;
+          // result.title = res.articles.title;
+          // result.publishedAt = res.articles.publishedAt;
+          // result.description = res.articles.description;
+          // result.urlToImage = res.articles.urlToImage;
 
-          setNewsData(result);
+          setNewsData(res.articles);
+          console.log("res articles:", res.articles);
         })
         .catch((err) => {
           console.log("error:", err);

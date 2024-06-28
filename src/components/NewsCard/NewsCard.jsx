@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import "./NewsCard.css";
 
-const NewsCard = ({ isLoggedIn, newsData }) => {
+const NewsCard = ({ isLoggedIn, news }) => {
   const [saveArticalClass, setSaveArticalClass] = useState(
     "newsCard__saveBlock-hidden"
   );
@@ -23,7 +24,7 @@ const NewsCard = ({ isLoggedIn, newsData }) => {
         evt.target.classList.contains("newsCard__saveButton") &&
         isLoggedIn === false
       ) {
-        setSaveArticalClass("newsCard__saveBlock - visibal");
+        setSaveArticalClass("newsCard__saveBlock-visible");
       } else {
         setSaveArticalClass("newsCard__saveBlock-hidden");
       }
@@ -34,8 +35,7 @@ const NewsCard = ({ isLoggedIn, newsData }) => {
 
   return (
     <div className="newsCard">
-      <img className="newsCard-img" src={newsData.urlToImage} alt="img"></img>
-
+      <img className="newsCard-img" src={news.urlToImage} alt="img"></img>
       <button
         type="button"
         className={likedCard}
@@ -44,12 +44,17 @@ const NewsCard = ({ isLoggedIn, newsData }) => {
       <div className={saveArticalClass}>
         <p className="newsCard__saveArtical">Sign in to save articles</p>
       </div>
-
-      <p className="newsCard-date">{newsData.publishedAt}</p>
-      <h2 className="newsCard-title">{newsData.title}</h2>
-      <p className="newsCard-text">{newsData.description}</p>
-      <p className="newsCard-sorce">{newsData.source}</p>
+      <p className="newsCard-date">{news.publishedAt}</p>
+      <h2 className="newsCard-title">{news.title}</h2>
+      <p className="newsCard-text">{news.description}</p>
+      <p className="newsCard-source">{news.source.name}</p>
     </div>
   );
 };
+
+NewsCard.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  news: PropTypes.object.isRequired,
+};
+
 export default NewsCard;

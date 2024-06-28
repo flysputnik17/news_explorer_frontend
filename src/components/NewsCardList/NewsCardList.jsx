@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 
@@ -19,7 +19,11 @@ const NewsCardList = ({ isLoggedIn, newsData, emptySearch }) => {
           <h2 className="searchResult__title">Search results</h2>
           <section className="searchResult__section">
             <ul className="searchResult__cards">
-              <NewsCard isLoggedIn={isLoggedIn} newsData={newsData} />
+              {newsData.slice(0, 100).map((news, index) => (
+                <li key={index}>
+                  <NewsCard isLoggedIn={isLoggedIn} news={news} />
+                </li>
+              ))}
             </ul>
             <button type="button" className="searchResult__section-button">
               Show more
@@ -30,4 +34,11 @@ const NewsCardList = ({ isLoggedIn, newsData, emptySearch }) => {
     </>
   );
 };
+
+NewsCardList.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  newsData: PropTypes.array.isRequired,
+  emptySearch: PropTypes.bool.isRequired,
+};
+
 export default NewsCardList;
