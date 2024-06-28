@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PropTypes from "prop-types";
+
 import NewsCardList from "../NewsCardList/NewsCardList";
 import "./SearchForm.css";
 
@@ -62,14 +62,6 @@ const SearchForm = ({
       )}
     </div>
   );
-};
-
-SearchForm.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-  newsData: PropTypes.array.isRequired,
-  handleNewsSearch: PropTypes.func.isRequired,
-  searchClicked: PropTypes.bool.isRequired,
-  emptySearch: PropTypes.bool.isRequired,
 };
 
 export default SearchForm;

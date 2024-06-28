@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { useState } from "react";
 import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
@@ -44,12 +43,6 @@ const NewsCardList = ({ isLoggedIn, newsData, emptySearch }) => {
       )}
     </>
   );
-};
-
-NewsCardList.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-  newsData: PropTypes.array.isRequired,
-  emptySearch: PropTypes.bool.isRequired,
 };
 
 export default NewsCardList;

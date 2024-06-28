@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+
 import "./NewsCard.css";
 
 const NewsCard = ({ isLoggedIn, news }) => {
@@ -50,11 +50,6 @@ const NewsCard = ({ isLoggedIn, news }) => {
       <p className="newsCard-source">{news.source.name}</p>
     </div>
   );
-};
-
-NewsCard.propTypes = {
-  isLoggedIn: PropTypes.bool.isRequired,
-  news: PropTypes.object.isRequired,
 };
 
 export default NewsCard;
