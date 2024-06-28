@@ -61,14 +61,6 @@ function App() {
       setEmptySearch(false);
       getSearchResults(keyword)
         .then((res) => {
-          // const result = res.articles;
-
-          // result.source = res.articles.source.name;
-          // result.title = res.articles.title;
-          // result.publishedAt = res.articles.publishedAt;
-          // result.description = res.articles.description;
-          // result.urlToImage = res.articles.urlToImage;
-
           setNewsData(res.articles);
           console.log("res articles:", res.articles);
         })

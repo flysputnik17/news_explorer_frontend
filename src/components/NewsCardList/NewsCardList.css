@@ -60,3 +60,7 @@
   line-height: 24px;
   color: #b6bcbf;
 }
+
+.searchResult__cards-list {
+  list-style: none;
+}
