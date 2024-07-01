@@ -133,7 +133,7 @@ function App() {
   };
   const logout = () => {
     setIsLoggedIn(false);
-    setMainRoute("");
+    setMainRoute(true);
     navigate("/");
   };
 
@@ -160,13 +160,20 @@ function App() {
                 handleNewsSearch={handleNewsSearch}
                 searchClicked={searchClicked}
                 emptySearch={emptySearch}
+                mainRoute={mainRoute}
               />
             }
           ></Route>
           <Route
             exact
             path="/saved-news"
-            element={<SavedNews isLoggedIn={isLoggedIn} newsData={newsData} />}
+            element={
+              <SavedNews
+                isLoggedIn={isLoggedIn}
+                newsData={newsData}
+                mainRoute={mainRoute}
+              />
+            }
           ></Route>
         </Routes>
       </div>

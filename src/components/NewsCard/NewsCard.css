@@ -112,6 +112,15 @@
   font-size: 12px;
   line-height: 14px;
 }
+.newsCard__deleteArtical {
+  margin: 0;
+  padding: 0;
+  color: black;
+  font-family: "roboto";
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+}
 
 .newsCard__saveButton:hover {
   background-image: url("../../images/Rectangle7.svg");
@@ -129,4 +138,64 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.newsCard__saveBlock-visible {
+  visibility: visible;
+  width: 142px;
+  height: 40px;
+  background: #ffffff;
+  border-radius: 10px;
+  position: absolute;
+  right: 68px;
+  top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.newsCard__deleteBlock-hidden {
+  visibility: hidden;
+  width: 142px;
+  height: 40px;
+  background: #ffffff;
+  border-radius: 10px;
+  position: absolute;
+  right: 68px;
+  top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.newsCard__deleteBlock-visible {
+  visibility: visible;
+  width: 142px;
+  height: 40px;
+  background: #ffffff;
+  border-radius: 10px;
+  position: absolute;
+  right: 68px;
+  top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.newsCard__deleteButton {
+  background-image: url("../../images/trash.svg");
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  background-color: #ffffff;
+  position: absolute;
+  right: 24px;
+  top: 24px;
+  background-position: center;
+  background-repeat: no-repeat;
+  object-fit: cover;
+  border: none;
+  border-radius: 10px;
+}
+.newsCard__deleteButton:hover {
+  cursor: pointer;
+  background-image: url("../../images/trashBold.svg");
 }

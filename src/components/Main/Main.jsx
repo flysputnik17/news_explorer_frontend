@@ -8,6 +8,7 @@ const Main = ({
   newsData,
   searchClicked,
   emptySearch,
+  mainRoute,
 }) => {
   return (
     <main className="main">
@@ -17,6 +18,7 @@ const Main = ({
         isLoggedIn={isLoggedIn}
         newsData={newsData}
         emptySearch={emptySearch}
+        mainRoute={mainRoute}
       />
       <About />
     </main>

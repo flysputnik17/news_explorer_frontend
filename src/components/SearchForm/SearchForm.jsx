@@ -9,6 +9,7 @@ const SearchForm = ({
   newsData,
   searchClicked,
   emptySearch,
+  mainRoute,
 }) => {
   const [keyWord, setKeyWord] = useState("");
 
@@ -56,6 +57,7 @@ const SearchForm = ({
           isLoggedIn={isLoggedIn}
           newsData={newsData}
           emptySearch={emptySearch}
+          mainRoute={mainRoute}
         />
       ) : (
         <></>
