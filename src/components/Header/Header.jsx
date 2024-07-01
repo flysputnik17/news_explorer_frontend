@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Header.css";
+import { useContext } from "react";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const Header = ({
   isLoggedIn,
@@ -11,6 +13,8 @@ const Header = ({
   handleSignIn,
   logout,
 }) => {
+  const currentUser = useContext(CurrentUserContext);
+
   const [headerStyle, setHeaderStyle] = useState("header");
   const [headerTitle, setHeaderTitle] = useState("header__title");
   const [headerButtons, setHeaderButtons] = useState("header__buttons");
@@ -74,7 +78,7 @@ const Header = ({
                 Saved articles
               </Link>
               <div className={headerElise}>
-                <p className="header__elise-title">Elise</p>
+                <p className="header__elise-title">{currentUser.name}</p>
                 <button
                   className={headerEliseButton}
                   type="button"

@@ -5,7 +5,7 @@ const SignupPopup = ({
   isOpen,
   onClose,
   handleSignInButton,
-  handleSignUpSuccess,
+  handleRegistration,
 }) => {
   const [buttonStyle, setButtonStyle] = useState("SignUp__button-disabled");
   const [buttonText, setButtonText] = useState("Disabled");
@@ -27,6 +27,11 @@ const SignupPopup = ({
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleRegistration({ email, password, username });
+  };
   useEffect(() => {
     if (email.length && password.length && username.length > 0) {
       setButtonStyle("SignUp__button");
@@ -41,7 +46,7 @@ const SignupPopup = ({
       titleText="Sign Up"
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={handleSignUpSuccess}
+      onSubmit={handleSubmit}
     >
       <label htmlFor="email" className="modal__label">
         Email

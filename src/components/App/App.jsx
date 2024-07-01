@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
-
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import SavedNews from "../SavedNews/SavedNews";
 import { APIkey, to, from, pageSize } from "../../utils/constants";
 import { getSearchResults } from "../../utils/ThirdPartyApi";
@@ -12,11 +12,6 @@ import SignupPopup from "../SignupPopup/SignupPopup";
 import SigninPopup from "../SigninPopup/SigninPopup";
 import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
 
-// const api = new Api({
-//   baseUrl: "https://newsapi.org/v2",
-//   headers: { "Content-Type": "application/json" },
-// });
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mainRoute, setMainRoute] = useState(true);
@@ -24,6 +19,11 @@ function App() {
   const [newsData, setNewsData] = useState([]);
   const [searchClicked, setSearchClicked] = useState(false);
   const [emptySearch, setEmptySearch] = useState(true);
+  const [currentUser, setCurrentUser] = useState({
+    name: "",
+    _id: "",
+    token: "",
+  });
 
   const navigate = useNavigate();
 
@@ -84,21 +84,21 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
-  const handleSignUpSuccess = () => {
+  const handleRegistration = (data) => {
     console.log("click");
+    console.log("data:", data);
+    setCurrentUser({ name: data.username, password: data.password });
+    console.log("currentUser:", currentUser);
     closeActiveModal();
     handleConfirm();
   };
 
   const handleSignupButton = () => {
-    console.log("click");
     closeActiveModal();
     handleSignUp();
   };
   const handleSignInButton = (e) => {
     e.preventDefault();
-    console.log("click");
-
     closeActiveModal();
     handleSignIn();
   };
@@ -138,71 +138,73 @@ function App() {
   };
 
   return (
-    <div className="page">
-      <div className="page__upper-content">
-        <Header
-          isLoggedIn={isLoggedIn}
-          mainRoute={mainRoute}
-          homeButtonClick={homeButtonClick}
-          logoButtonClick={logoButtonClick}
-          savedNewsClick={savedNewsClick}
-          handleSignIn={handleSignIn}
-          logout={logout}
-        />
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <Main
-                isLoggedIn={isLoggedIn}
-                newsData={newsData}
-                handleNewsSearch={handleNewsSearch}
-                searchClicked={searchClicked}
-                emptySearch={emptySearch}
-                mainRoute={mainRoute}
-              />
-            }
-          ></Route>
-          <Route
-            exact
-            path="/saved-news"
-            element={
-              <SavedNews
-                isLoggedIn={isLoggedIn}
-                newsData={newsData}
-                mainRoute={mainRoute}
-              />
-            }
-          ></Route>
-        </Routes>
-      </div>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="page">
+        <div className="page__upper-content">
+          <Header
+            isLoggedIn={isLoggedIn}
+            mainRoute={mainRoute}
+            homeButtonClick={homeButtonClick}
+            logoButtonClick={logoButtonClick}
+            savedNewsClick={savedNewsClick}
+            handleSignIn={handleSignIn}
+            logout={logout}
+          />
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <Main
+                  isLoggedIn={isLoggedIn}
+                  newsData={newsData}
+                  handleNewsSearch={handleNewsSearch}
+                  searchClicked={searchClicked}
+                  emptySearch={emptySearch}
+                  mainRoute={mainRoute}
+                />
+              }
+            ></Route>
+            <Route
+              exact
+              path="/saved-news"
+              element={
+                <SavedNews
+                  isLoggedIn={isLoggedIn}
+                  newsData={newsData}
+                  mainRoute={mainRoute}
+                />
+              }
+            ></Route>
+          </Routes>
+        </div>
 
-      <Footer />
-      {activeModal === "sign-up" && (
-        <SignupPopup
-          isOpen={activeModal === "sign-up"}
-          onClose={closeActiveModal}
-          handleSignInButton={handleSignInButton}
-          handleSignUpSuccess={handleSignUpSuccess}
-        />
-      )}
-      {activeModal === "sign-in" && (
-        <SigninPopup
-          isOpen={activeModal === "sign-in"}
-          onClose={closeActiveModal}
-          handleSignupButton={handleSignupButton}
-          checkloggedIn={checkloggedIn}
-        />
-      )}
-      {activeModal === "confirmation" && (
-        <ConfirmationPopup
-          isOpen={activeModal === "confirmation"}
-          onClose={closeActiveModal}
-          handleSignInButton={handleSignInButton}
-        />
-      )}
-    </div>
+        <Footer />
+        {activeModal === "sign-up" && (
+          <SignupPopup
+            isOpen={activeModal === "sign-up"}
+            onClose={closeActiveModal}
+            handleSignInButton={handleSignInButton}
+            handleRegistration={handleRegistration}
+          />
+        )}
+        {activeModal === "sign-in" && (
+          <SigninPopup
+            isOpen={activeModal === "sign-in"}
+            onClose={closeActiveModal}
+            handleSignupButton={handleSignupButton}
+            checkloggedIn={checkloggedIn}
+          />
+        )}
+        {activeModal === "confirmation" && (
+          <ConfirmationPopup
+            isOpen={activeModal === "confirmation"}
+            onClose={closeActiveModal}
+            handleSignInButton={handleSignInButton}
+          />
+        )}
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 
