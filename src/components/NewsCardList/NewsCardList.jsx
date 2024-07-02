@@ -22,7 +22,12 @@ const NewsCardList = ({ isLoggedIn, newsData, emptySearch, mainRoute }) => {
         </div>
       ) : (
         <div className="searchResult">
-          <h2 className="searchResult__title">Search results</h2>
+          {mainRoute ? (
+            <h2 className="searchResult__title">Search results</h2>
+          ) : (
+            <></>
+          )}
+
           <section className="searchResult__section">
             <ul className="searchResult__cards">
               {newsData.slice(0, visibleCardsCount).map((news, index) => (

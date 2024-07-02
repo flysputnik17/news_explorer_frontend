@@ -24,6 +24,8 @@ function App() {
     _id: "",
     token: "",
   });
+  const [keywords, setKeywords] = useState([]);
+  const [savedArticles, setSavedArticles] = useState([]);
 
   const navigate = useNavigate();
 
@@ -58,6 +60,7 @@ function App() {
     if (keyword === "") {
       setEmptySearch(true);
     } else {
+      setKeywords(keyword);
       setEmptySearch(false);
       getSearchResults(keyword)
         .then((res) => {
@@ -70,7 +73,7 @@ function App() {
     }
   };
 
-  const handleSignUp = () => {
+  const signUpPopup = () => {
     setActiveModal("sign-up");
   };
   const handleSignIn = () => {
@@ -93,9 +96,16 @@ function App() {
     handleConfirm();
   };
 
+  const handleSuccessRegistration = () => {
+    setIsLoggedIn(true);
+    setMainRoute(false);
+    navigate("/saved-news");
+    closeActiveModal();
+  };
+
   const handleSignupButton = () => {
     closeActiveModal();
-    handleSignUp();
+    signUpPopup();
   };
   const handleSignInButton = (e) => {
     e.preventDefault();
@@ -173,13 +183,14 @@ function App() {
                   isLoggedIn={isLoggedIn}
                   newsData={newsData}
                   mainRoute={mainRoute}
+                  keywords={keywords}
                 />
               }
             ></Route>
           </Routes>
         </div>
 
-        <Footer />
+        <Footer homeButtonClick={homeButtonClick} />
         {activeModal === "sign-up" && (
           <SignupPopup
             isOpen={activeModal === "sign-up"}
@@ -200,7 +211,7 @@ function App() {
           <ConfirmationPopup
             isOpen={activeModal === "confirmation"}
             onClose={closeActiveModal}
-            handleSignInButton={handleSignInButton}
+            handleSuccessRegistration={handleSuccessRegistration}
           />
         )}
       </div>

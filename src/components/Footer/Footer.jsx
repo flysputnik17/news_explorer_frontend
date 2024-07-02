@@ -1,14 +1,19 @@
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
-const Footer = () => {
+const Footer = ({ homeButtonClick }) => {
   return (
     <footer className="footer">
       <h2 className="footer__copyright">
         © 2020 Supersite, Powered by News API
       </h2>
       <div className="footer__block">
-        <Link to="/" className="footer__block-buttons-home" type="button">
+        <Link
+          to="/"
+          className="footer__block-buttons-home"
+          type="button"
+          onClick={homeButtonClick}
+        >
           Home
         </Link>
         <Link

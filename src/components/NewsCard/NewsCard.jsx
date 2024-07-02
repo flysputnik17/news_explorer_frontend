@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import "./NewsCard.css";
 
-const NewsCard = ({ isLoggedIn, news, mainRoute }) => {
+const NewsCard = ({ isLoggedIn, news, mainRoute, key }) => {
   const [saveArticalClass, setSaveArticalClass] = useState(
     "newsCard__saveBlock-hidden"
   );

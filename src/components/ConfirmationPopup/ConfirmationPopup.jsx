@@ -1,6 +1,6 @@
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
-const ConfirmationPopup = ({ isOpen, onClose, handleSignInButton }) => {
+const ConfirmationPopup = ({ isOpen, onClose, handleSuccessRegistration }) => {
   return (
     <PopupWithForm
       titleText="Registration successfully completed!"
@@ -10,7 +10,7 @@ const ConfirmationPopup = ({ isOpen, onClose, handleSignInButton }) => {
       <button
         className="Or-Login__button"
         type="button"
-        onClick={handleSignInButton}
+        onClick={handleSuccessRegistration}
       >
         Sign in
       </button>
