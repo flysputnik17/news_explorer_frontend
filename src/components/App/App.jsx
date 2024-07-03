@@ -147,6 +147,28 @@ function App() {
     navigate("/");
   };
 
+  //func to save articles
+  const handleSaveArticle = (article) => {
+    if (isLoggedIn) {
+      setSavedArticles((prevArticles) => [...prevArticles, article]);
+    } else {
+      return;
+    }
+  };
+
+  //func to unsave title
+  const handleDeleteArticle = (article) => {
+    if (isLoggedIn) {
+      setSavedArticles((prevArticles) =>
+        prevArticles.filter(
+          (savedArticle) => savedArticle.title !== article.title
+        )
+      );
+    } else {
+      return;
+    }
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
@@ -172,6 +194,9 @@ function App() {
                   searchClicked={searchClicked}
                   emptySearch={emptySearch}
                   mainRoute={mainRoute}
+                  handleSaveArticle={handleSaveArticle}
+                  handleDeleteArticle={handleDeleteArticle}
+                  savedArticles={savedArticles}
                 />
               }
             ></Route>
@@ -184,6 +209,8 @@ function App() {
                   newsData={newsData}
                   mainRoute={mainRoute}
                   keywords={keywords}
+                  handleDeleteArticle={handleDeleteArticle}
+                  savedArticles={savedArticles}
                 />
               }
             ></Route>

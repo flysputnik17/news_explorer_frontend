@@ -10,6 +10,9 @@ const SearchForm = ({
   searchClicked,
   emptySearch,
   mainRoute,
+  handleSaveArticle,
+  handleDeleteArticle,
+  savedArticles,
 }) => {
   const [keyWord, setKeyWord] = useState("");
 
@@ -58,6 +61,9 @@ const SearchForm = ({
           newsData={newsData}
           emptySearch={emptySearch}
           mainRoute={mainRoute}
+          handleSaveArticle={handleSaveArticle}
+          handleDeleteArticle={handleDeleteArticle}
+          savedArticles={savedArticles}
         />
       ) : (
         <></>

@@ -2,7 +2,14 @@ import { useEffect, useState } from "react";
 
 import "./NewsCard.css";
 
-const NewsCard = ({ isLoggedIn, news, mainRoute, key }) => {
+const NewsCard = ({
+  isLoggedIn,
+  news,
+  mainRoute,
+  handleSaveArticle,
+  handleDeleteArticle,
+  isSaved,
+}) => {
   const [saveArticalClass, setSaveArticalClass] = useState(
     "newsCard__saveBlock-hidden"
   );
@@ -55,8 +62,13 @@ const NewsCard = ({ isLoggedIn, news, mainRoute, key }) => {
         <>
           <button
             type="button"
-            className={likedCard}
-            onClick={handleLikedCard}
+            className={
+              isSaved ? "newsCard__saveButton-liked" : "newsCard__saveButton"
+            }
+            onClick={() => {
+              handleLikedCard();
+              handleSaveArticle(news);
+            }}
           ></button>
           <div className={saveArticalClass}>
             <p className="newsCard__saveArtical">Sign in to save articles</p>
@@ -67,7 +79,10 @@ const NewsCard = ({ isLoggedIn, news, mainRoute, key }) => {
           <button
             type="button"
             className="newsCard__deleteButton"
-            onClick={handleLikedCard}
+            onClick={() => {
+              handleLikedCard();
+              handleDeleteArticle(news);
+            }}
           ></button>
           <div className={deleteArticalClass}>
             <p className="newsCard__deleteArtical">Remove from saved</p>

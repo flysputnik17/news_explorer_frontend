@@ -9,6 +9,9 @@ const Main = ({
   searchClicked,
   emptySearch,
   mainRoute,
+  handleSaveArticle,
+  handleDeleteArticle,
+  savedArticles,
 }) => {
   return (
     <main className="main">
@@ -19,6 +22,9 @@ const Main = ({
         newsData={newsData}
         emptySearch={emptySearch}
         mainRoute={mainRoute}
+        handleSaveArticle={handleSaveArticle}
+        handleDeleteArticle={handleDeleteArticle}
+        savedArticles={savedArticles}
       />
       <About />
     </main>
