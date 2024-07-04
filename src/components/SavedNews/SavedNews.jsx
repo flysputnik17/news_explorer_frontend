@@ -12,7 +12,6 @@ const SavedNews = ({
   savedArticles,
 }) => {
   const currentUser = useContext(CurrentUserContext);
-  // const [savedArticles, setSavedArticles] = useState(0);
 
   return (
     <div className="saved">
@@ -21,9 +20,10 @@ const SavedNews = ({
         <h3 className="saved__username">
           {currentUser.name}, you have {savedArticles.length} saved articles
         </h3>
-        {keywords.length > 0 ? (
+        {savedArticles.length > 1 ? (
           <h4 className="saved__cate">
-            By keywords: {keywords}, and {keywords.length} other
+            By keywords: {keywords[0]}, {keywords[1]}, and {keywords.length - 1}{" "}
+            other
           </h4>
         ) : (
           <></>

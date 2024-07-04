@@ -1,6 +1,7 @@
 import "./Main.css";
 import SearchForm from "../SearchForm/SearchForm";
 import About from "../About/About";
+import Preloader from "../Preloader/Preloader";
 
 const Main = ({
   isLoggedIn,
@@ -12,6 +13,7 @@ const Main = ({
   handleSaveArticle,
   handleDeleteArticle,
   savedArticles,
+  loading,
 }) => {
   return (
     <main className="main">
@@ -26,6 +28,7 @@ const Main = ({
         handleDeleteArticle={handleDeleteArticle}
         savedArticles={savedArticles}
       />
+      {loading ? <Preloader /> : <></>}
       <About />
     </main>
   );

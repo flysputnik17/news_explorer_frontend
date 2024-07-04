@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import NewsCardList from "../NewsCardList/NewsCardList";
 import "./SearchForm.css";
+import Preloader from "../Preloader/Preloader";
 
 const SearchForm = ({
   isLoggedIn,

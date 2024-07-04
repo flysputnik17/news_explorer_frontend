@@ -26,6 +26,7 @@ function App() {
   });
   const [keywords, setKeywords] = useState([]);
   const [savedArticles, setSavedArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -57,10 +58,12 @@ function App() {
   //if there is a keyword the newsCardList will be render with the the data from the get req
   const handleNewsSearch = (keyword) => {
     setSearchClicked(true);
+    setLoading(true);
     if (keyword === "") {
       setEmptySearch(true);
+      setLoading(false);
     } else {
-      setKeywords(keyword);
+      setKeywords((prevKeyword) => [...prevKeyword, keyword]);
       setEmptySearch(false);
       getSearchResults(keyword)
         .then((res) => {
@@ -69,6 +72,9 @@ function App() {
         })
         .catch((err) => {
           console.log("error:", err);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   };
@@ -164,6 +170,9 @@ function App() {
           (savedArticle) => savedArticle.title !== article.title
         )
       );
+      setKeywords((prevKeyword) =>
+        prevKeyword.filter((keyword) => keyword !== article.keyword)
+      );
     } else {
       return;
     }
@@ -197,6 +206,7 @@ function App() {
                   handleSaveArticle={handleSaveArticle}
                   handleDeleteArticle={handleDeleteArticle}
                   savedArticles={savedArticles}
+                  loading={loading}
                 />
               }
             ></Route>
