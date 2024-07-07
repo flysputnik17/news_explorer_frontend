@@ -10,6 +10,16 @@ const NewsCard = ({
   handleDeleteArticle,
   isSaved,
 }) => {
+  const handleDateConversion = (date) => {
+    const options = {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+
+    return new Date(date).toLocaleDateString("en-US", options);
+  };
+
   const [saveArticalClass, setSaveArticalClass] = useState(
     "newsCard__saveBlock-hidden"
   );
@@ -28,33 +38,6 @@ const NewsCard = ({
     }
   };
 
-  useEffect(() => {
-    const hoverSaveButton = (evt) => {
-      if (
-        evt.target.classList.contains("newsCard__saveButton") &&
-        isLoggedIn === false
-      ) {
-        setSaveArticalClass("newsCard__saveBlock-visible");
-      } else {
-        setSaveArticalClass("newsCard__saveBlock-hidden");
-      }
-    };
-    document.addEventListener("mouseover", hoverSaveButton);
-    return () => document.removeEventListener("mouseover", hoverSaveButton);
-  }, [isLoggedIn]);
-
-  useEffect(() => {
-    const hoverDelete = (evt) => {
-      if (evt.target.classList.contains("newsCard__deleteButton")) {
-        setDeleteArticalClass("newsCard__deleteBlock-visible");
-      } else {
-        setDeleteArticalClass("newsCard__deleteBlock-hidden");
-      }
-    };
-    document.addEventListener("mouseover", hoverDelete);
-    return () => document.removeEventListener("mouseover", hoverDelete);
-  }, []);
-
   return (
     <div className="newsCard">
       <img className="newsCard-img" src={news.urlToImage} alt="img"></img>
@@ -69,6 +52,13 @@ const NewsCard = ({
               handleLikedCard();
               handleSaveArticle(news);
             }}
+            onMouseEnter={() => {
+              if (!isLoggedIn)
+                setSaveArticalClass("newsCard__saveBlock-visible");
+            }}
+            onMouseLeave={() => {
+              setSaveArticalClass("newsCard__saveBlock-hidden");
+            }}
           ></button>
           <div className={saveArticalClass}>
             <p className="newsCard__saveArtical">Sign in to save articles</p>
@@ -80,8 +70,14 @@ const NewsCard = ({
             type="button"
             className="newsCard__deleteButton"
             onClick={() => {
-              handleLikedCard();
               handleDeleteArticle(news);
+            }}
+            onMouseEnter={() => {
+              if (isLoggedIn)
+                setDeleteArticalClass("newsCard__deleteBlock-visible");
+            }}
+            onMouseLeave={() => {
+              setDeleteArticalClass("newsCard__deleteBlock-hidden");
             }}
           ></button>
           <div className={deleteArticalClass}>
@@ -90,7 +86,7 @@ const NewsCard = ({
         </>
       )}
 
-      <p className="newsCard-date">{news.publishedAt}</p>
+      <p className="newsCard-date">{handleDateConversion(news.publishedAt)}</p>
       <h2 className="newsCard-title">{news.title}</h2>
       <p className="newsCard-text">{news.description}</p>
       <p className="newsCard-source">{news.source.name}</p>

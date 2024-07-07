@@ -65,10 +65,10 @@ function App() {
     } else {
       setKeywords((prevKeyword) => [...prevKeyword, keyword]);
       setEmptySearch(false);
+      setNewsData([]);
       getSearchResults(keyword)
         .then((res) => {
           setNewsData(res.articles);
-          console.log("res articles:", res.articles);
         })
         .catch((err) => {
           console.log("error:", err);
