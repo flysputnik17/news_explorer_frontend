@@ -1,6 +1,6 @@
 .newsCard {
-  max-width: 400px;
-  max-height: 576px;
+  width: 400px;
+  height: 576px;
   border: none;
   border-radius: 19px;
   background-color: white;
@@ -9,11 +9,10 @@
   flex-direction: column;
   align-items: baseline;
   position: relative;
+  margin: 0 16px 16px 0;
 }
 .newsCard-img {
-  width: 400px;
   height: 272px;
-  /* background-image: url("../../images/image_08.svg"); */
   background-color: transparent;
   object-fit: cover;
   margin: 0 auto;
@@ -60,7 +59,6 @@
 }
 .newsCard-title {
   width: 352px;
-  height: 60px;
   margin: 0 24px 16px 24px;
   text-align: start;
   font-family: "roboto slab";
@@ -80,13 +78,15 @@
   color: #1a1b22;
 }
 
-.newsCard-sorce {
-  margin: 18px auto 24px 24px;
+.newsCard-source {
+  margin: auto auto 24px 24px;
   font-family: "roboto slab";
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
   color: #b6bcbf;
+  max-width: 352px;
+  max-height: 20px;
 }
 
 .newsCard__saveBlock {
@@ -197,4 +197,20 @@
 .newsCard__deleteButton:hover {
   cursor: pointer;
   background-image: url("../../images/trashBold.svg");
+}
+
+.newsCard-keyword {
+  width: 80px;
+  height: 40px;
+  background-color: white;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  position: absolute;
+  left: 24px;
+  top: 24px;
+  font-family: "roboto";
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
 }

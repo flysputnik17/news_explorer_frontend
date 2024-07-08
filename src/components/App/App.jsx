@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
+import { Route, Routes, useActionData, useNavigate } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import SavedNews from "../SavedNews/SavedNews";
-import { APIkey, to, from, pageSize } from "../../utils/constants";
 import { getSearchResults } from "../../utils/ThirdPartyApi";
 import "./App.css";
 import Header from "../Header/Header";
@@ -25,6 +24,7 @@ function App() {
     token: "",
   });
   const [keywords, setKeywords] = useState([]);
+  const [currKeyword, setCurrKeyword] = useState("");
   const [savedArticles, setSavedArticles] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -69,6 +69,8 @@ function App() {
       getSearchResults(keyword)
         .then((res) => {
           setNewsData(res.articles);
+          setCurrKeyword(keyword);
+          console.log("res:", res);
         })
         .catch((err) => {
           console.log("error:", err);
@@ -221,6 +223,7 @@ function App() {
                   keywords={keywords}
                   handleDeleteArticle={handleDeleteArticle}
                   savedArticles={savedArticles}
+                  currKeyword={currKeyword}
                 />
               }
             ></Route>

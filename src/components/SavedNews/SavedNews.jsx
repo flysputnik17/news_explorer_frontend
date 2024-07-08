@@ -10,6 +10,7 @@ const SavedNews = ({
   keywords,
   handleDeleteArticle,
   savedArticles,
+  currKeyword,
 }) => {
   const currentUser = useContext(CurrentUserContext);
 
@@ -36,6 +37,7 @@ const SavedNews = ({
           mainRoute={mainRoute}
           savedArticles={savedArticles}
           handleDeleteArticle={handleDeleteArticle}
+          currKeyword={currKeyword}
         />
       ) : (
         <></>

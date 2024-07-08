@@ -1,8 +1,9 @@
 .searchResult {
-  width: 1440px;
+  max-width: 1440px;
   display: flex;
   flex-direction: column;
   background-color: #f5f6f7;
+  flex-wrap: wrap;
 }
 .searchResult__title {
   max-width: 712px;
@@ -15,7 +16,11 @@
   color: #1a1b22;
 }
 .searchResult__section {
-  margin: 0 104px 64px 104px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-left: 104px;
 }
 .searchResult__cards {
   margin: 0;
@@ -37,6 +42,7 @@
   border: none;
   border-radius: 30px;
   cursor: pointer;
+  margin: 48px auto 80px auto;
 }
 .searchResult__notfound-img {
   width: 82.5px;

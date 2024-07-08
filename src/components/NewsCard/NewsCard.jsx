@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import "./NewsCard.css";
 
@@ -9,6 +9,7 @@ const NewsCard = ({
   handleSaveArticle,
   handleDeleteArticle,
   isSaved,
+  currKeyword,
 }) => {
   const handleDateConversion = (date) => {
     const options = {
@@ -66,6 +67,7 @@ const NewsCard = ({
         </>
       ) : (
         <>
+          <div className="newsCard-keyword">{currKeyword}</div>
           <button
             type="button"
             className="newsCard__deleteButton"

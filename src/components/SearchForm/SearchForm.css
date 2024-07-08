@@ -34,7 +34,7 @@
 }
 
 .search__searchBar {
-  margin: 88px auto 80px;
+  margin: 88px auto 80px auto;
   width: 608px;
   height: 64px;
   position: relative;
