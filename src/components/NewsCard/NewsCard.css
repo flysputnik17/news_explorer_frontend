@@ -1,6 +1,6 @@
 .newsCard {
-  width: 400px;
-  height: 576px;
+  max-width: 400px;
+  max-height: 576px;
   border: none;
   border-radius: 19px;
   background-color: white;
@@ -47,19 +47,29 @@
   border: none;
   border-radius: 10px;
 }
-
-.newsCard-date {
-  height: 24px;
-  margin: 20px auto 12px 24px;
+.newsCard__content {
+  max-width: 352px;
+  max-height: 268px;
+  margin: 20px 24px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: start;
+}
+.newsCard__content-date {
+  max-width: 161px;
+  max-height: 24px;
+  margin: 0 auto 16px 0;
   font-family: "roboto";
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;
   color: #b6bcbf;
 }
-.newsCard-title {
-  width: 352px;
-  margin: 0 24px 16px 24px;
+.newsCard__content-title {
+  margin: 0 0 16px 0;
+  max-width: 352px;
+  max-height: 92px;
   text-align: start;
   font-family: "roboto slab";
   font-weight: 400;
@@ -67,26 +77,31 @@
   line-height: 30px;
   color: #1a1b22;
 }
-.newsCard-text {
-  margin: 0;
-  width: 352px;
+.newsCard__content-text {
+  margin: 0 0 20px 0;
+  max-width: 352px;
+  max-height: 120px;
   text-align: start;
   font-family: "roboto slab";
   font-weight: 400;
   font-size: 16px;
   line-height: 22px;
   color: #1a1b22;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.newsCard-source {
-  margin: auto auto 24px 24px;
+.newsCard__content-source {
+  margin: 0 auto 0 0;
   font-family: "roboto slab";
   font-weight: 700;
   font-size: 16px;
   line-height: 20px;
   color: #b6bcbf;
-  max-width: 352px;
+  max-width: 96px;
   max-height: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .newsCard__saveBlock {

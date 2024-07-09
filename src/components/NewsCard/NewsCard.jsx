@@ -87,11 +87,14 @@ const NewsCard = ({
           </div>
         </>
       )}
-
-      <p className="newsCard-date">{handleDateConversion(news.publishedAt)}</p>
-      <h2 className="newsCard-title">{news.title}</h2>
-      <p className="newsCard-text">{news.description}</p>
-      <p className="newsCard-source">{news.source.name}</p>
+      <div className="newsCard__content">
+        <p className="newsCard__content-date">
+          {handleDateConversion(news.publishedAt)}
+        </p>
+        <h2 className="newsCard__content-title">{news.title}</h2>
+        <p className="newsCard__content-text">{news.description}</p>
+        <p className="newsCard__content-source">{news.source.name}</p>
+      </div>
     </div>
   );
 };

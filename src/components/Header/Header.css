@@ -9,6 +9,10 @@
 .header__content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.header__menu-button {
+  display: none;
 }
 
 .header__title {
@@ -36,6 +40,7 @@
   text-decoration: none;
   width: 49px;
   height: 24px;
+  font-family: "roboto";
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -64,6 +69,7 @@
   height: 48px;
   margin-right: 104px;
   margin-left: 42px;
+  font-family: "roboto";
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -206,4 +212,67 @@
   background-repeat: no-repeat;
   background-position: right;
   cursor: pointer;
+}
+.header__buttons--open {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) and (min-width: 490px) {
+  .header {
+    max-width: 768px;
+    max-height: 66px;
+  }
+  .header__title {
+    margin: 23px auto 19px 40px;
+  }
+  .header__buttons-homeButton {
+    font-size: 16px;
+  }
+  .header__unsigned-buttons-signInButton {
+    max-width: 152px;
+    max-height: 40px;
+    margin: 14px 40px 12px 16px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 490px) and (min-width: 320px) {
+  .header {
+    max-width: 490px;
+    max-height: 56px;
+  }
+  .header-open {
+    background-color: #1a1b22;
+  }
+
+  .header__title {
+    max-width: 117px;
+    max-height: 24px;
+    font-size: 16px;
+    margin: 16px auto 16px 16px;
+  }
+
+  .header__buttons {
+    display: none;
+  }
+  .header__menu-button {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin: 16px 16px 16px auto;
+    background-color: transparent;
+    border: none;
+    background-image: url("../../images/menu.svg");
+    cursor: pointer;
+  }
+  .header__buttons--open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px; /* Adjust based on header height */
+    right: 0;
+    background-color: #1a1b22; /* or another suitable background color */
+    width: 100%;
+  }
 }

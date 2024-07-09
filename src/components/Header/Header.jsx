@@ -30,6 +30,13 @@ const Header = ({
     "header__elise-button"
   );
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const headerContent = "header__content";
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   //now i need to make that if mainRoute is true the class of the heders will be change
   useEffect(() => {
     if (mainRoute === false) {
@@ -52,7 +59,7 @@ const Header = ({
   }, [mainRoute]);
 
   return (
-    <header className={headerStyle}>
+    <header className={`${headerStyle} ${isMenuOpen ? "header-open" : ""}`}>
       <div className="header__content">
         <Link to="/" className={headerTitle} onClick={logoButtonClick}>
           NewsExplorer
@@ -89,7 +96,11 @@ const Header = ({
           </>
         ) : (
           <>
-            <div className="header__buttons">
+            <div
+              className={`${headerButtons} ${
+                isMenuOpen ? "header__buttons--open" : ""
+              }`}
+            >
               <button className="header__buttons-homeButton" type="button">
                 Home
               </button>
@@ -103,6 +114,7 @@ const Header = ({
             </div>
           </>
         )}
+        <button className="header__menu-button" onClick={toggleMenu}></button>
       </div>
     </header>
   );
