@@ -12,6 +12,8 @@ const Header = ({
   savedNewsClick,
   handleSignIn,
   logout,
+  toggleMenu,
+  isMenuOpen,
 }) => {
   const currentUser = useContext(CurrentUserContext);
 
@@ -30,14 +32,6 @@ const Header = ({
     "header__elise-button"
   );
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const headerContent = "header__content";
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  //now i need to make that if mainRoute is true the class of the heders will be change
   useEffect(() => {
     if (mainRoute === false) {
       setHeaderStyle("header__saved");

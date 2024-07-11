@@ -1,14 +1,13 @@
 .search {
   display: flex;
-  justify-content: center;
   flex-direction: column;
-  align-content: center;
   flex-wrap: wrap;
+  height: 576px;
 }
 
 .search__text {
-  width: 608px;
-  margin: 80px auto 0;
+  max-width: 608px;
+  margin: 80px auto 88px auto;
   color: white;
   display: flex;
   flex-direction: column;
@@ -34,7 +33,7 @@
 }
 
 .search__searchBar {
-  margin: 88px auto 80px auto;
+  margin: 0 auto;
   width: 608px;
   height: 64px;
   position: relative;
@@ -75,4 +74,81 @@
 }
 .search__searchBar-button:hover {
   cursor: pointer;
+}
+
+@media (max-width: 1000px) and (min-width: 822px) {
+  .search__text {
+    margin: 38px auto 48px auto;
+  }
+}
+
+@media (max-width: 822px) and (min-width: 490px) {
+  .search__text {
+    margin: 38px auto 48px auto;
+  }
+  .search__text-title {
+    max-width: 385px;
+    font-size: 36px;
+    line-height: 40px;
+  }
+  .search__text-paragraph {
+    max-width: 452px;
+    text-align: start;
+  }
+  .search__searchBar {
+    max-width: 452px;
+    max-height: 56px;
+    margin: 0 auto 45px auto;
+  }
+  .search__searchBar-input {
+    max-width: 228px;
+    max-height: 22px;
+  }
+  .search__searchBar-button {
+    max-width: 160px;
+    max-height: 56px;
+  }
+}
+
+@media (max-width: 490px) and (min-width: 320px) {
+  .search__text {
+    margin: 30px 16px 112px 16px;
+  }
+  .search__text-title {
+    font-size: 36px;
+    line-height: 40px;
+    display: inline-block;
+    text-align: start;
+    margin-bottom: 16px;
+  }
+  .search__text-paragraph {
+    margin: 0;
+    max-width: 288px;
+    max-height: 72px;
+    text-align: start;
+  }
+  .search__searchBar {
+    display: flex;
+    flex-direction: column;
+    width: 288px;
+    height: 128px;
+    background-color: transparent;
+    margin: 0 auto 45px auto;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .search__searchBar-input {
+    margin: 0;
+    margin-bottom: 16px;
+    border: none;
+    border-radius: 30px;
+    width: 288px;
+    height: 58px;
+  }
+  .search__searchBar-button {
+    border: none;
+    border-radius: 30px;
+    width: 288px;
+    height: 58px;
+  }
 }

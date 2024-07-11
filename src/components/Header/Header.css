@@ -1,6 +1,6 @@
 .header {
-  max-width: 1440px;
-  max-height: 80px;
+  /* max-width: 1440px;
+  max-height: 80px; */
   background-color: transparent;
   border-bottom: 1px solid #ffffff33;
   font-family: "roboto";
@@ -48,6 +48,7 @@
   border: none;
   background-color: transparent;
   color: white;
+  cursor: pointer;
 }
 
 .header__buttons-articals {
@@ -62,6 +63,7 @@
   background-color: transparent;
   color: white;
   margin-left: 76px;
+  cursor: pointer;
 }
 
 .header__unsigned-buttons-signInButton {
@@ -78,6 +80,7 @@
   border-radius: 30px;
   background-color: transparent;
   color: white;
+  cursor: pointer;
 }
 
 .header__elise {
@@ -111,26 +114,7 @@
   background-image: url("../../images/logout.svg");
   background-repeat: no-repeat;
   background-position: right;
-}
-
-.header__buttons-homeButton:hover {
   cursor: pointer;
-  transform: scale(1.1, 1.1);
-}
-
-.header__unsigned-buttons-signInButton:hover {
-  cursor: pointer;
-  transform: scale(1.1, 1.1);
-}
-
-.header__buttons-articals:hover {
-  cursor: pointer;
-  transform: scale(1.1, 1.1);
-}
-
-.header__elise:hover {
-  cursor: pointer;
-  transform: scale(1.1, 1.1);
 }
 
 .header__saved {
@@ -223,6 +207,7 @@
     max-width: 768px;
     max-height: 66px;
   }
+
   .header__title {
     margin: 23px auto 19px 40px;
   }
@@ -274,5 +259,18 @@
     right: 0;
     background-color: #1a1b22; /* or another suitable background color */
     width: 100%;
+    align-items: flex-start;
+    border-top: 1px solid #ffffff33;
+  }
+  .header__buttons-homeButton {
+    max-width: 490px;
+    min-height: 56px;
+    text-align: left;
+    margin: 16px 16px 22px 16px;
+  }
+  .header__unsigned-buttons-signInButton {
+    min-width: 288px;
+    max-height: 56px;
+    margin: 0 16px 24px 16px;
   }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Route, Routes, useActionData, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import SavedNews from "../SavedNews/SavedNews";
 import { getSearchResults } from "../../utils/ThirdPartyApi";
@@ -28,6 +28,30 @@ function App() {
   const [savedArticles, setSavedArticles] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  /////////////////////////////////////////////////////////////////////////////
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 490);
+
+  const handleResize = () => {
+    setIsSmallScreen(window.innerWidth <= 490);
+    if (window.innerWidth > 490) {
+      setIsMenuOpen(false);
+    }
+  };
+  const toggleMenu = () => {
+    if (isSmallScreen) {
+      console.log("click");
+      setIsMenuOpen(!isMenuOpen);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  ///////////////////////////////////////////////////////////////////////////
   const navigate = useNavigate();
 
   //for closing modals with the Escape button
@@ -95,6 +119,7 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
+
   const handleRegistration = (data) => {
     console.log("click");
     console.log("data:", data);
@@ -192,6 +217,8 @@ function App() {
             savedNewsClick={savedNewsClick}
             handleSignIn={handleSignIn}
             logout={logout}
+            toggleMenu={toggleMenu}
+            isMenuOpen={isMenuOpen}
           />
           <Routes>
             <Route
@@ -209,6 +236,7 @@ function App() {
                   handleDeleteArticle={handleDeleteArticle}
                   savedArticles={savedArticles}
                   loading={loading}
+                  isMenuOpen={isMenuOpen}
                 />
               }
             ></Route>
