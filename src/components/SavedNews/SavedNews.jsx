@@ -4,9 +4,6 @@ import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const SavedNews = ({
-  isLoggedIn,
-  newsData,
-  mainRoute,
   keywords,
   handleDeleteArticle,
   savedArticles,
@@ -32,9 +29,6 @@ const SavedNews = ({
       </div>
       {savedArticles.length > 0 ? (
         <NewsCardList
-          isLoggedIn={isLoggedIn}
-          newsData={newsData}
-          mainRoute={mainRoute}
           savedArticles={savedArticles}
           handleDeleteArticle={handleDeleteArticle}
           currKeyword={currKeyword}

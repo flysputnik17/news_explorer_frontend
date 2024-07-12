@@ -1,15 +1,11 @@
 import { useState } from "react";
-
 import NewsCardList from "../NewsCardList/NewsCardList";
 import "./SearchForm.css";
 
 const SearchForm = ({
-  isLoggedIn,
   handleNewsSearch,
-  newsData,
   searchClicked,
   emptySearch,
-  mainRoute,
   handleSaveArticle,
   handleDeleteArticle,
   savedArticles,
@@ -28,10 +24,7 @@ const SearchForm = ({
   return (
     <div className="search">
       <div className="search__text">
-        <h2 className="search__text-title">
-          What's going on in
-          <br /> the world?
-        </h2>
+        <h2 className="search__text-title">What's going on in the world?</h2>
         <p className="search__text-paragraph">
           Find the latest news on any topic and save them in your personal
           account.
@@ -57,10 +50,7 @@ const SearchForm = ({
       </div>
       {searchClicked ? (
         <NewsCardList
-          isLoggedIn={isLoggedIn}
-          newsData={newsData}
           emptySearch={emptySearch}
-          mainRoute={mainRoute}
           handleSaveArticle={handleSaveArticle}
           handleDeleteArticle={handleDeleteArticle}
           savedArticles={savedArticles}

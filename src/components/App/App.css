@@ -3,6 +3,7 @@
   max-width: 1440px;
   margin: 0 auto;
   background-color: transparent;
+  z-index: 0;
 }
 .page__upper-content {
   text-align: center;
@@ -17,6 +18,12 @@
 @media (max-width: 1300px) {
   .page__upper-content {
     background-image: url("../../images/backgroundtablet.svg");
+  }
+}
+
+@media (max-width: 674px) and (min-width: 490px) {
+  .page__upper-content {
+    background-size: auto;
   }
 }
 

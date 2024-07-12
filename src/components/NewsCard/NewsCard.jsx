@@ -1,16 +1,17 @@
-import { useState } from "react";
-
+import { useState, useContext } from "react";
+import IsLoggedInContext from "../../contexts/IsLoggedInContext";
 import "./NewsCard.css";
+import MainRouteContext from "../../contexts/MainRouteContext";
 
 const NewsCard = ({
-  isLoggedIn,
   news,
-  mainRoute,
   handleSaveArticle,
   handleDeleteArticle,
   isSaved,
   currKeyword,
 }) => {
+  const isLoggedIn = useContext(IsLoggedInContext);
+  const mainRoute = useContext(MainRouteContext);
   const handleDateConversion = (date) => {
     const options = {
       year: "numeric",

@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
+
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import MenuOpenContext from "../../contexts/MenuOpenContext";
+import IsLoggedInContext from "../../contexts/IsLoggedInContext";
+import MainRouteContext from "../../contexts/MainRouteContext";
+import NewsDataContext from "../../contexts/NewsDataContext";
+
 import SavedNews from "../SavedNews/SavedNews";
 import { getSearchResults } from "../../utils/ThirdPartyApi";
 import "./App.css";
@@ -206,84 +212,82 @@ function App() {
   };
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="page">
-        <div className="page__upper-content">
-          <Header
-            isLoggedIn={isLoggedIn}
-            mainRoute={mainRoute}
-            homeButtonClick={homeButtonClick}
-            logoButtonClick={logoButtonClick}
-            savedNewsClick={savedNewsClick}
-            handleSignIn={handleSignIn}
-            logout={logout}
-            toggleMenu={toggleMenu}
-            isMenuOpen={isMenuOpen}
-          />
-          <Routes>
-            <Route
-              exact
-              path="/"
-              element={
-                <Main
-                  isLoggedIn={isLoggedIn}
-                  newsData={newsData}
-                  handleNewsSearch={handleNewsSearch}
-                  searchClicked={searchClicked}
-                  emptySearch={emptySearch}
-                  mainRoute={mainRoute}
-                  handleSaveArticle={handleSaveArticle}
-                  handleDeleteArticle={handleDeleteArticle}
-                  savedArticles={savedArticles}
-                  loading={loading}
-                  isMenuOpen={isMenuOpen}
+    <MainRouteContext.Provider value={mainRoute}>
+      <IsLoggedInContext.Provider value={isLoggedIn}>
+        <CurrentUserContext.Provider value={currentUser}>
+          <MenuOpenContext.Provider value={isMenuOpen}>
+            <div className="page">
+              <div className="page__upper-content">
+                <Header
+                  homeButtonClick={homeButtonClick}
+                  logoButtonClick={logoButtonClick}
+                  savedNewsClick={savedNewsClick}
+                  handleSignIn={handleSignIn}
+                  logout={logout}
+                  toggleMenu={toggleMenu}
                 />
-              }
-            ></Route>
-            <Route
-              exact
-              path="/saved-news"
-              element={
-                <SavedNews
-                  isLoggedIn={isLoggedIn}
-                  newsData={newsData}
-                  mainRoute={mainRoute}
-                  keywords={keywords}
-                  handleDeleteArticle={handleDeleteArticle}
-                  savedArticles={savedArticles}
-                  currKeyword={currKeyword}
-                />
-              }
-            ></Route>
-          </Routes>
-        </div>
+                <NewsDataContext.Provider value={newsData}>
+                  <Routes>
+                    <Route
+                      exact
+                      path="/"
+                      element={
+                        <Main
+                          handleNewsSearch={handleNewsSearch}
+                          searchClicked={searchClicked}
+                          emptySearch={emptySearch}
+                          handleSaveArticle={handleSaveArticle}
+                          handleDeleteArticle={handleDeleteArticle}
+                          savedArticles={savedArticles}
+                          loading={loading}
+                        />
+                      }
+                    ></Route>
+                    <Route
+                      exact
+                      path="/saved-news"
+                      element={
+                        <SavedNews
+                          keywords={keywords}
+                          handleDeleteArticle={handleDeleteArticle}
+                          savedArticles={savedArticles}
+                          currKeyword={currKeyword}
+                        />
+                      }
+                    ></Route>
+                  </Routes>
+                </NewsDataContext.Provider>
+              </div>
 
-        <Footer homeButtonClick={homeButtonClick} />
-        {activeModal === "sign-up" && (
-          <SignupPopup
-            isOpen={activeModal === "sign-up"}
-            onClose={closeActiveModal}
-            handleSignInButton={handleSignInButton}
-            handleRegistration={handleRegistration}
-          />
-        )}
-        {activeModal === "sign-in" && (
-          <SigninPopup
-            isOpen={activeModal === "sign-in"}
-            onClose={closeActiveModal}
-            handleSignupButton={handleSignupButton}
-            checkloggedIn={checkloggedIn}
-          />
-        )}
-        {activeModal === "confirmation" && (
-          <ConfirmationPopup
-            isOpen={activeModal === "confirmation"}
-            onClose={closeActiveModal}
-            handleSuccessRegistration={handleSuccessRegistration}
-          />
-        )}
-      </div>
-    </CurrentUserContext.Provider>
+              <Footer homeButtonClick={homeButtonClick} />
+              {activeModal === "sign-up" && (
+                <SignupPopup
+                  isOpen={activeModal === "sign-up"}
+                  onClose={closeActiveModal}
+                  handleSignInButton={handleSignInButton}
+                  handleRegistration={handleRegistration}
+                />
+              )}
+              {activeModal === "sign-in" && (
+                <SigninPopup
+                  isOpen={activeModal === "sign-in"}
+                  onClose={closeActiveModal}
+                  handleSignupButton={handleSignupButton}
+                  checkloggedIn={checkloggedIn}
+                />
+              )}
+              {activeModal === "confirmation" && (
+                <ConfirmationPopup
+                  isOpen={activeModal === "confirmation"}
+                  onClose={closeActiveModal}
+                  handleSuccessRegistration={handleSuccessRegistration}
+                />
+              )}
+            </div>
+          </MenuOpenContext.Provider>
+        </CurrentUserContext.Provider>
+      </IsLoggedInContext.Provider>
+    </MainRouteContext.Provider>
   );
 }
 

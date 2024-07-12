@@ -1,18 +1,18 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
-
+import MainRouteContext from "../../contexts/MainRouteContext";
+import NewsDataContext from "../../contexts/NewsDataContext";
 const NewsCardList = ({
-  isLoggedIn,
-  newsData,
   emptySearch,
-  mainRoute,
   handleSaveArticle,
   handleDeleteArticle,
   savedArticles,
   keywords,
   currKeyword,
 }) => {
+  const mainRoute = useContext(MainRouteContext);
+  const newsData = useContext(NewsDataContext);
   const [visibleCardsCount, setVisibleCardsCount] = useState(3);
 
   const handleShowMore = () => {
@@ -39,9 +39,7 @@ const NewsCardList = ({
                 {newsData.slice(0, visibleCardsCount).map((news, index) => (
                   <NewsCard
                     key={index}
-                    isLoggedIn={isLoggedIn}
                     news={news}
-                    mainRoute={mainRoute}
                     handleSaveArticle={handleSaveArticle}
                     handleDeleteArticle={handleDeleteArticle}
                     isSaved={savedArticles.some(
@@ -67,7 +65,6 @@ const NewsCardList = ({
                 {savedArticles.map((news, index) => (
                   <NewsCard
                     key={index}
-                    isLoggedIn={isLoggedIn}
                     news={news}
                     handleDeleteArticle={handleDeleteArticle}
                     keywords={keywords}

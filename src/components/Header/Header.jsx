@@ -2,20 +2,23 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./Header.css";
 import { useContext } from "react";
+import MainRouteContext from "../../contexts/MainRouteContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import MenuOpenContext from "../../contexts/MenuOpenContext";
+import IsLoggedInContext from "../../contexts/IsLoggedInContext";
 
 const Header = ({
-  isLoggedIn,
-  mainRoute,
   homeButtonClick,
   logoButtonClick,
   savedNewsClick,
   handleSignIn,
   logout,
   toggleMenu,
-  isMenuOpen,
 }) => {
-  const currentUser = useContext(CurrentUserContext);
+  const mainRoute = useContext(MainRouteContext); //mainRoute context is for use the useEffect to change the buttons
+  const isLoggedIn = useContext(IsLoggedInContext); //isLoggedIn context is for to detemin wich buttons to render its depandes on if the user is logged in or not
+  const currentUser = useContext(CurrentUserContext); //currentUser context is for rendering the name of the user
+  const isMenuOpen = useContext(MenuOpenContext); //isMenuOpen context is for to render the hamburger menu if the screen width is less then 490px
 
   const [headerStyle, setHeaderStyle] = useState("header");
   const [headerTitle, setHeaderTitle] = useState("header__title");

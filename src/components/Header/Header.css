@@ -200,6 +200,7 @@
 .header__buttons--open {
   display: flex;
   flex-direction: column;
+  z-index: 1;
 }
 
 @media (max-width: 768px) and (min-width: 490px) {

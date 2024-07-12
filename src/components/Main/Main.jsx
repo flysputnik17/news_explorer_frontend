@@ -4,12 +4,9 @@ import About from "../About/About";
 import Preloader from "../Preloader/Preloader";
 
 const Main = ({
-  isLoggedIn,
   handleNewsSearch,
-  newsData,
   searchClicked,
   emptySearch,
-  mainRoute,
   handleSaveArticle,
   handleDeleteArticle,
   savedArticles,
@@ -20,10 +17,7 @@ const Main = ({
       <SearchForm
         handleNewsSearch={handleNewsSearch}
         searchClicked={searchClicked}
-        isLoggedIn={isLoggedIn}
-        newsData={newsData}
         emptySearch={emptySearch}
-        mainRoute={mainRoute}
         handleSaveArticle={handleSaveArticle}
         handleDeleteArticle={handleDeleteArticle}
         savedArticles={savedArticles}
