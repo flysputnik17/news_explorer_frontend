@@ -3,12 +3,7 @@ import NewsCardList from "../NewsCardList/NewsCardList";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-const SavedNews = ({
-  keywords,
-  handleDeleteArticle,
-  savedArticles,
-  currKeyword,
-}) => {
+const SavedNews = ({ keywords, handleDeleteArticle, savedArticles }) => {
   const currentUser = useContext(CurrentUserContext);
 
   return (
@@ -31,7 +26,6 @@ const SavedNews = ({
         <NewsCardList
           savedArticles={savedArticles}
           handleDeleteArticle={handleDeleteArticle}
-          currKeyword={currKeyword}
         />
       ) : (
         <></>

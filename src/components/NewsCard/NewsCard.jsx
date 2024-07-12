@@ -2,16 +2,17 @@ import { useState, useContext } from "react";
 import IsLoggedInContext from "../../contexts/IsLoggedInContext";
 import "./NewsCard.css";
 import MainRouteContext from "../../contexts/MainRouteContext";
+import CurrentKeyWordContext from "../../contexts/CurrentKeyWordContext";
 
 const NewsCard = ({
   news,
   handleSaveArticle,
   handleDeleteArticle,
   isSaved,
-  currKeyword,
 }) => {
   const isLoggedIn = useContext(IsLoggedInContext);
   const mainRoute = useContext(MainRouteContext);
+  const currKeyword = useContext(CurrentKeyWordContext);
   const handleDateConversion = (date) => {
     const options = {
       year: "numeric",
@@ -52,7 +53,7 @@ const NewsCard = ({
             }
             onClick={() => {
               handleLikedCard();
-              handleSaveArticle(news);
+              handleSaveArticle(news, currKeyword);
             }}
             onMouseEnter={() => {
               if (!isLoggedIn)

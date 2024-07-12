@@ -11,6 +11,7 @@ import MainRouteContext from "../../contexts/MainRouteContext";
 import NewsDataContext from "../../contexts/NewsDataContext";
 import LoadingContext from "../../contexts/LoadingContext";
 import EmptySearchContext from "../../contexts/EmptySearchContext";
+import CurrentKeyWordContext from "../../contexts/CurrentKeyWordContext";
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////React Components Imports/////////////////////////////////
@@ -194,9 +195,10 @@ function App() {
   };
 
   //func to save articles
-  const handleSaveArticle = (article) => {
+  const handleSaveArticle = (article, currKeyword) => {
     if (isLoggedIn) {
       setSavedArticles((prevArticles) => [...prevArticles, article]);
+      setCurrKeyword(currKeyword);
     } else {
       return;
     }
@@ -241,77 +243,79 @@ function App() {
       <IsLoggedInContext.Provider value={isLoggedIn}>
         <CurrentUserContext.Provider value={currentUser}>
           <MenuOpenContext.Provider value={isMenuOpen}>
-            <div className="page">
-              <div className="page__upper-content">
-                <Header
-                  homeButtonClick={homeButtonClick}
-                  logoButtonClick={logoButtonClick}
-                  savedNewsClick={savedNewsClick}
-                  handleSignIn={handleSignIn}
-                  logout={logout}
-                  toggleMenu={toggleMenu}
-                />
-                <NewsDataContext.Provider value={newsData}>
-                  <Routes>
-                    <Route
-                      exact
-                      path="/"
-                      element={
-                        <LoadingContext.Provider value={loading}>
-                          <EmptySearchContext.Provider value={emptySearch}>
-                            <Main
-                              handleNewsSearch={handleNewsSearch}
-                              searchClicked={searchClicked}
-                              handleSaveArticle={handleSaveArticle}
-                              handleDeleteArticle={handleDeleteArticle}
-                              savedArticles={savedArticles}
-                              loading={loading}
-                            />
-                          </EmptySearchContext.Provider>
-                        </LoadingContext.Provider>
-                      }
-                    ></Route>
-                    <Route
-                      exact
-                      path="/saved-news"
-                      element={
-                        <SavedNews
-                          keywords={keywords}
-                          handleDeleteArticle={handleDeleteArticle}
-                          savedArticles={savedArticles}
-                          currKeyword={currKeyword}
-                        />
-                      }
-                    ></Route>
-                  </Routes>
-                </NewsDataContext.Provider>
-              </div>
+            <CurrentKeyWordContext.Provider value={currKeyword}>
+              <div className="page">
+                <div className="page__upper-content">
+                  <Header
+                    homeButtonClick={homeButtonClick}
+                    logoButtonClick={logoButtonClick}
+                    savedNewsClick={savedNewsClick}
+                    handleSignIn={handleSignIn}
+                    logout={logout}
+                    toggleMenu={toggleMenu}
+                  />
+                  <NewsDataContext.Provider value={newsData}>
+                    <Routes>
+                      <Route
+                        exact
+                        path="/"
+                        element={
+                          <LoadingContext.Provider value={loading}>
+                            <EmptySearchContext.Provider value={emptySearch}>
+                              <Main
+                                handleNewsSearch={handleNewsSearch}
+                                searchClicked={searchClicked}
+                                handleSaveArticle={handleSaveArticle}
+                                handleDeleteArticle={handleDeleteArticle}
+                                savedArticles={savedArticles}
+                                loading={loading}
+                              />
+                            </EmptySearchContext.Provider>
+                          </LoadingContext.Provider>
+                        }
+                      ></Route>
+                      <Route
+                        exact
+                        path="/saved-news"
+                        element={
+                          <SavedNews
+                            keywords={keywords}
+                            handleDeleteArticle={handleDeleteArticle}
+                            savedArticles={savedArticles}
+                            currKeyword={currKeyword}
+                          />
+                        }
+                      ></Route>
+                    </Routes>
+                  </NewsDataContext.Provider>
+                </div>
 
-              <Footer homeButtonClick={homeButtonClick} />
-              {activeModal === "sign-up" && (
-                <SignupPopup
-                  isOpen={activeModal === "sign-up"}
-                  onClose={closeActiveModal}
-                  handleSignInButton={handleSignInButton}
-                  handleRegistration={handleRegistration}
-                />
-              )}
-              {activeModal === "sign-in" && (
-                <SigninPopup
-                  isOpen={activeModal === "sign-in"}
-                  onClose={closeActiveModal}
-                  handleSignupButton={handleSignupButton}
-                  checkloggedIn={checkloggedIn}
-                />
-              )}
-              {activeModal === "confirmation" && (
-                <ConfirmationPopup
-                  isOpen={activeModal === "confirmation"}
-                  onClose={closeActiveModal}
-                  handleSuccessRegistration={handleSuccessRegistration}
-                />
-              )}
-            </div>
+                <Footer homeButtonClick={homeButtonClick} />
+                {activeModal === "sign-up" && (
+                  <SignupPopup
+                    isOpen={activeModal === "sign-up"}
+                    onClose={closeActiveModal}
+                    handleSignInButton={handleSignInButton}
+                    handleRegistration={handleRegistration}
+                  />
+                )}
+                {activeModal === "sign-in" && (
+                  <SigninPopup
+                    isOpen={activeModal === "sign-in"}
+                    onClose={closeActiveModal}
+                    handleSignupButton={handleSignupButton}
+                    checkloggedIn={checkloggedIn}
+                  />
+                )}
+                {activeModal === "confirmation" && (
+                  <ConfirmationPopup
+                    isOpen={activeModal === "confirmation"}
+                    onClose={closeActiveModal}
+                    handleSuccessRegistration={handleSuccessRegistration}
+                  />
+                )}
+              </div>
+            </CurrentKeyWordContext.Provider>
           </MenuOpenContext.Provider>
         </CurrentUserContext.Provider>
       </IsLoggedInContext.Provider>

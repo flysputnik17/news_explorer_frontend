@@ -12,6 +12,7 @@
   margin: 0 16px 16px 0;
 }
 .newsCard-img {
+  width: 100%;
   height: 272px;
   background-color: transparent;
   object-fit: cover;

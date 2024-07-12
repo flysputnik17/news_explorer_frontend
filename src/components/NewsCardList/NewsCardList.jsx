@@ -9,7 +9,6 @@ const NewsCardList = ({
   handleDeleteArticle,
   savedArticles,
   keywords,
-  currKeyword,
 }) => {
   const mainRoute = useContext(MainRouteContext);
   const newsData = useContext(NewsDataContext);
@@ -69,7 +68,6 @@ const NewsCardList = ({
                     news={news}
                     handleDeleteArticle={handleDeleteArticle}
                     keywords={keywords}
-                    currKeyword={currKeyword}
                   />
                 ))}
               </div>
