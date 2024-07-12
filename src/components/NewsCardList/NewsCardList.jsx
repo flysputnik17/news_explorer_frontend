@@ -3,8 +3,8 @@ import "./NewsCardList.css";
 import NewsCard from "../NewsCard/NewsCard";
 import MainRouteContext from "../../contexts/MainRouteContext";
 import NewsDataContext from "../../contexts/NewsDataContext";
+import EmptySearchContext from "../../contexts/EmptySearchContext";
 const NewsCardList = ({
-  emptySearch,
   handleSaveArticle,
   handleDeleteArticle,
   savedArticles,
@@ -13,6 +13,7 @@ const NewsCardList = ({
 }) => {
   const mainRoute = useContext(MainRouteContext);
   const newsData = useContext(NewsDataContext);
+  const emptySearch = useContext(EmptySearchContext);
   const [visibleCardsCount, setVisibleCardsCount] = useState(3);
 
   const handleShowMore = () => {

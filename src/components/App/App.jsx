@@ -1,14 +1,19 @@
+/////////////////////////////////////////////////React Imports/////////////////////////////////////////////////
 import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
+///////////////////////////////////////////////////////////////////////////////////////////////
 
+////////////////////////////////////////////Context Imports////////////////////////////////////
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import MenuOpenContext from "../../contexts/MenuOpenContext";
 import IsLoggedInContext from "../../contexts/IsLoggedInContext";
 import MainRouteContext from "../../contexts/MainRouteContext";
 import NewsDataContext from "../../contexts/NewsDataContext";
+import LoadingContext from "../../contexts/LoadingContext";
+import EmptySearchContext from "../../contexts/EmptySearchContext";
+////////////////////////////////////////////////////////////////////////////////////////////////
 
-import SavedNews from "../SavedNews/SavedNews";
-import { getSearchResults } from "../../utils/ThirdPartyApi";
+/////////////////////////////////////React Components Imports/////////////////////////////////
 import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
@@ -16,49 +21,35 @@ import Footer from "../Footer/Footer";
 import SignupPopup from "../SignupPopup/SignupPopup";
 import SigninPopup from "../SigninPopup/SigninPopup";
 import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
+import SavedNews from "../SavedNews/SavedNews";
+/////////////////////////////////////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////API Imports/////////////////////////////////////////
+import { getSearchResults } from "../../utils/ThirdPartyApi";
+////////////////////////////////////////////////////////////////////////////////////////////////
 function App() {
+  /////////////////////////////////////////////////////////////////////////////////////////
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [mainRoute, setMainRoute] = useState(true);
   const [activeModal, setActiveModal] = useState("");
   const [newsData, setNewsData] = useState([]);
   const [searchClicked, setSearchClicked] = useState(false);
   const [emptySearch, setEmptySearch] = useState(true);
+  const [keywords, setKeywords] = useState([]);
+  const [currKeyword, setCurrKeyword] = useState("");
+  const [savedArticles, setSavedArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 490);
   const [currentUser, setCurrentUser] = useState({
     name: "",
     _id: "",
     token: "",
   });
-  const [keywords, setKeywords] = useState([]);
-  const [currKeyword, setCurrKeyword] = useState("");
-  const [savedArticles, setSavedArticles] = useState([]);
-  const [loading, setLoading] = useState(false);
+  //////////////////////////////////////////////////////////////////////////////////////////////
 
-  /////////////////////////////////////////////////////////////////////////////
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 490);
-
-  const handleResize = () => {
-    setIsSmallScreen(window.innerWidth <= 490);
-    if (window.innerWidth > 490) {
-      setIsMenuOpen(false);
-    }
-  };
-  const toggleMenu = () => {
-    if (isSmallScreen) {
-      console.log("click");
-      setIsMenuOpen(!isMenuOpen);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
-  ///////////////////////////////////////////////////////////////////////////
-  const navigate = useNavigate();
+  ////////////////////////////////////////Hooks/////////////////////////////////////////////
 
   //for closing modals with the Escape button
   useEffect(() => {
@@ -84,33 +75,14 @@ function App() {
     return () => document.removeEventListener("mousedown", handleOverly);
   }, [activeModal]);
 
-  //if there is no keyword the emprySearch will be ture so the Nothing found will render
-  //if there is a keyword the newsCardList will be render with the the data from the get req
-  const handleNewsSearch = (keyword) => {
-    setSearchClicked(true);
-    setLoading(true);
-    if (keyword === "") {
-      setEmptySearch(true);
-      setLoading(false);
-    } else {
-      setKeywords((prevKeyword) => [...prevKeyword, keyword]);
-      setEmptySearch(false);
-      setNewsData([]);
-      getSearchResults(keyword)
-        .then((res) => {
-          setNewsData(res.articles);
-          setCurrKeyword(keyword);
-          console.log("res:", res);
-        })
-        .catch((err) => {
-          console.log("error:", err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-  };
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
+  /////////////////////////////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////////PopUP functions/////////////////////////////
   const signUpPopup = () => {
     setActiveModal("sign-up");
   };
@@ -125,7 +97,9 @@ function App() {
   const closeActiveModal = () => {
     setActiveModal("");
   };
+  /////////////////////////////////////////////////////////////////////////////////////////////
 
+  //////////////////////////////////////////User reg and login functions///////////////////////
   const handleRegistration = (data) => {
     console.log("click");
     console.log("data:", data);
@@ -142,6 +116,20 @@ function App() {
     closeActiveModal();
   };
 
+  const checkloggedIn = (e) => {
+    e.preventDefault();
+    setIsLoggedIn(true);
+    closeActiveModal();
+  };
+  const logout = () => {
+    setIsLoggedIn(false);
+    setMainRoute(true);
+    navigate("/");
+  };
+
+  ///////////////////////////////////////////////////////////////////////////////////////////
+
+  /////////////////////////////////////////Buttons fucnctions///////////////////////////////////
   const handleSignupButton = () => {
     closeActiveModal();
     signUpPopup();
@@ -175,15 +163,34 @@ function App() {
     }
   };
 
-  const checkloggedIn = (e) => {
-    e.preventDefault();
-    setIsLoggedIn(true);
-    closeActiveModal();
-  };
-  const logout = () => {
-    setIsLoggedIn(false);
-    setMainRoute(true);
-    navigate("/");
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+
+  //////////////////////////////////////News Functions////////////////////////////////////////////
+  //if there is no keyword the emprySearch will be ture so the Nothing found will render
+  //if there is a keyword the newsCardList will be render with the the data from the get req
+  const handleNewsSearch = (keyword) => {
+    setSearchClicked(true);
+    setLoading(true);
+    if (keyword === "") {
+      setEmptySearch(true);
+      setLoading(false);
+    } else {
+      setKeywords((prevKeyword) => [...prevKeyword, keyword]);
+      setEmptySearch(false);
+      setNewsData([]);
+      getSearchResults(keyword)
+        .then((res) => {
+          setNewsData(res.articles);
+          setCurrKeyword(keyword);
+          console.log("res:", res);
+        })
+        .catch((err) => {
+          console.log("error:", err);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   };
 
   //func to save articles
@@ -211,6 +218,24 @@ function App() {
     }
   };
 
+  ////////////////////////////////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////Hamburger Menu Function///////////////////////////
+  const handleResize = () => {
+    setIsSmallScreen(window.innerWidth <= 490);
+    if (window.innerWidth > 490) {
+      setIsMenuOpen(false);
+    }
+  };
+  const toggleMenu = () => {
+    if (isSmallScreen) {
+      console.log("click");
+      setIsMenuOpen(!isMenuOpen);
+    }
+  };
+
+  //////////////////////////////////////////////////////////////////////////////////////////////
+
   return (
     <MainRouteContext.Provider value={mainRoute}>
       <IsLoggedInContext.Provider value={isLoggedIn}>
@@ -232,15 +257,18 @@ function App() {
                       exact
                       path="/"
                       element={
-                        <Main
-                          handleNewsSearch={handleNewsSearch}
-                          searchClicked={searchClicked}
-                          emptySearch={emptySearch}
-                          handleSaveArticle={handleSaveArticle}
-                          handleDeleteArticle={handleDeleteArticle}
-                          savedArticles={savedArticles}
-                          loading={loading}
-                        />
+                        <LoadingContext.Provider value={loading}>
+                          <EmptySearchContext.Provider value={emptySearch}>
+                            <Main
+                              handleNewsSearch={handleNewsSearch}
+                              searchClicked={searchClicked}
+                              handleSaveArticle={handleSaveArticle}
+                              handleDeleteArticle={handleDeleteArticle}
+                              savedArticles={savedArticles}
+                              loading={loading}
+                            />
+                          </EmptySearchContext.Provider>
+                        </LoadingContext.Provider>
                       }
                     ></Route>
                     <Route

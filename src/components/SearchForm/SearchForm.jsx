@@ -5,7 +5,6 @@ import "./SearchForm.css";
 const SearchForm = ({
   handleNewsSearch,
   searchClicked,
-  emptySearch,
   handleSaveArticle,
   handleDeleteArticle,
   savedArticles,
@@ -50,7 +49,6 @@ const SearchForm = ({
       </div>
       {searchClicked ? (
         <NewsCardList
-          emptySearch={emptySearch}
           handleSaveArticle={handleSaveArticle}
           handleDeleteArticle={handleDeleteArticle}
           savedArticles={savedArticles}
