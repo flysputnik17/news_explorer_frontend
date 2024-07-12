@@ -71,3 +71,36 @@
 .searchResult__cards-list {
   list-style: none;
 }
+
+@media (max-width: 950px) and (min-width: 490px) {
+}
+
+@media (max-width: 490px) and (min-width: 320px) {
+  .searchResult {
+    height: 50%;
+    position: absolute;
+    bottom: 100%;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-wrap: nowrap;
+  }
+  .searchResult__notfound-img {
+    background-repeat: no-repeat;
+    margin: 43px auto 15px auto;
+  }
+
+  .searchResult__notfound-title {
+    font-size: 16px;
+    line-height: 30px;
+    color: #1a1b22;
+    margin: 0 auto 16px auto;
+  }
+
+  .searchResult__notfound {
+    font-size: 14px;
+    line-height: 24px;
+    color: #b6bcbf;
+    margin: 0 auto 80px auto;
+  }
+}

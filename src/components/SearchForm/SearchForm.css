@@ -118,11 +118,7 @@
 @media (max-width: 490px) and (min-width: 320px) {
   .search {
     position: relative;
-    max-width: 490px;
-    display: flex;
-    flex-direction: column;
     height: 576px;
-    flex-wrap: nowrap;
   }
   .search__text {
     margin: 30px 16px 112px 19px;
