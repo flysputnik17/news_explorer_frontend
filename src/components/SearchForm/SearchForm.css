@@ -116,10 +116,10 @@
 }
 
 @media (max-width: 490px) and (min-width: 320px) {
-  .search {
+  /* .search {
     position: relative;
-    height: 576px;
-  }
+    max-height: 576px;
+  } */
   .search__text {
     margin: 30px 16px 112px 19px;
   }
@@ -129,7 +129,7 @@
     display: inline-block;
     text-align: start;
     margin-bottom: 16px;
-    width: 288px;
+    width: 280px;
   }
   .search__text-paragraph {
     margin: 0;
@@ -139,7 +139,7 @@
   }
 
   .search__searchBar {
-    position: absolute;
+    /* position: absolute; */
     top: 50%;
     left: 0;
     right: 0;

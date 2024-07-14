@@ -64,7 +64,11 @@ const Header = ({
 
         {isLoggedIn ? (
           <>
-            <div className={headerButtons}>
+            <div
+              className={`${headerButtons} ${
+                isMenuOpen ? "header__buttons--open" : ""
+              }`}
+            >
               <Link
                 to="/"
                 className={headerButtonHome}

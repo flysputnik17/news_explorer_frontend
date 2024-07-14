@@ -47,17 +47,16 @@ const NewsCardList = ({
                     )}
                   />
                 ))}
-
-                {visibleCardsCount < newsData.length && (
-                  <button
-                    type="button"
-                    className="searchResult__section-button"
-                    onClick={handleShowMore}
-                  >
-                    Show more
-                  </button>
-                )}
               </div>
+              {visibleCardsCount < newsData.length && (
+                <button
+                  type="button"
+                  className="searchResult__section-button"
+                  onClick={handleShowMore}
+                >
+                  Show more
+                </button>
+              )}
             </>
           ) : (
             <>
