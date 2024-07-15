@@ -56,9 +56,15 @@ const Header = ({
   }, [mainRoute]);
 
   return (
-    <header className={`${headerStyle} ${isMenuOpen ? "header-open" : ""}`}>
+    <header className={` ${headerStyle} ${isMenuOpen ? "header-open" : ""}`}>
       <div className="header__content">
-        <Link to="/" className={headerTitle} onClick={logoButtonClick}>
+        <Link
+          to="/"
+          className={`${headerTitle} ${
+            isMenuOpen ? "header__saved-title-white " : ""
+          }`}
+          onClick={logoButtonClick}
+        >
           NewsExplorer
         </Link>
 
@@ -88,7 +94,11 @@ const Header = ({
               <div className={headerElise}>
                 <p className="header__elise-title">{currentUser.name}</p>
                 <button
-                  className={headerEliseButton}
+                  className={`${
+                    mainRoute || isMenuOpen
+                      ? "header__elise-button"
+                      : "header__saved-elise-button"
+                  }`}
                   type="button"
                   onClick={logout}
                 ></button>
@@ -102,7 +112,7 @@ const Header = ({
                 isMenuOpen ? "header__buttons--open" : ""
               }`}
             >
-              <button className="header__buttons-homeButton" type="button">
+              <button className={headerButtonHome} type="button">
                 Home
               </button>
               <button
@@ -115,7 +125,14 @@ const Header = ({
             </div>
           </>
         )}
-        <button className="header__menu-button" onClick={toggleMenu}></button>
+        <button
+          className={`${
+            mainRoute || isMenuOpen
+              ? "header__menu-button"
+              : "header__menu-button-black"
+          }`}
+          onClick={toggleMenu}
+        ></button>
       </div>
     </header>
   );

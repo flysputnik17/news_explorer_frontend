@@ -148,7 +148,7 @@
   .searchResult__section {
     justify-content: center;
     max-width: 490px;
-    margin: 0 auto;
+    margin: 24px auto;
   }
 
   .searchResult__section-button {

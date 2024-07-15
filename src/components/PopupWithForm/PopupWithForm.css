@@ -47,6 +47,8 @@
   height: 40px;
   border: none;
   cursor: pointer;
+  background-color: transparent;
+  background-image: url("../../images/close.svg");
 }
 
 .modal__form {
@@ -129,7 +131,7 @@
   font-family: "roboto";
   width: 360px;
   height: 64px;
-  margin: 39px auto 16px auto;
+  margin: 6px auto 16px auto;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -144,7 +146,7 @@
   font-family: "roboto";
   width: 360px;
   height: 64px;
-  margin: 39px auto 16px auto;
+  margin: 6px auto 16px auto;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -166,4 +168,23 @@
   line-height: 16px;
   background-color: transparent;
   margin-bottom: 28px;
+}
+
+@media (max-width: 490px) and (min-width: 320px) {
+  .modal__content {
+    max-width: 320px;
+    height: 100%;
+    padding: 16px 16px 36px 16px;
+  }
+  .modal__form {
+    flex-wrap: nowrap;
+  }
+  .modal__input {
+    max-width: 288px;
+  }
+  .SignUp__button,
+  .SignUp__button-disabled {
+    max-width: 288px;
+    margin: 23px 16px 16px 16px;
+  }
 }
