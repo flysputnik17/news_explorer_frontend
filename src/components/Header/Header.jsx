@@ -6,6 +6,17 @@ import MainRouteContext from "../../contexts/MainRouteContext";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import MenuOpenContext from "../../contexts/MenuOpenContext";
 import IsLoggedInContext from "../../contexts/IsLoggedInContext";
+import {
+  headerButtons,
+  headerTitle,
+  headerTitleBlack,
+  headerLogut,
+  headerLogutBlack,
+  headerButtonHome,
+  headerButtonHomeBlack,
+  headerButtonHomeModWhite,
+  headerButtonHomeModBlack,
+} from "../../utils/constants";
 
 const Header = ({
   homeButtonClick,
@@ -21,24 +32,12 @@ const Header = ({
   const isMenuOpen = useContext(MenuOpenContext); //isMenuOpen context is for to render the hamburger menu if the screen width is less then 490px
 
   const [headerStyle, setHeaderStyle] = useState("header");
-  const [headerTitle, setHeaderTitle] = useState("header__title");
-  const [headerButtonHome, setHeaderButtonHome] = useState(
-    "header__buttons-homeButton"
-  );
-  const [headerLogut, setHeaderLogut] = useState("header__logout");
-  const headerButtons = "header__buttons";
 
   useEffect(() => {
     if (mainRoute === false) {
       setHeaderStyle("header__saved");
-      setHeaderTitle("header__saved-title");
-      setHeaderButtonHome("header__saved-buttons-homeButton");
-      setHeaderLogut("header__saved-logout");
     } else {
       setHeaderStyle("header");
-      setHeaderTitle("header__title");
-      setHeaderButtonHome("header__buttons-homeButton");
-      setHeaderLogut("header__logout");
     }
   }, [mainRoute]);
 
@@ -47,9 +46,9 @@ const Header = ({
       <div className="header__content">
         <Link
           to="/"
-          className={`${headerTitle} ${
-            isMenuOpen ? "header__saved-title-white " : ""
-          }`}
+          className={`${
+            mainRoute ? `${headerTitle}` : `${headerTitle} ${headerTitleBlack}`
+          } ${isMenuOpen ? "header__saved-title-white " : ""}`}
           onClick={logoButtonClick}
         >
           NewsExplorer
@@ -62,9 +61,11 @@ const Header = ({
         >
           <Link
             to="/"
-            className={`${headerButtonHome} ${
-              mainRoute ? "header__buttons-homeButton-mod-wihte" : ""
-            }`}
+            className={`${
+              mainRoute
+                ? `${headerButtonHome} ${headerButtonHomeModWhite}`
+                : `${headerButtonHome} ${headerButtonHomeBlack}`
+            } `}
             type="button"
             onClick={homeButtonClick}
           >
@@ -74,15 +75,23 @@ const Header = ({
             <>
               <Link
                 to="/saved-news"
-                className={`${headerButtonHome} ${
-                  mainRoute ? "" : "header__buttons-homeButton-mod-black"
-                }`}
+                className={`${
+                  mainRoute
+                    ? `${headerButtonHome} `
+                    : `${headerButtonHome} ${headerButtonHomeBlack} ${headerButtonHomeModBlack}`
+                } `}
                 type="button"
                 onClick={savedNewsClick}
               >
                 Saved articles
               </Link>
-              <div className={headerLogut}>
+              <div
+                className={`${
+                  mainRoute
+                    ? `${headerLogut}`
+                    : `${headerLogut} ${headerLogutBlack}`
+                } ${isMenuOpen ? "header__saved-title-white " : ""}`}
+              >
                 <p className="header__logout-title">{currentUser.name}</p>
                 <button
                   className={`${
