@@ -22,36 +22,23 @@ const Header = ({
 
   const [headerStyle, setHeaderStyle] = useState("header");
   const [headerTitle, setHeaderTitle] = useState("header__title");
-  const [headerButtons, setHeaderButtons] = useState("header__buttons");
   const [headerButtonHome, setHeaderButtonHome] = useState(
     "header__buttons-homeButton"
   );
-  const [headerButtonArtical, setHeaderButtonArtical] = useState(
-    "header__buttons-articals"
-  );
-  const [headerElise, setHeaderElise] = useState("header__elise");
-
-  const [headerEliseButton, setHeaderEliseButton] = useState(
-    "header__elise-button"
-  );
+  const [headerLogut, setHeaderLogut] = useState("header__logout");
+  const headerButtons = "header__buttons";
 
   useEffect(() => {
     if (mainRoute === false) {
       setHeaderStyle("header__saved");
       setHeaderTitle("header__saved-title");
-      setHeaderButtons("header__saved-buttons");
       setHeaderButtonHome("header__saved-buttons-homeButton");
-      setHeaderButtonArtical("header__saved-buttons-articals");
-      setHeaderElise("header__saved-elise");
-      setHeaderEliseButton("header__saved-elise-button");
+      setHeaderLogut("header__saved-logout");
     } else {
       setHeaderStyle("header");
       setHeaderTitle("header__title");
-      setHeaderButtons("header__buttons");
       setHeaderButtonHome("header__buttons-homeButton");
-      setHeaderButtonArtical("header__buttons-articals");
-      setHeaderElise("header__elise");
-      setHeaderEliseButton("header__elise-button");
+      setHeaderLogut("header__logout");
     }
   }, [mainRoute]);
 
@@ -68,53 +55,48 @@ const Header = ({
           NewsExplorer
         </Link>
 
-        {isLoggedIn ? (
-          <>
-            <div
-              className={`${headerButtons} ${
-                isMenuOpen ? "header__buttons--open" : ""
-              }`}
-            >
-              <Link
-                to="/"
-                className={headerButtonHome}
-                type="button"
-                onClick={homeButtonClick}
-              >
-                Home
-              </Link>
+        <div
+          className={`${headerButtons} ${
+            isMenuOpen ? "header__buttons--open" : ""
+          }`}
+        >
+          <Link
+            to="/"
+            className={`${headerButtonHome} ${
+              mainRoute ? "header__buttons-homeButton-mod-wihte" : ""
+            }`}
+            type="button"
+            onClick={homeButtonClick}
+          >
+            Home
+          </Link>
+          {isLoggedIn ? (
+            <>
               <Link
                 to="/saved-news"
-                className={headerButtonArtical}
+                className={`${headerButtonHome} ${
+                  mainRoute ? "" : "header__buttons-homeButton-mod-black"
+                }`}
                 type="button"
                 onClick={savedNewsClick}
               >
                 Saved articles
               </Link>
-              <div className={headerElise}>
-                <p className="header__elise-title">{currentUser.name}</p>
+              <div className={headerLogut}>
+                <p className="header__logout-title">{currentUser.name}</p>
                 <button
                   className={`${
                     mainRoute || isMenuOpen
-                      ? "header__elise-button"
-                      : "header__saved-elise-button"
+                      ? "header__logout-button"
+                      : "header__saved-logout-button"
                   }`}
                   type="button"
                   onClick={logout}
                 ></button>
               </div>
-            </div>
-          </>
-        ) : (
-          <>
-            <div
-              className={`${headerButtons} ${
-                isMenuOpen ? "header__buttons--open" : ""
-              }`}
-            >
-              <button className={headerButtonHome} type="button">
-                Home
-              </button>
+            </>
+          ) : (
+            <>
               <button
                 onClick={handleSignIn}
                 className="header__unsigned-buttons-signInButton"
@@ -122,9 +104,10 @@ const Header = ({
               >
                 Sign in
               </button>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
+
         <button
           className={`${
             mainRoute || isMenuOpen

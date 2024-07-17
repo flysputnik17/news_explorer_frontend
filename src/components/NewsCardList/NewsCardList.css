@@ -113,6 +113,7 @@
 
   .searchResult__section {
     margin: 0 auto 32px 40px;
+    justify-content: center;
   }
   .searchResult__notfound-img {
     background-repeat: no-repeat;
