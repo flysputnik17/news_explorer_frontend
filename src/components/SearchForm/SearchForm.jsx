@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import "./SearchForm.css";
+import LoadingContext from "../../contexts/LoadingContext";
 
 const SearchForm = ({
   handleNewsSearch,
@@ -10,6 +11,8 @@ const SearchForm = ({
   savedArticles,
 }) => {
   const [keyWord, setKeyWord] = useState("");
+
+  const loading = useContext(LoadingContext);
 
   const newsInput = (e) => {
     setKeyWord(e.target.value);
@@ -23,13 +26,13 @@ const SearchForm = ({
   return (
     <div className="search">
       <div className="search__text">
-        <h2 className="search__text-title">What's going on in the world?</h2>
+        <h1 className="search__text-title">What's going on in the world?</h1>
         <p className="search__text-paragraph">
           Find the latest news on any topic and save them in your personal
           account.
         </p>
       </div>
-      <div className="search__searchBar">
+      <form className="search__searchBar">
         <label htmlFor="topic" className="search__searchBar-label"></label>
         <input
           type="text"
@@ -41,12 +44,14 @@ const SearchForm = ({
         ></input>
         <button
           type="button"
-          className="search__searchBar-button"
+          className={`${"search__searchBar-button"} ${
+            loading ? "search__searchBar-button-click" : ""
+          } `}
           onClick={submitSearch}
         >
           Search
         </button>
-      </div>
+      </form>
       {searchClicked ? (
         <NewsCardList
           handleSaveArticle={handleSaveArticle}

@@ -29,7 +29,7 @@
   text-align: start;
 }
 .modal__title {
-  font-family: "roboto";
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
   color: black;
   font-weight: 900;
   font-size: 24px;
@@ -62,7 +62,7 @@
 }
 
 .modal__label {
-  font-family: "inter";
+  font-family: "inter", Arial, Helvetica, sans-serif;
   max-width: 358px;
   max-height: 47px;
   font-weight: 400;
@@ -74,7 +74,7 @@
 
 .modal__input {
   padding: 0;
-  font-family: "inter";
+  font-family: "inter", Arial, Helvetica, sans-serif;
   width: 358px;
   display: block;
   font-weight: 400;
@@ -115,7 +115,7 @@
 }
 
 .Or-Sign-Up__button {
-  font-family: "inter";
+  font-family: "inter", Arial, Helvetica, sans-serif;
   padding: 0;
   border: none;
   color: #2f71e5;
@@ -128,7 +128,7 @@
 }
 
 .SignUp__button {
-  font-family: "roboto";
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
   width: 360px;
   height: 64px;
   margin: 6px auto 16px auto;
@@ -143,7 +143,7 @@
   cursor: pointer;
 }
 .SignUp__button-disabled {
-  font-family: "roboto";
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
   width: 360px;
   height: 64px;
   margin: 6px auto 16px auto;
@@ -158,7 +158,7 @@
 }
 
 .Or-Login__button {
-  font-family: "inter";
+  font-family: "inter", Arial, Helvetica, sans-serif;
   padding: 0;
   border: none;
   color: #2f71e5;

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+
 import "./Header.css";
 import { useContext } from "react";
 import MainRouteContext from "../../contexts/MainRouteContext";
@@ -39,7 +39,7 @@ const Header = ({
         isMenuOpen ? "header-open" : ""
       }`}
     >
-      <div className="header__content">
+      <nav className="header__content">
         <Link
           to="/"
           className={`${
@@ -50,7 +50,7 @@ const Header = ({
           NewsExplorer
         </Link>
 
-        <div
+        <nav
           className={`${headerButtons} ${
             isMenuOpen ? "header__buttons--open" : ""
           }`}
@@ -81,7 +81,7 @@ const Header = ({
               >
                 Saved articles
               </Link>
-              <div
+              <nav
                 className={`${
                   mainRoute
                     ? `${headerLogut}`
@@ -98,7 +98,7 @@ const Header = ({
                   type="button"
                   onClick={logout}
                 ></button>
-              </div>
+              </nav>
             </>
           ) : (
             <>
@@ -111,7 +111,7 @@ const Header = ({
               </button>
             </>
           )}
-        </div>
+        </nav>
 
         <button
           className={`${
@@ -121,7 +121,7 @@ const Header = ({
           }`}
           onClick={toggleMenu}
         ></button>
-      </div>
+      </nav>
     </header>
   );
 };

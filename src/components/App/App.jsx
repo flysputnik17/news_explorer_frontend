@@ -268,7 +268,6 @@ function App() {
                                 handleSaveArticle={handleSaveArticle}
                                 handleDeleteArticle={handleDeleteArticle}
                                 savedArticles={savedArticles}
-                                loading={loading}
                               />
                             </EmptySearchContext.Provider>
                           </LoadingContext.Provider>

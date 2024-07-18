@@ -3,7 +3,7 @@
   max-height: 80px;
   background-color: transparent;
   border-bottom: 1px solid #ffffff33;
-  font-family: "roboto";
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
 }
 
 .header__saved {
@@ -23,7 +23,7 @@
 
 .header__title {
   text-decoration: none;
-  font-family: "roboto slab";
+  font-family: "roboto slab", "inter", Arial, Helvetica, sans-serif;
   width: 200px;
   height: 24px;
   font-weight: 700;
@@ -51,7 +51,7 @@
   text-decoration: none;
   margin-left: 76px;
   height: 100%;
-  font-family: "roboto";
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -79,7 +79,7 @@
   height: 48px;
   margin-right: 104px;
   margin-left: 42px;
-  font-family: "roboto";
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -112,7 +112,7 @@
   padding: 0;
   width: 56px;
   height: 24px;
-  font-family: "roboto";
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;

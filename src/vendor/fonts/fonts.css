@@ -42,3 +42,9 @@
   src: url("./inter-400-regular.woff2") format("woff2");
   font-weight: 400;
 }
+
+@font-face {
+  font-family: "inter";
+  src: url("./inter-500.woff2") format("woff2");
+  font-weight: 500;
+}

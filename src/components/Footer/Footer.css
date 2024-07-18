@@ -9,7 +9,7 @@
   width: 433px;
   height: 22px;
   margin: 32px 0 26px 104px;
-  font-family: "roboto";
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 22px;
@@ -21,7 +21,7 @@
   flex-direction: row;
   margin: 30px 104px 28px auto;
   height: 24px;
-  font-family: "roboto";
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;

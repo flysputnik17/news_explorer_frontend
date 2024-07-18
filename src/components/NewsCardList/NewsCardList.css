@@ -9,7 +9,7 @@
   max-width: 712px;
   max-height: 46px;
   margin: 80px auto 64px 104px;
-  font-family: "roboto slab";
+  font-family: "roboto slab", "inter", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 40px;
   line-height: 46px;
@@ -34,7 +34,7 @@
   width: 288px;
   height: 64px;
   padding: 0;
-  font-family: "roboto";
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
   font-weight: 500;
   font-size: 18px;
   line-height: 24px;
@@ -57,7 +57,7 @@
   margin: 86px auto 31.5px auto;
 }
 .searchResult__notfound-title {
-  font-family: "roboto slab";
+  font-family: "roboto slab", "inter", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 26px;
   line-height: 30px;
@@ -65,7 +65,7 @@
   margin: 0 auto 16px auto;
 }
 .searchResult__notfound {
-  font-family: "roboto";
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
   font-weight: 400;
   font-size: 18px;
   line-height: 24px;

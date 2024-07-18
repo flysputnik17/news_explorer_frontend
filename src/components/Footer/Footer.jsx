@@ -8,7 +8,7 @@ const Footer = ({ homeButtonClick }) => {
         © 2020 Supersite, Powered by News API
       </h2>
       <div className="footer__block">
-        <div className="footer__block-bottoms">
+        <nav className="footer__block-bottoms">
           <Link
             to="/"
             className="footer__block-buttons-home"
@@ -26,8 +26,8 @@ const Footer = ({ homeButtonClick }) => {
           >
             TripleTen
           </Link>
-        </div>
-        <div className="footer__block-links">
+        </nav>
+        <nav className="footer__block-links">
           <a
             className="footer__block-icon-github"
             href="https://github.com/flysputnik17/news_explorer_frontend"
@@ -39,7 +39,7 @@ const Footer = ({ homeButtonClick }) => {
             href="/"
             target="_blank"
           ></a>
-        </div>
+        </nav>
       </div>
     </footer>
   );
