@@ -7,6 +7,8 @@ import CurrentUserContext from "../../contexts/CurrentUserContext";
 import MenuOpenContext from "../../contexts/MenuOpenContext";
 import IsLoggedInContext from "../../contexts/IsLoggedInContext";
 import {
+  headerStyle,
+  headerStyleSaved,
   headerButtons,
   headerTitle,
   headerTitleBlack,
@@ -31,18 +33,12 @@ const Header = ({
   const currentUser = useContext(CurrentUserContext); //currentUser context is for rendering the name of the user
   const isMenuOpen = useContext(MenuOpenContext); //isMenuOpen context is for to render the hamburger menu if the screen width is less then 490px
 
-  const [headerStyle, setHeaderStyle] = useState("header");
-
-  useEffect(() => {
-    if (mainRoute === false) {
-      setHeaderStyle("header__saved");
-    } else {
-      setHeaderStyle("header");
-    }
-  }, [mainRoute]);
-
   return (
-    <header className={` ${headerStyle} ${isMenuOpen ? "header-open" : ""}`}>
+    <header
+      className={` ${mainRoute ? `${headerStyle}` : `${headerStyleSaved}`} ${
+        isMenuOpen ? "header-open" : ""
+      }`}
+    >
       <div className="header__content">
         <Link
           to="/"

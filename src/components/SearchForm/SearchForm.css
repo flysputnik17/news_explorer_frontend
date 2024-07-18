@@ -87,7 +87,7 @@
   }
 }
 
-@media (max-width: 781px) and (min-width: 490px) {
+@media (max-width: 781px) and (min-width: 514px) {
   .search__text {
     margin: 28px auto 38px auto;
   }
@@ -115,7 +115,7 @@
   }
 }
 
-@media (max-width: 490px) and (min-width: 320px) {
+@media (max-width: 514px) and (min-width: 320px) {
   /* .search {
     position: relative;
     max-height: 576px;

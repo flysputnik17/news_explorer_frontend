@@ -6,6 +6,11 @@
   font-family: "roboto";
 }
 
+.header__saved {
+  background-color: white;
+  border-bottom: 1px solid #d1d2d6;
+}
+
 .header__content {
   display: flex;
   justify-content: space-between;
@@ -56,6 +61,7 @@
   color: white;
   cursor: pointer;
   align-content: center;
+  white-space: nowrap;
 }
 .header__buttons-homeButton-black {
   color: black;
@@ -106,6 +112,7 @@
   padding: 0;
   width: 56px;
   height: 24px;
+  font-family: "roboto";
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
@@ -122,44 +129,6 @@
   background-repeat: no-repeat;
   background-position: right;
   cursor: pointer;
-}
-
-.header__saved {
-  max-width: 1440px;
-  max-height: 80px;
-  background-color: white;
-  border-bottom: 1px solid #00000033;
-  font-family: "roboto";
-}
-
-.header__saved-title {
-  text-decoration: none;
-  font-family: "roboto slab";
-  width: 200px;
-  height: 24px;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
-  color: black;
-  margin: 30px 0 26px 104px;
-  padding: 0;
-  cursor: pointer;
-}
-
-.header__saved-buttons-homeButton {
-  text-decoration: none;
-  margin-left: 76px;
-  height: 100%;
-  font-family: "roboto";
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 24px;
-  padding: 0;
-  border: none;
-  background-color: transparent;
-  color: black;
-  cursor: pointer;
-  align-content: center;
 }
 
 .header__saved-logout-button {
@@ -180,34 +149,33 @@
   flex-direction: column;
   z-index: 1;
 }
+@media (max-width: 853px) and (min-width: 777px) {
+  .header__logout {
+    margin-right: 52px;
+    margin-left: 32px;
+  }
+}
 
-@media (max-width: 768px) and (min-width: 491px) {
-  .header,
-  .header__saved {
+@media (max-width: 777px) and (min-width: 514px) {
+  .header {
     max-width: 768px;
     max-height: 66px;
   }
 
-  .header__title,
-  .header__saved-title {
-    margin: 23px auto 19px 40px;
+  .header__title {
+    margin: 23px auto 19px 20px;
   }
 
   .header__buttons {
     margin-right: 40px;
     height: 66px;
   }
-  .header__buttons-homeButton,
-  .header__saved-buttons-homeButton {
+  .header__buttons-homeButton {
+    max-width: 160px;
     font-size: 16px;
+    margin-left: 33px;
   }
-  .header__saved-buttons-articals,
-  .header__buttons-articals {
-    font-size: 16px;
-    margin-left: 16px;
-    margin-right: 0;
-  }
-  .header__saved-logout,
+
   .header__logout {
     max-width: 100px;
     max-height: 40px;
@@ -217,12 +185,11 @@
     font-size: 16px;
     margin: 8px auto 8px 15px;
   }
-  .header__saved-logout-button,
+
   .header__logout-button {
     margin: 8px 13px 8px auto;
   }
 
-  .header__saved-logout,
   .header__unsigned-buttons-signInButton {
     max-width: 152px;
     max-height: 40px;
@@ -231,18 +198,16 @@
   }
 }
 
-@media (max-width: 490px) and (min-width: 320px) {
-  .header,
-  .header__saved {
-    max-width: 490px;
+@media (max-width: 514px) and (min-width: 320px) {
+  .header {
+    max-width: 514px;
     max-height: 56px;
   }
   .header-open {
     background-color: #1a1b22;
   }
 
-  .header__title,
-  .header__saved-title {
+  .header__title {
     max-width: 117px;
     max-height: 24px;
     font-size: 16px;
@@ -287,10 +252,7 @@
     align-items: flex-start;
     border-top: 1px solid #ffffff33;
   }
-  .header__buttons-homeButton,
-  .header__buttons-articals,
-  .header__saved-buttons-homeButton,
-  .header__saved-buttons-articals {
+  .header__buttons-homeButton {
     max-width: 490px;
     min-height: 56px;
     text-align: left;
@@ -300,8 +262,7 @@
     border: none;
   }
   .header__unsigned-buttons-signInButton,
-  .header__logout,
-  .header__saved-logout {
+  .header__logout {
     width: 288px;
     max-height: 56px;
     margin: 0 16px 24px 16px;

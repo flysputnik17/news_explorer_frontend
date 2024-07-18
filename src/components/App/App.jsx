@@ -42,7 +42,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 490);
+  const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 514);
   const [currentUser, setCurrentUser] = useState({
     name: "",
     _id: "",
@@ -224,8 +224,8 @@ function App() {
 
   ///////////////////////////////////////////Hamburger Menu Function///////////////////////////
   const handleResize = () => {
-    setIsSmallScreen(window.innerWidth <= 490);
-    if (window.innerWidth > 490) {
+    setIsSmallScreen(window.innerWidth <= 514);
+    if (window.innerWidth > 514) {
       setIsMenuOpen(false);
     }
   };
