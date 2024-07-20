@@ -81,18 +81,21 @@
   background-color: #2a65cc;
 }
 
-@media (max-width: 1000px) and (min-width: 822px) {
+@media (max-width: 1122px) and (min-width: 880px) {
   .search__text {
     margin: 38px auto 48px auto;
   }
+  .search__searchBar {
+    margin: 0 auto 40px auto;
+  }
 }
-@media (max-width: 822px) and (min-width: 781px) {
+/* @media (max-width: 822px) and (min-width: 781px) {
   .search__text {
     margin: 28px auto 38px auto;
   }
-}
+} */
 
-@media (max-width: 781px) and (min-width: 514px) {
+@media (max-width: 880px) and (min-width: 514px) {
   .search__text {
     margin: 28px auto 38px auto;
   }
@@ -109,7 +112,7 @@
   .search__searchBar {
     max-width: 452px;
     height: 56px;
-    margin: 0 auto 40px auto;
+    margin: 0 auto 22px auto;
   }
   .search__searchBar-input {
     max-width: 228px;

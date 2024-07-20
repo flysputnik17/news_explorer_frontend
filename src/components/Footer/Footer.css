@@ -52,13 +52,14 @@
 .footer__block-icon-github {
   width: 24px;
   height: 24px;
-  background-image: url("../../images/github.svg");
+  background-image: url("../../images/github.jpg");
   background-color: transparent;
 }
 .footer__block-buttons-facebook {
   width: 24px;
   height: 24px;
-  background-image: url("../../images/fb.svg");
+  background-image: url("../../images/facebook.jpg");
+  background-repeat: no-repeat;
   margin-left: 24px;
 }
 

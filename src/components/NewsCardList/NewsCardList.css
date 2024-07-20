@@ -85,7 +85,7 @@
 
 @media (max-width: 929px) and (min-width: 769px) {
   .searchResult__title {
-    margin: auto;
+    margin: 40px auto 32px 40px;
   }
   .searchResult__section {
     justify-content: center;
