@@ -67,7 +67,6 @@ const NewsCardList = ({
                     news={news}
                     handleDeleteArticle={handleDeleteArticle}
                     keywords={keywords}
-                    savedArticles={savedArticles}
                   />
                 ))}
               </div>
