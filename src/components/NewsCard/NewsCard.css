@@ -78,6 +78,9 @@
   line-height: 30px;
   color: #1a1b22;
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 .newsCard__content-text {
   margin: 0 0 20px 0;
@@ -91,8 +94,10 @@
   color: #1a1b22;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
 }
-
 .newsCard__content-source {
   margin: 0 auto 0 0;
   font-family: "roboto slab", "inter", Arial, Helvetica, sans-serif;
@@ -119,15 +124,7 @@
   justify-content: center;
   align-items: center;
 }
-.newsCard__saveArtical {
-  margin: 0;
-  padding: 0;
-  color: black;
-  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 14px;
-}
+.newsCard__saveArtical,
 .newsCard__deleteArtical {
   margin: 0;
   padding: 0;
@@ -137,38 +134,11 @@
   font-size: 12px;
   line-height: 14px;
 }
-
 .newsCard__saveButton:hover {
   background-image: url("../../images/Rectangle7.svg");
   cursor: pointer;
 }
-.newsCard__saveBlock-hidden {
-  visibility: hidden;
-  width: 142px;
-  height: 40px;
-  background: #ffffff;
-  border-radius: 10px;
-  position: absolute;
-  right: 68px;
-  top: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.newsCard__saveBlock-visible {
-  visibility: visible;
-  width: 142px;
-  height: 40px;
-  background: #ffffff;
-  border-radius: 10px;
-  position: absolute;
-  right: 68px;
-  top: 24px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+.newsCard__saveBlock-hidden,
 .newsCard__deleteBlock-hidden {
   visibility: hidden;
   width: 142px;
@@ -182,6 +152,7 @@
   justify-content: center;
   align-items: center;
 }
+.newsCard__saveBlock-visible,
 .newsCard__deleteBlock-visible {
   visibility: visible;
   width: 142px;
@@ -195,7 +166,6 @@
   justify-content: center;
   align-items: center;
 }
-
 .newsCard__deleteButton {
   background-image: url("../../images/trash.svg");
   padding: 0;
@@ -215,7 +185,6 @@
   cursor: pointer;
   background-image: url("../../images/trashBold.svg");
 }
-
 .newsCard-keyword {
   width: 80px;
   height: 40px;
@@ -232,7 +201,14 @@
   line-height: 24px;
 }
 
-@media (max-width: 768px) and (min-width: 490px) {
+@media (max-width: 1349px) {
+  .newsCard {
+    width: 31.3%;
+    margin: 0 8px 8px 0;
+  }
+}
+
+@media (max-width: 786px) {
   .newsCard {
     max-width: 224px;
     max-height: 420px;
@@ -245,10 +221,7 @@
     object-fit: cover;
     margin: 0 auto;
   }
-  .newsCard__saveButton {
-    right: 14px;
-    top: 14px;
-  }
+  .newsCard__saveButton,
   .newsCard__saveButton-liked {
     right: 14px;
     top: 14px;
@@ -281,8 +254,9 @@
   }
 }
 
-@media (max-width: 490px) and (min-width: 320px) {
+@media (max-width: 490px) {
   .newsCard {
+    width: 100%;
     max-width: 288px;
     max-height: 440px;
     margin: 0 16px 10px 16px;
@@ -297,19 +271,21 @@
   .newsCard__content {
     margin: 16px 16px 16px 16px;
   }
-
   .newsCard__content-date {
     max-width: 256px;
     max-height: 24px;
     margin: 0 auto 10px 0;
   }
   .newsCard__content-title {
+    line-height: 24px;
+    font-size: 22px;
     max-width: 235px;
     max-height: 48px;
-    margin: 0 auto 14px auto;
+    margin: 0 0 14px 0;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    display: block;
   }
   .newsCard__content-text {
     max-width: 256px;
