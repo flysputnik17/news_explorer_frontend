@@ -81,6 +81,9 @@
   .searchResult {
     margin: 62px 0 62px 0;
   }
+  .searchResult__section {
+    margin: 62px 40px 32px 40px;
+  }
 }
 
 @media (max-width: 950px) and (min-width: 929px) {
@@ -117,7 +120,6 @@
   }
 
   .searchResult__section {
-    margin: 32px auto 32px auto;
     justify-content: center;
   }
   .searchResult__notfound-img {
