@@ -1,0 +1,190 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #0000004d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: visible;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+}
+.modal_opened {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0.5s, opacity 0.5s linear;
+}
+.modal__content {
+  background-color: white;
+  position: relative;
+  padding: 36px 34px 36px 28px;
+  max-width: 430px;
+  max-height: 458px;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 20px;
+  text-align: start;
+}
+.modal__title {
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
+  color: black;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 28px;
+  margin: 0;
+  margin-bottom: 22px;
+}
+
+.modal__close-button {
+  padding: 0;
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 40px;
+  height: 40px;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  background-image: url("../../images/back.svg");
+}
+
+.modal__form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  align-items: center;
+}
+
+.modal__label {
+  font-family: "inter", Arial, Helvetica, sans-serif;
+  max-width: 358px;
+  max-height: 47px;
+  font-weight: 400;
+  color: #2f71e5;
+  font-size: 12px;
+  line-height: 14px;
+  margin-bottom: 33px;
+}
+
+.modal__input {
+  padding: 0;
+  font-family: "inter", Arial, Helvetica, sans-serif;
+  width: 358px;
+  display: block;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  border: none;
+  border-bottom: 1px solid black;
+  margin-top: 9px;
+}
+
+.modal__add-button {
+  width: 124px;
+  height: 36px;
+  background-color: #0000004d;
+  border-radius: 4px;
+  color: white;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 0;
+  border-color: white;
+  cursor: pointer;
+}
+
+.Login__button {
+  color: #ffffff;
+  width: 73px;
+  height: 36px;
+  background-color: #0000004d;
+  border: none;
+  margin-top: 15px;
+}
+
+.Login__button:hover {
+  background-color: black;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.Or-Sign-Up__button {
+  font-family: "inter", Arial, Helvetica, sans-serif;
+  padding: 0;
+  border: none;
+  color: #2f71e5;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  background-color: transparent;
+  margin-bottom: 28px;
+}
+
+.SignUp__button {
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
+  width: 360px;
+  height: 64px;
+  margin: 6px auto 16px auto;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 0;
+  border: 1px outset;
+  border-radius: 30px;
+  background-color: #2f71e5;
+  color: #ffffff;
+  cursor: pointer;
+}
+.SignUp__button-disabled {
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
+  width: 360px;
+  height: 64px;
+  margin: 6px auto 16px auto;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 0;
+  border: 1px outset;
+  border-radius: 30px;
+  background-color: #e6e8eb;
+  color: #b6bcbf;
+}
+
+.Or-Login__button {
+  font-family: "inter", Arial, Helvetica, sans-serif;
+  padding: 0;
+  border: none;
+  color: #2f71e5;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  background-color: transparent;
+  margin-bottom: 28px;
+}
+
+@media (max-width: 490px) and (min-width: 320px) {
+  .modal__content {
+    max-width: 320px;
+    height: 100%;
+    padding: 16px 16px 36px 16px;
+  }
+  .modal__form {
+    flex-wrap: nowrap;
+  }
+  .modal__input {
+    max-width: 288px;
+  }
+  .SignUp__button,
+  .SignUp__button-disabled {
+    max-width: 288px;
+    margin: 23px 16px 16px 16px;
+  }
+}

@@ -1,0 +1,277 @@
+.header {
+  max-width: 1440px;
+  max-height: 80px;
+  background-color: transparent;
+  border-bottom: 1px solid #ffffff33;
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
+}
+
+.header__saved {
+  background-color: white;
+  border-bottom: 1px solid #d1d2d6;
+}
+
+.header__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header__menu-button,
+.header__menu-button-black {
+  display: none;
+}
+
+.header__title {
+  text-decoration: none;
+  font-family: "roboto slab", "inter", Arial, Helvetica, sans-serif;
+  width: 200px;
+  height: 24px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: white;
+  margin: 30px 0 26px 104px;
+  padding: 0;
+  cursor: pointer;
+}
+.header__title-black {
+  color: black;
+}
+
+.header__buttons {
+  margin: 0 0 0 auto;
+  align-self: center;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: 80px;
+}
+
+.header__buttons-homeButton {
+  text-decoration: none;
+  margin-left: 76px;
+  height: 100%;
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+  align-content: center;
+  white-space: nowrap;
+}
+.header__buttons-homeButton-black {
+  color: black;
+}
+.header__buttons-homeButton-mod-wihte {
+  border-bottom: 3px solid white;
+}
+
+.header__buttons-homeButton-mod-black {
+  border-bottom: 3px solid black;
+}
+
+.header__unsigned-buttons-signInButton {
+  width: 176px;
+  height: 48px;
+  margin-right: 104px;
+  margin-left: 42px;
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 0;
+  border: 1px outset;
+  border-radius: 30px;
+  background-color: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.header__logout {
+  display: flex;
+  width: 112px;
+  height: 48px;
+  padding: 0;
+  margin-right: 104px;
+  margin-left: 64px;
+  border: 1px outset;
+  border-radius: 30px;
+  color: white;
+  cursor: pointer;
+}
+.header__logout-black {
+  color: black;
+}
+
+.header__logout-title {
+  margin: 12px 0 12px 19px;
+  padding: 0;
+  width: 56px;
+  height: 24px;
+  font-family: "roboto", "inter", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+}
+.header__logout-button {
+  padding: 0;
+  margin: 12px 15px 12px 0;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  background-image: url("../../images/logout.svg");
+  background-repeat: no-repeat;
+  background-position: right;
+  cursor: pointer;
+}
+
+.header__saved-logout-button {
+  padding: 0;
+  margin: 12px 15px 12px 0;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  color: rgb(0, 0, 0);
+  background-image: url("../../images/Union.svg");
+  background-repeat: no-repeat;
+  background-position: right;
+  cursor: pointer;
+}
+.header__buttons--open {
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+@media (max-width: 853px) and (min-width: 777px) {
+  .header__logout {
+    margin-right: 52px;
+    margin-left: 32px;
+  }
+}
+
+@media (max-width: 777px) and (min-width: 514px) {
+  .header {
+    max-width: 768px;
+    max-height: 66px;
+  }
+
+  .header__title {
+    margin: 23px auto 19px 20px;
+  }
+
+  .header__buttons {
+    margin-right: 40px;
+    height: 66px;
+  }
+  .header__buttons-homeButton {
+    max-width: 160px;
+    font-size: 16px;
+    margin-left: 33px;
+  }
+
+  .header__logout {
+    max-width: 100px;
+    max-height: 40px;
+    margin: 0 0 0 16px;
+  }
+  .header__logout-title {
+    font-size: 16px;
+    margin: 8px auto 8px 15px;
+  }
+
+  .header__logout-button {
+    margin: 8px 13px 8px auto;
+  }
+
+  .header__unsigned-buttons-signInButton {
+    max-width: 152px;
+    max-height: 40px;
+    margin: 14px 40px 12px 16px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 514px) and (min-width: 320px) {
+  .header {
+    max-width: 514px;
+    max-height: 56px;
+  }
+  .header-open {
+    background-color: #1a1b22;
+  }
+
+  .header__title {
+    max-width: 117px;
+    max-height: 24px;
+    font-size: 16px;
+    margin: 16px auto 16px 16px;
+  }
+
+  .header__buttons {
+    display: none;
+    margin: 0;
+  }
+  .header__menu-button {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin: 16px 16px 16px auto;
+    background-color: transparent;
+    border: none;
+    background-image: url("../../images/menu.svg");
+    cursor: pointer;
+  }
+
+  .header__menu-button-black {
+    width: 24px;
+    height: 24px;
+    display: block;
+    margin: 16px 16px 16px auto;
+    background-color: transparent;
+    border: none;
+    background-image: url("../../images/menublack.svg");
+    cursor: pointer;
+  }
+
+  .header__buttons--open {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px;
+    right: 0;
+    background-color: #1a1b22;
+    width: 100%;
+    align-items: flex-start;
+    border-top: 1px solid #ffffff33;
+  }
+  .header__buttons-homeButton {
+    max-width: 490px;
+    min-height: 56px;
+    text-align: left;
+    margin: 16px 0 22px 16px;
+    color: white;
+    align-content: center;
+    border: none;
+  }
+  .header__unsigned-buttons-signInButton,
+  .header__logout {
+    width: 288px;
+    max-height: 56px;
+    margin: 0 16px 24px 16px;
+    justify-content: center;
+    position: relative;
+    right: 10px;
+    color: white;
+  }
+  .header__saved-title-white {
+    color: white;
+  }
+}
