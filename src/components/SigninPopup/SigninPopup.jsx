@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
-const SigninPopup = ({
-  isOpen,
-  onClose,
-  handleSignupButton,
-  checkloggedIn,
-}) => {
+const SigninPopup = ({ isOpen, onClose, handleSignupButton, handleLogin }) => {
   const [buttonStyle, setButtonStyle] = useState("SignUp__button-disabled");
   const [buttonText, setButtonText] = useState("Disabled");
 
@@ -20,6 +15,11 @@ const SigninPopup = ({
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleLogin({ email, password });
   };
   useEffect(() => {
     if (email.length && password.length > 0) {
@@ -36,7 +36,7 @@ const SigninPopup = ({
       titleText="Sign In"
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={checkloggedIn}
+      onSubmit={handleSubmit}
     >
       <label htmlFor="email" className="modal__label">
         Email

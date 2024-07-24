@@ -27,7 +27,11 @@ import SavedNews from "../SavedNews/SavedNews";
 
 /////////////////////////////////////////////API Imports/////////////////////////////////////////
 import { getSearchResults } from "../../utils/ThirdPartyApi";
+import Auth from "../../utils/auth";
 ////////////////////////////////////////////////////////////////////////////////////////////////
+
+const auth = new Auth({ headers: { "Content-Type": "application/json" } });
+
 function App() {
   /////////////////////////////////////////////////////////////////////////////////////////
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,7 +48,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 514);
   const [currentUser, setCurrentUser] = useState({
-    name: "",
+    username: "",
     _id: "",
     token: "",
   });
@@ -81,6 +85,13 @@ function App() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      checkloggedIn(jwt);
+    }
+  }, []);
+
   /////////////////////////////////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////PopUP functions/////////////////////////////
@@ -104,23 +115,52 @@ function App() {
   const handleRegistration = (data) => {
     console.log("click");
     console.log("data:", data);
-    setCurrentUser({ name: data.username, password: data.password });
-    console.log("currentUser:", currentUser);
-    closeActiveModal();
-    handleConfirm();
+    auth
+      .register(data)
+      .then(() => {
+        setCurrentUser({
+          email: data.email,
+          password: data.password,
+          username: data.username,
+        });
+        closeActiveModal();
+        handleConfirm();
+      })
+      .catch(console.error);
+  };
+
+  const handleLogin = (data) => {
+    setIsLoggedIn(true);
+    auth
+      .login(data)
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        setCurrentUser(data);
+        closeActiveModal();
+        return checkloggedIn();
+      })
+      .catch((err) => {
+        console.error("Error in handleLogin", err);
+      });
   };
 
   const handleSuccessRegistration = () => {
-    setIsLoggedIn(true);
-    setMainRoute(false);
-    navigate("/saved-news");
+    handleLogin(currentUser);
     closeActiveModal();
   };
 
-  const checkloggedIn = (e) => {
-    e.preventDefault();
-    setIsLoggedIn(true);
-    closeActiveModal();
+  const checkloggedIn = () => {
+    const jwt = localStorage.getItem("jwt");
+    return auth
+      .getUserInfo(jwt)
+      .then((res) => {
+        setIsLoggedIn(true);
+        setCurrentUser(res);
+        navigate("/saved-news");
+      })
+      .catch((err) => {
+        console.error("Error in checkloggedIn", err);
+      });
   };
   const logout = () => {
     setIsLoggedIn(false);
@@ -303,7 +343,7 @@ function App() {
                     isOpen={activeModal === "sign-in"}
                     onClose={closeActiveModal}
                     handleSignupButton={handleSignupButton}
-                    checkloggedIn={checkloggedIn}
+                    handleLogin={handleLogin}
                   />
                 )}
                 {activeModal === "confirmation" && (
