@@ -33,3 +33,5 @@ export {
   headerButtonHomeModWhite,
   headerButtonHomeModBlack,
 };
+
+export const baseUrl = "http://localhost:3001";

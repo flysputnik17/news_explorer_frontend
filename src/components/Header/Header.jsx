@@ -88,7 +88,7 @@ const Header = ({
                     : `${headerLogut} ${headerLogutBlack}`
                 } ${isMenuOpen ? "header__saved-title-white " : ""}`}
               >
-                <p className="header__logout-title">{currentUser.name}</p>
+                <p className="header__logout-title">{currentUser.username}</p>
                 <button
                   className={`${
                     mainRoute || isMenuOpen
