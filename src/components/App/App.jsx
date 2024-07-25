@@ -28,10 +28,13 @@ import SavedNews from "../SavedNews/SavedNews";
 /////////////////////////////////////////////API Imports/////////////////////////////////////////
 import { getSearchResults } from "../../utils/ThirdPartyApi";
 import Auth from "../../utils/auth";
+import Api from "../../utils/api";
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 const auth = new Auth({ headers: { "Content-Type": "application/json" } });
-
+const api = new Api({
+  headers: { "Content-Type": "application/json" },
+});
 function App() {
   /////////////////////////////////////////////////////////////////////////////////////////
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -91,6 +94,14 @@ function App() {
       checkloggedIn(jwt);
     }
   }, []);
+  useEffect(() => {
+    api
+      .getArticles()
+      .then((res) => {
+        setSavedArticles(res);
+      })
+      .catch(console.error);
+  }, []);
 
   /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -130,11 +141,11 @@ function App() {
   };
 
   const handleLogin = (data) => {
-    setIsLoggedIn(true);
     auth
       .login(data)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
+        setIsLoggedIn(true);
         setCurrentUser(data);
         closeActiveModal();
         return checkloggedIn();
@@ -154,15 +165,16 @@ function App() {
     return auth
       .getUserInfo(jwt)
       .then((res) => {
-        setIsLoggedIn(true);
         setCurrentUser(res);
-        navigate("/saved-news");
+        setIsLoggedIn(true);
+        closeActiveModal();
       })
       .catch((err) => {
         console.error("Error in checkloggedIn", err);
       });
   };
   const logout = () => {
+    localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setMainRoute(true);
     navigate("/");
