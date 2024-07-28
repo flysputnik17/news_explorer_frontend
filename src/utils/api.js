@@ -25,7 +25,10 @@ export default class Api {
     }).then(this.checkResponse);
   }
 
-  addArticle({ keyword, title, text, date, source, link, Image }) {
+  addArticle(
+    keyword,
+    { title, description, publishedAt, source, url, urlToImage }
+  ) {
     const jwt = localStorage.getItem("jwt");
     return fetch(`${this.baseUrl}/articles`, {
       method: "POST",
@@ -36,11 +39,11 @@ export default class Api {
       body: JSON.stringify({
         keyword,
         title,
-        text,
-        date,
+        description,
+        publishedAt,
         source,
-        link,
-        Image,
+        url,
+        urlToImage,
       }),
     }).then(this.checkResponse);
   }

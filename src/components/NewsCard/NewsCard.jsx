@@ -95,7 +95,9 @@ const NewsCard = ({
         </p>
         <h2 className="newsCard__content-title">{news.title}</h2>
         <p className="newsCard__content-text">{news.description}</p>
-        <p className="newsCard__content-source">{news.source.name}</p>
+        <p className="newsCard__content-source">{`${
+          mainRoute ? news.source.name : news.source
+        }`}</p>
       </div>
     </div>
   );

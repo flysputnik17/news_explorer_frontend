@@ -32,9 +32,7 @@ import Api from "../../utils/api";
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 const auth = new Auth({ headers: { "Content-Type": "application/json" } });
-const api = new Api({
-  headers: { "Content-Type": "application/json" },
-});
+const api = new Api({ headers: { "Content-Type": "application/json" } });
 function App() {
   /////////////////////////////////////////////////////////////////////////////////////////
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -94,14 +92,14 @@ function App() {
       checkloggedIn(jwt);
     }
   }, []);
-  useEffect(() => {
-    api
-      .getArticles()
-      .then((res) => {
-        setSavedArticles(res);
-      })
-      .catch(console.error);
-  }, []);
+  // useEffect(() => {
+  //   api
+  //     .getArticles()
+  //     .then((res) => {
+  //       setSavedArticles(res);
+  //     })
+  //     .catch(console.error);
+  // }, []);
 
   /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -249,8 +247,22 @@ function App() {
   //func to save articles
   const handleSaveArticle = (article, currKeyword) => {
     if (isLoggedIn) {
-      setSavedArticles((prevArticles) => [...prevArticles, article]);
-      setCurrKeyword(currKeyword);
+      api
+        .addArticle(currKeyword, {
+          title: article.title,
+          description: article.description,
+          publishedAt: article.publishedAt,
+          source: article.source.name,
+          url: article.url,
+          urlToImage: article.urlToImage,
+        })
+        .then((res) => {
+          setSavedArticles((prevArticles) => [res.data, ...prevArticles]);
+          setCurrKeyword(currKeyword);
+        })
+        .catch((err) => {
+          console.error("Error in handleSaveArticle:", err);
+        });
     } else {
       return;
     }
