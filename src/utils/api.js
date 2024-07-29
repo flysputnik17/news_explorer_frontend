@@ -48,10 +48,14 @@ export default class Api {
     }).then(this.checkResponse);
   }
 
-  deleteArticle() {
-    return fetch(`${this.baseUrl}/articles/articleId`, {
+  deleteArticle(id) {
+    const jwt = localStorage.getItem("jwt");
+    return fetch(`${this.baseUrl}/articles/${id}`, {
       method: "DELETE",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${jwt}`,
+      },
     }).catch(this.checkResponse);
   }
 }

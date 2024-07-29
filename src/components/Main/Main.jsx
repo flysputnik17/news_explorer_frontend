@@ -10,7 +10,6 @@ const Main = ({
   searchClicked,
   handleSaveArticle,
   handleDeleteArticle,
-  savedArticles,
 }) => {
   const loading = useContext(LoadingContext);
   return (
@@ -20,7 +19,6 @@ const Main = ({
         searchClicked={searchClicked}
         handleSaveArticle={handleSaveArticle}
         handleDeleteArticle={handleDeleteArticle}
-        savedArticles={savedArticles}
       />
       {loading ? <Preloader /> : <></>}
       <About />

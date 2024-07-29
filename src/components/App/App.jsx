@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////React Imports/////////////////////////////////////////////////
 import { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////Context Imports////////////////////////////////////
@@ -12,6 +12,7 @@ import NewsDataContext from "../../contexts/NewsDataContext";
 import LoadingContext from "../../contexts/LoadingContext";
 import EmptySearchContext from "../../contexts/EmptySearchContext";
 import CurrentKeyWordContext from "../../contexts/CurrentKeyWordContext";
+import SavedArticles from "../../contexts/SavedArticles";
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////React Components Imports/////////////////////////////////
@@ -92,14 +93,17 @@ function App() {
       checkloggedIn(jwt);
     }
   }, []);
-  // useEffect(() => {
-  //   api
-  //     .getArticles()
-  //     .then((res) => {
-  //       setSavedArticles(res);
-  //     })
-  //     .catch(console.error);
-  // }, []);
+
+  useEffect(() => {
+    api
+      .getArticles()
+      .then((res) => {
+        setSavedArticles(res);
+      })
+      .catch((err) => {
+        console.error("error in getArticles Hook:", err);
+      });
+  }, []);
 
   /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -271,14 +275,18 @@ function App() {
   //func to unsave title
   const handleDeleteArticle = (article) => {
     if (isLoggedIn) {
-      setSavedArticles((prevArticles) =>
-        prevArticles.filter(
-          (savedArticle) => savedArticle.title !== article.title
-        )
-      );
-      setKeywords((prevKeyword) =>
-        prevKeyword.filter((keyword) => keyword !== article.keyword)
-      );
+      api
+        .deleteArticle(article._id)
+        .then(() => {
+          setSavedArticles(
+            savedArticles.filter((savedArticle) => {
+              return savedArticle !== article;
+            })
+          );
+        })
+        .catch((err) => {
+          console.error("Error in handleDeleteArticle:", err);
+        });
     } else {
       return;
     }
@@ -319,37 +327,47 @@ function App() {
                     toggleMenu={toggleMenu}
                   />
                   <NewsDataContext.Provider value={newsData}>
-                    <Routes>
-                      <Route
-                        exact
-                        path="/"
-                        element={
-                          <LoadingContext.Provider value={loading}>
-                            <EmptySearchContext.Provider value={emptySearch}>
-                              <Main
-                                handleNewsSearch={handleNewsSearch}
-                                searchClicked={searchClicked}
-                                handleSaveArticle={handleSaveArticle}
-                                handleDeleteArticle={handleDeleteArticle}
-                                savedArticles={savedArticles}
-                              />
-                            </EmptySearchContext.Provider>
-                          </LoadingContext.Provider>
-                        }
-                      ></Route>
-                      <Route
-                        exact
-                        path="/saved-news"
-                        element={
-                          <SavedNews
-                            keywords={keywords}
-                            handleDeleteArticle={handleDeleteArticle}
-                            savedArticles={savedArticles}
-                            currKeyword={currKeyword}
-                          />
-                        }
-                      ></Route>
-                    </Routes>
+                    <SavedArticles.Provider value={savedArticles}>
+                      <Routes>
+                        <Route
+                          exact
+                          path="/"
+                          element={
+                            <LoadingContext.Provider value={loading}>
+                              <EmptySearchContext.Provider value={emptySearch}>
+                                <Main
+                                  handleNewsSearch={handleNewsSearch}
+                                  searchClicked={searchClicked}
+                                  handleSaveArticle={handleSaveArticle}
+                                  handleDeleteArticle={handleDeleteArticle}
+                                />
+                              </EmptySearchContext.Provider>
+                            </LoadingContext.Provider>
+                          }
+                        ></Route>
+                        <Route
+                          exact
+                          path="/saved-news"
+                          element={
+                            <SavedNews
+                              keywords={keywords}
+                              handleDeleteArticle={handleDeleteArticle}
+                              currKeyword={currKeyword}
+                            />
+                          }
+                        ></Route>
+                        <Route
+                          path="*"
+                          element={
+                            isLoggedIn ? (
+                              <Navigate to="/saved-news" replace />
+                            ) : (
+                              <Navigate to="/" replace />
+                            )
+                          }
+                        />
+                      </Routes>
+                    </SavedArticles.Provider>
                   </NewsDataContext.Provider>
                 </div>
 

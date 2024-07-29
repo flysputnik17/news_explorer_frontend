@@ -2,9 +2,11 @@ import "./SavedNews.css";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import SavedArticles from "../../contexts/SavedArticles";
 
-const SavedNews = ({ keywords, handleDeleteArticle, savedArticles }) => {
+const SavedNews = ({ keywords, handleDeleteArticle }) => {
   const currentUser = useContext(CurrentUserContext);
+  const savedArticles = useContext(SavedArticles);
 
   return (
     <div className="saved">
@@ -23,10 +25,7 @@ const SavedNews = ({ keywords, handleDeleteArticle, savedArticles }) => {
         )}
       </div>
       {savedArticles.length > 0 ? (
-        <NewsCardList
-          savedArticles={savedArticles}
-          handleDeleteArticle={handleDeleteArticle}
-        />
+        <NewsCardList handleDeleteArticle={handleDeleteArticle} />
       ) : (
         <></>
       )}

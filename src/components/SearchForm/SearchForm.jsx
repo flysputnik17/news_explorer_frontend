@@ -8,7 +8,6 @@ const SearchForm = ({
   searchClicked,
   handleSaveArticle,
   handleDeleteArticle,
-  savedArticles,
 }) => {
   const [keyWord, setKeyWord] = useState("");
 
@@ -56,7 +55,6 @@ const SearchForm = ({
         <NewsCardList
           handleSaveArticle={handleSaveArticle}
           handleDeleteArticle={handleDeleteArticle}
-          savedArticles={savedArticles}
         />
       ) : (
         <></>
