@@ -93,17 +93,6 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    api
-      .getArticles()
-      .then((res) => {
-        setSavedArticles(res);
-      })
-      .catch((err) => {
-        console.error("error in getArticles Hook:", err);
-      });
-  }, []);
-
   /////////////////////////////////////////////////////////////////////////////////////////////
 
   ///////////////////////////////////////////////////PopUP functions/////////////////////////////
@@ -169,6 +158,18 @@ function App() {
         setCurrentUser(res);
         setIsLoggedIn(true);
         closeActiveModal();
+        setMainRoute(false);
+        navigate("/saved-news");
+        api
+          .getArticles()
+          .then((res) => {
+            setSavedArticles(res);
+            const keywords = res.map((article) => article.keyword);
+            setCurrKeyword(keywords);
+          })
+          .catch((err) => {
+            console.error("error in getArticles Hook:", err);
+          });
       })
       .catch((err) => {
         console.error("Error in checkloggedIn", err);
