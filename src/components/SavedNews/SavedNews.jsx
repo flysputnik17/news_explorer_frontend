@@ -15,10 +15,10 @@ const SavedNews = ({ keywords, handleDeleteArticle }) => {
         <h3 className="saved__username">
           {currentUser.username}, you have {savedArticles.length} saved articles
         </h3>
-        {savedArticles.length > 1 ? (
+        {savedArticles.length > 2 ? (
           <h4 className="saved__cate">
-            By keywords: {keywords[0]}, {keywords[1]}, and {keywords.length - 1}{" "}
-            other
+            By keywords: {savedArticles[0].keyword}, {savedArticles[1].keyword},
+            and {savedArticles.length - 2} other
           </h4>
         ) : (
           <></>

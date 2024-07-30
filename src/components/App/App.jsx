@@ -272,17 +272,20 @@ function App() {
     }
   };
 
-  //func to unsave title
   const handleDeleteArticle = (article) => {
     if (isLoggedIn) {
+      console.log("Deleting article with ID:", article._id);
       api
         .deleteArticle(article._id)
         .then(() => {
           setSavedArticles(
-            savedArticles.filter((savedArticle) => {
-              return savedArticle !== article;
-            })
+            savedArticles.filter(
+              (savedArticle) => savedArticle._id !== article._id
+            )
           );
+          //     setKeywords((prevKeyword) =>
+          //   prevKeyword.filter((keyword) => keyword !== article.keyword)
+          // );
         })
         .catch((err) => {
           console.error("Error in handleDeleteArticle:", err);

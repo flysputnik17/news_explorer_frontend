@@ -69,7 +69,7 @@ const NewsCard = ({
         </>
       ) : (
         <>
-          <div className="newsCard-keyword">{currKeyword}</div>
+          <div className="newsCard-keyword">{news.keyword}</div>
           <button
             type="button"
             className="newsCard__deleteButton"
@@ -95,9 +95,12 @@ const NewsCard = ({
         </p>
         <h2 className="newsCard__content-title">{news.title}</h2>
         <p className="newsCard__content-text">{news.description}</p>
-        <p className="newsCard__content-source">{`${
-          mainRoute ? news.source.name : news.source
-        }`}</p>
+        <a
+          href={news.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="newsCard__content-source"
+        >{`${mainRoute ? news.source.name : news.source}`}</a>
       </div>
     </div>
   );
