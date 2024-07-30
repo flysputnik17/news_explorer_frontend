@@ -4,7 +4,7 @@ import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import SavedArticles from "../../contexts/SavedArticles";
 
-const SavedNews = ({ keywords, handleDeleteArticle }) => {
+const SavedNews = ({ handleDeleteArticle }) => {
   const currentUser = useContext(CurrentUserContext);
   const savedArticles = useContext(SavedArticles);
 

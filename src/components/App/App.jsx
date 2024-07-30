@@ -42,7 +42,6 @@ function App() {
   const [newsData, setNewsData] = useState([]);
   const [searchClicked, setSearchClicked] = useState(false);
   const [emptySearch, setEmptySearch] = useState(true);
-  const [keywords, setKeywords] = useState([]);
   const [currKeyword, setCurrKeyword] = useState("");
   const [savedArticles, setSavedArticles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -230,7 +229,7 @@ function App() {
       setEmptySearch(true);
       setLoading(false);
     } else {
-      setKeywords((prevKeyword) => [...prevKeyword, keyword]);
+      setCurrKeyword((prevKeyword) => [...prevKeyword, keyword]);
       setEmptySearch(false);
       setNewsData([]);
       getSearchResults(keyword)
@@ -283,9 +282,6 @@ function App() {
               (savedArticle) => savedArticle._id !== article._id
             )
           );
-          //     setKeywords((prevKeyword) =>
-          //   prevKeyword.filter((keyword) => keyword !== article.keyword)
-          // );
         })
         .catch((err) => {
           console.error("Error in handleDeleteArticle:", err);
@@ -353,9 +349,7 @@ function App() {
                           path="/saved-news"
                           element={
                             <SavedNews
-                              keywords={keywords}
                               handleDeleteArticle={handleDeleteArticle}
-                              currKeyword={currKeyword}
                             />
                           }
                         ></Route>
