@@ -13,34 +13,79 @@ const SignupPopup = ({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
+  const [emailError, setEmailError] = useState(""); // State for email error message
+  const [passwordError, setPasswordError] = useState(""); // State for password error message
+  const [usernameError, setUsernameError] = useState(""); // State for username error message
 
   const signupButton = document.getElementById("signupButton");
 
   const handleEmailChange = (e) => {
-    setEmail(e.target.value);
+    const value = e.target.value;
+    setEmail(value);
+
+    // Email validation logic
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(value)) {
+      setEmailError("Invalid email address");
+    } else {
+      setEmailError("");
+    }
   };
 
   const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+    const value = e.target.value;
+    setPassword(value);
+
+    // Password validation logic
+    const minPasswordLength = 8; // Example: Minimum length of 6 characters
+    if (value.length < minPasswordLength) {
+      setPasswordError(
+        `Password must be at least ${minPasswordLength} characters`
+      );
+    } else {
+      setPasswordError("");
+    }
   };
 
   const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
+    const value = e.target.value;
+    setUsername(value);
+
+    // Username validation logic
+    const minUsernameLength = 2;
+    if (value.length < minUsernameLength) {
+      setUsernameError(
+        `Username must be at least ${minUsernameLength} characters`
+      );
+    } else {
+      setUsernameError("");
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (emailError || passwordError || usernameError) return; // Prevent submission if there are errors
     handleRegistration({ email, password, username });
   };
+
   useEffect(() => {
-    if (email.length && password.length && username.length > 0) {
+    if (
+      email.length > 0 &&
+      password.length > 0 &&
+      username.length > 0 &&
+      !emailError &&
+      !passwordError &&
+      !usernameError
+    ) {
       setButtonStyle("SignUp__button");
       setButtonText("Sign up");
       signupButton.disabled = false;
     } else {
-      return;
+      setButtonStyle("SignUp__button-disabled");
+      setButtonText("Disabled");
     }
-  }, [email, password, username]);
+  }, [email, password, username, emailError, passwordError, usernameError]);
+
   return (
     <PopupWithForm
       titleText="Sign Up"
@@ -59,18 +104,20 @@ const SignupPopup = ({
           onChange={handleEmailChange}
           required
         />
+        {emailError && <p className="modal__error">{emailError}</p>}
       </label>
       <label htmlFor="password" className="modal__label">
         Password
         <input
           className="modal__input"
           id="password"
-          name="Enter password"
-          type="text"
+          name="password"
+          type="password" // Changed to password type
           placeholder="Password"
           onChange={handlePasswordChange}
           required
         />
+        {passwordError && <p className="modal__error">{passwordError}</p>}
       </label>
       <label htmlFor="Username" className="modal__label">
         Username
@@ -80,11 +127,12 @@ const SignupPopup = ({
           className="modal__input"
           type="text"
           placeholder="Enter your username"
-          minLength="1"
+          minLength="2"
           maxLength="30"
           onChange={handleUsernameChange}
           required
         />
+        {usernameError && <p className="modal__error">{usernameError}</p>}
       </label>
       <button type="submit" disabled className={buttonStyle} id="signupButton">
         {buttonText}
