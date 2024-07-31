@@ -135,6 +135,7 @@ function App() {
       .login(data)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
+        resetState();
         setIsLoggedIn(true);
         setCurrentUser(data);
         closeActiveModal();
@@ -162,9 +163,12 @@ function App() {
         navigate("/saved-news");
         api
           .getArticles()
-          .then((res) => {
-            setSavedArticles(res);
-            const keywords = res.map((article) => article.keyword);
+          .then((articles) => {
+            const userArticles = articles.filter(
+              (article) => article.owner === res._id
+            );
+            setSavedArticles(userArticles);
+            const keywords = userArticles.map((article) => article.keyword);
             setCurrKeyword(keywords);
           })
           .catch((err) => {
@@ -175,10 +179,22 @@ function App() {
         console.error("Error in checkloggedIn", err);
       });
   };
-  const logout = () => {
-    localStorage.removeItem("jwt");
+
+  const resetState = () => {
     setIsLoggedIn(false);
     setMainRoute(true);
+    setCurrKeyword("");
+    setSavedArticles([]);
+    setCurrentUser({
+      username: "",
+      _id: "",
+      token: "",
+    });
+  };
+
+  const logout = () => {
+    localStorage.removeItem("jwt");
+    resetState();
     navigate("/");
   };
 

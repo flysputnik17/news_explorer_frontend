@@ -8,6 +8,11 @@ const SavedNews = ({ handleDeleteArticle }) => {
   const currentUser = useContext(CurrentUserContext);
   const savedArticles = useContext(SavedArticles);
 
+  // Extract unique keywords
+  const uniqueKeywords = [
+    ...new Set(savedArticles.map((article) => article.keyword)),
+  ];
+
   return (
     <div className="saved">
       <div className="saved__title">
@@ -15,10 +20,10 @@ const SavedNews = ({ handleDeleteArticle }) => {
         <h3 className="saved__username">
           {currentUser.username}, you have {savedArticles.length} saved articles
         </h3>
-        {savedArticles.length > 2 ? (
+        {uniqueKeywords.length > 2 ? (
           <h4 className="saved__cate">
-            By keywords: {savedArticles[0].keyword}, {savedArticles[1].keyword},
-            and {savedArticles.length - 2} other
+            By keywords: {uniqueKeywords[0]}, {uniqueKeywords[1]}, and{" "}
+            {uniqueKeywords.length - 2} other
           </h4>
         ) : (
           <></>
