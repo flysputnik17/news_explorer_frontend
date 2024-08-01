@@ -53,6 +53,7 @@ function App() {
     _id: "",
     token: "",
   });
+  const [emailUsed, setEmailUsed] = useState(false);
   //////////////////////////////////////////////////////////////////////////////////////////////
 
   ////////////////////////////////////////Hooks/////////////////////////////////////////////
@@ -109,6 +110,7 @@ function App() {
 
   const closeActiveModal = () => {
     setActiveModal("");
+    setEmailUsed(false);
   };
   /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -127,7 +129,10 @@ function App() {
         closeActiveModal();
         handleConfirm();
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error("error in handleRegistration:", err);
+        setEmailUsed(true);
+      });
   };
 
   const handleLogin = (data) => {
@@ -190,6 +195,7 @@ function App() {
       _id: "",
       token: "",
     });
+    setEmailUsed(false);
   };
 
   const logout = () => {
@@ -392,6 +398,7 @@ function App() {
                     onClose={closeActiveModal}
                     handleSignInButton={handleSignInButton}
                     handleRegistration={handleRegistration}
+                    emailUsed={emailUsed}
                   />
                 )}
                 {activeModal === "sign-in" && (

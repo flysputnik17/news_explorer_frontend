@@ -6,6 +6,7 @@ const SignupPopup = ({
   onClose,
   handleSignInButton,
   handleRegistration,
+  emailUsed,
 }) => {
   const [buttonStyle, setButtonStyle] = useState("SignUp__button-disabled");
   const [buttonText, setButtonText] = useState("Disabled");
@@ -134,6 +135,11 @@ const SignupPopup = ({
         />
         {usernameError && <p className="modal__error">{usernameError}</p>}
       </label>
+      {emailUsed ? (
+        <p className="modal__error">This email is not available</p>
+      ) : (
+        ""
+      )}
       <button type="submit" disabled className={buttonStyle} id="signupButton">
         {buttonText}
       </button>
