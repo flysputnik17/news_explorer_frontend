@@ -10,6 +10,6 @@ export const getSearchResults = (keyWord) => {
   };
 
   return fetch(
-    `https://newsapi.org/v2/everything?q=${keyWord}&from=${from}&to=${to}&sortBy=popularity&apiKey=${APIkey}&pageSize=${pageSize}`
+    `https://nomoreparties.co/news/v2/everything?q=${keyWord}&from=${from}&to=${to}&sortBy=popularity&apiKey=${APIkey}&pageSize=${pageSize}`
   ).then(checkResponse);
 };
