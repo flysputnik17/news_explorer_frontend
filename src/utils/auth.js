@@ -14,11 +14,11 @@ export default class Auth {
     return Promise.reject(`Error:${res.status}`); //returning Error status
   }
 
-  register({ email, password, username }) {
+  register({ email, password, name }) {
     return fetch(`${this.baseUrl}/signup`, {
       method: "POST",
       headers: this.headers,
-      body: JSON.stringify({ email, password, username }),
+      body: JSON.stringify({ email, password, name }),
     }).then(this.checkResponse);
   }
 
