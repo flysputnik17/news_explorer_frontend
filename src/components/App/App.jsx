@@ -167,13 +167,10 @@ function App() {
         setMainRoute(false);
         navigate("/saved-news");
         api
-          .getArticles()
-          .then((articles) => {
-            const userArticles = articles.filter(
-              (article) => article.owner === res._id
-            );
-            setSavedArticles(userArticles);
-            const keywords = userArticles.map((article) => article.keyword);
+          .getArticles(jwt)
+          .then((res) => {
+            setSavedArticles(res);
+            const keywords = res.map((article) => article.keyword);
             setCurrKeyword(keywords);
           })
           .catch((err) => {

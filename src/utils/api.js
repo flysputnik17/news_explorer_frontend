@@ -14,8 +14,7 @@ export default class Api {
     return Promise.reject(`Error:${res.status}`); //returning Error status
   }
 
-  getArticles() {
-    const jwt = localStorage.getItem("jwt");
+  getArticles(jwt) {
     return fetch(`${this.baseUrl}/articles`, {
       method: "GET",
       headers: {

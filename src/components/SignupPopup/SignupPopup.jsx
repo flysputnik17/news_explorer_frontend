@@ -13,7 +13,7 @@ const SignupPopup = ({
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [emailError, setEmailError] = useState(""); // State for email error message
   const [passwordError, setPasswordError] = useState(""); // State for password error message
   const [usernameError, setUsernameError] = useState(""); // State for username error message
@@ -50,7 +50,7 @@ const SignupPopup = ({
 
   const handleUsernameChange = (e) => {
     const value = e.target.value;
-    setUsername(value);
+    setName(value);
 
     // Username validation logic
     const minUsernameLength = 2;
@@ -66,14 +66,14 @@ const SignupPopup = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (emailError || passwordError || usernameError) return; // Prevent submission if there are errors
-    handleRegistration({ email, password, username });
+    handleRegistration({ email, password, name });
   };
 
   useEffect(() => {
     if (
       email.length > 0 &&
       password.length > 0 &&
-      username.length > 0 &&
+      name.length > 0 &&
       !emailError &&
       !passwordError &&
       !usernameError
@@ -85,7 +85,7 @@ const SignupPopup = ({
       setButtonStyle("SignUp__button-disabled");
       setButtonText("Disabled");
     }
-  }, [email, password, username, emailError, passwordError, usernameError]);
+  }, [email, password, name, emailError, passwordError, usernameError]);
 
   return (
     <PopupWithForm
