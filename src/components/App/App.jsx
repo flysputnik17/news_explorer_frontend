@@ -49,7 +49,7 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 514);
   const [currentUser, setCurrentUser] = useState({
-    username: "",
+    name: "",
     _id: "",
     token: "",
   });
@@ -124,7 +124,7 @@ function App() {
         setCurrentUser({
           email: data.email,
           password: data.password,
-          username: data.username,
+          name: data.name,
         });
         closeActiveModal();
         handleConfirm();
@@ -191,7 +191,7 @@ function App() {
     setCurrKeyword("");
     setSavedArticles([]);
     setCurrentUser({
-      username: "",
+      name: "",
       _id: "",
       token: "",
     });

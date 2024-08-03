@@ -18,7 +18,7 @@ const SavedNews = ({ handleDeleteArticle }) => {
       <div className="saved__title">
         <h2 className="saved__articals">Saved articles</h2>
         <h3 className="saved__username">
-          {currentUser.username}, you have {savedArticles.length} saved articles
+          {currentUser.name}, you have {savedArticles.length} saved articles
         </h3>
         {uniqueKeywords.length > 2 ? (
           <h4 className="saved__cate">
