@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import "./SearchForm.css";
 import LoadingContext from "../../contexts/LoadingContext";
@@ -31,7 +31,7 @@ const SearchForm = ({
           account.
         </p>
       </div>
-      <form className="search__searchBar">
+      <form className="search__searchBar" onSubmit={submitSearch}>
         <label htmlFor="topic" className="search__searchBar-label"></label>
         <input
           type="text"
@@ -42,11 +42,10 @@ const SearchForm = ({
           id="keyWord"
         ></input>
         <button
-          type="button"
+          type="submit"
           className={`${"search__searchBar-button"} ${
             loading ? "search__searchBar-button-click" : ""
           } `}
-          onClick={submitSearch}
         >
           Search
         </button>

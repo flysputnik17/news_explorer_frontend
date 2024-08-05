@@ -288,7 +288,7 @@ function App() {
           console.error("Error in handleSaveArticle:", err);
         });
     } else {
-      return;
+      signUpPopup();
     }
   };
 
