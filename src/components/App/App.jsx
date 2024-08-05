@@ -24,11 +24,12 @@ import SignupPopup from "../SignupPopup/SignupPopup";
 import SigninPopup from "../SigninPopup/SigninPopup";
 import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
 import SavedNews from "../SavedNews/SavedNews";
+import ProtectedRoute from "../ProtectedRoute";
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////API Imports/////////////////////////////////////////
 import { getSearchResults } from "../../utils/ThirdPartyApi";
-import Auth from "../../utils/auth";
+import Auth from "../../utils/MainApi";
 import Api from "../../utils/api";
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -148,12 +149,13 @@ function App() {
       })
       .catch((err) => {
         console.error("Error in handleLogin", err);
+        setEmailUsed(true);
       });
   };
 
   const handleSuccessRegistration = () => {
-    handleLogin(currentUser);
     closeActiveModal();
+    handleSignIn();
   };
 
   const checkloggedIn = () => {
@@ -164,8 +166,7 @@ function App() {
         setCurrentUser(res);
         setIsLoggedIn(true);
         closeActiveModal();
-        setMainRoute(false);
-        navigate("/saved-news");
+        setMainRoute(true);
         api
           .getArticles(jwt)
           .then((res) => {
@@ -368,9 +369,11 @@ function App() {
                           exact
                           path="/saved-news"
                           element={
-                            <SavedNews
-                              handleDeleteArticle={handleDeleteArticle}
-                            />
+                            <ProtectedRoute isLoggedIn={isLoggedIn}>
+                              <SavedNews
+                                handleDeleteArticle={handleDeleteArticle}
+                              />
+                            </ProtectedRoute>
                           }
                         ></Route>
                         <Route
@@ -404,6 +407,7 @@ function App() {
                     onClose={closeActiveModal}
                     handleSignupButton={handleSignupButton}
                     handleLogin={handleLogin}
+                    emailUsed={emailUsed}
                   />
                 )}
                 {activeModal === "confirmation" && (

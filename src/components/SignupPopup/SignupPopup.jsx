@@ -38,7 +38,7 @@ const SignupPopup = ({
     setPassword(value);
 
     // Password validation logic
-    const minPasswordLength = 8; // Example: Minimum length of 6 characters
+    const minPasswordLength = 8;
     if (value.length < minPasswordLength) {
       setPasswordError(
         `Password must be at least ${minPasswordLength} characters`
@@ -113,7 +113,7 @@ const SignupPopup = ({
           className="modal__input"
           id="password"
           name="password"
-          type="password" // Changed to password type
+          type="password"
           placeholder="Password"
           onChange={handlePasswordChange}
           required

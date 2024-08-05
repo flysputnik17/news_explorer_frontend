@@ -20,13 +20,22 @@ const SavedNews = ({ handleDeleteArticle }) => {
         <h3 className="saved__username">
           {currentUser.name}, you have {savedArticles.length} saved articles
         </h3>
-        {uniqueKeywords.length > 2 ? (
-          <h4 className="saved__cate">
-            By keywords: {uniqueKeywords[0]}, {uniqueKeywords[1]}, and{" "}
-            {uniqueKeywords.length - 2} other
-          </h4>
-        ) : (
+        {savedArticles.length === 0 ? (
           <></>
+        ) : (
+          <>
+            {uniqueKeywords.length > 3 ? (
+              <h4 className="saved__cate">
+                By keywords: {uniqueKeywords[0]}, {uniqueKeywords[1]}, and{" "}
+                {uniqueKeywords.length - 2} other
+              </h4>
+            ) : (
+              <h4 className="saved__cate">
+                By keywords: {uniqueKeywords[0]}, {uniqueKeywords[1]},{" "}
+                {uniqueKeywords[2]}
+              </h4>
+            )}
+          </>
         )}
       </div>
       {savedArticles.length > 0 ? (

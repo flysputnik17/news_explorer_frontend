@@ -1,7 +1,13 @@
 import { useEffect, useState } from "react";
 import PopupWithForm from "../PopupWithForm/PopupWithForm";
 
-const SigninPopup = ({ isOpen, onClose, handleSignupButton, handleLogin }) => {
+const SigninPopup = ({
+  isOpen,
+  onClose,
+  handleSignupButton,
+  handleLogin,
+  emailUsed,
+}) => {
   const [buttonStyle, setButtonStyle] = useState("SignUp__button-disabled");
   const [buttonText, setButtonText] = useState("Disabled");
 
@@ -29,7 +35,7 @@ const SigninPopup = ({ isOpen, onClose, handleSignupButton, handleLogin }) => {
     setPassword(value);
 
     // Password validation logic
-    const minPasswordLength = 8; // Example: Minimum length of 6 characters
+    const minPasswordLength = 8;
     if (value.length < minPasswordLength) {
       setPasswordError(
         `Password must be at least ${minPasswordLength} characters`
@@ -96,7 +102,11 @@ const SigninPopup = ({ isOpen, onClose, handleSignupButton, handleLogin }) => {
         />
         {passwordError && <p className="modal__error">{passwordError}</p>}
       </label>
-
+      {emailUsed ? (
+        <p className="modal__error">Incorrect email or password</p>
+      ) : (
+        ""
+      )}
       <button id="signinButton" disabled type="submit" className={buttonStyle}>
         {buttonText}
       </button>
