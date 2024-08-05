@@ -145,7 +145,6 @@ function App() {
         setIsLoggedIn(true);
         setCurrentUser(data);
         closeActiveModal();
-        return checkloggedIn();
       })
       .catch((err) => {
         console.error("Error in handleLogin", err);

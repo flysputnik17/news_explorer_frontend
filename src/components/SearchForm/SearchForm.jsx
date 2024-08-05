@@ -1,4 +1,4 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import "./SearchForm.css";
 import LoadingContext from "../../contexts/LoadingContext";
