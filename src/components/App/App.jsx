@@ -117,8 +117,6 @@ function App() {
 
   //////////////////////////////////////////User reg and login functions///////////////////////
   const handleRegistration = (data) => {
-    console.log("click");
-    console.log("data:", data);
     auth
       .register(data)
       .then(() => {
@@ -143,7 +141,7 @@ function App() {
         localStorage.setItem("jwt", res.token);
         resetState();
         setIsLoggedIn(true);
-        setCurrentUser(data);
+        setCurrentUser(currentUser);
         closeActiveModal();
       })
       .catch((err) => {
@@ -185,7 +183,6 @@ function App() {
   const resetState = () => {
     setIsLoggedIn(false);
     setMainRoute(true);
-    setCurrKeyword("");
     setSavedArticles([]);
     setCurrentUser({
       name: "",
@@ -256,7 +253,6 @@ function App() {
         .then((res) => {
           setNewsData(res.articles);
           setCurrKeyword(keyword);
-          console.log("res:", res);
         })
         .catch((err) => {
           console.log("error:", err);
