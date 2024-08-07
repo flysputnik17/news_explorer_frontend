@@ -140,9 +140,20 @@ function App() {
       .then((res) => {
         localStorage.setItem("jwt", res.token);
         setIsLoggedIn(true);
-        setCurrentUser(res);
         closeActiveModal();
-        checkloggedIn();
+        const jwt = localStorage.getItem("jwt");
+        auth.getUserInfo(jwt).then((res) => {
+          setCurrentUser(res);
+          setCurrKeyword(currKeyword);
+        });
+        api
+          .getArticles(jwt)
+          .then((res) => {
+            setSavedArticles(res);
+          })
+          .catch((err) => {
+            console.error("error in getArticles Hook:", err);
+          });
       })
       .catch((err) => {
         console.error("Error in handleLogin", err);
