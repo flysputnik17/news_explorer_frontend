@@ -7,7 +7,12 @@ import EmptySearchContext from "../../contexts/EmptySearchContext";
 import SavedArticles from "../../contexts/SavedArticles";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-const NewsCardList = ({ handleSaveArticle, handleDeleteArticle, keywords }) => {
+const NewsCardList = ({
+  handleSaveArticle,
+  handleDeleteArticle,
+  keywords,
+  handleUnsaveArticle,
+}) => {
   const mainRoute = useContext(MainRouteContext);
   const newsData = useContext(NewsDataContext);
   const emptySearch = useContext(EmptySearchContext);
@@ -42,6 +47,7 @@ const NewsCardList = ({ handleSaveArticle, handleDeleteArticle, keywords }) => {
                     news={news}
                     handleSaveArticle={handleSaveArticle}
                     handleDeleteArticle={handleDeleteArticle}
+                    handleUnsaveArticle={handleUnsaveArticle}
                     isSaved={savedArticles.some(
                       (savedArticle) => savedArticle.title === news.title
                     )}

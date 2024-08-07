@@ -318,18 +318,26 @@ function App() {
     }
   };
 
-  // const handleUnlikeArticle = (article) => {
-  //   if (isLoggedIn) {
-  //     console.log("Unlike article with url: ", article.url);
-  //     setSavedArticles(
-  //       savedArticles.filter((savedArticle) => savedArticle.url !== article.url)
-  //     );
-
-  //     handleDeleteArticle(article);
-  //   } else {
-  //     return;
-  //   }
-  // };
+  const handleUnsaveArticle = (newsItem) => {
+    const isArticleSaved = savedArticles.some((article) => {
+      return article.url === newsItem.url;
+    });
+    const articleBeingDeleted = isArticleSaved
+      ? savedArticles.find((article) => {
+          return article.url === newsItem.url;
+        })
+      : undefined;
+    api
+      .deleteArticle(articleBeingDeleted._id)
+      .then(() => {
+        setSavedArticles(
+          savedArticles.filter((article) => {
+            return article.url !== newsItem.url;
+          })
+        );
+      })
+      .catch((err) => console.error(err));
+  };
 
   ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -379,6 +387,7 @@ function App() {
                                   searchClicked={searchClicked}
                                   handleSaveArticle={handleSaveArticle}
                                   handleDeleteArticle={handleDeleteArticle}
+                                  handleUnsaveArticle={handleUnsaveArticle}
                                 />
                               </EmptySearchContext.Provider>
                             </LoadingContext.Provider>

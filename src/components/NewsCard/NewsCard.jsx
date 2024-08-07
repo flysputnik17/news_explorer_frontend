@@ -9,6 +9,7 @@ const NewsCard = ({
   handleSaveArticle,
   handleDeleteArticle,
   isSaved,
+  handleUnsaveArticle,
 }) => {
   const isLoggedIn = useContext(IsLoggedInContext);
   const mainRoute = useContext(MainRouteContext);
@@ -53,7 +54,7 @@ const NewsCard = ({
             }
             onClick={() => {
               if (isSaved) {
-                handleDeleteArticle(news);
+                handleUnsaveArticle(news);
               } else {
                 handleLikedCard();
                 handleSaveArticle(news, currKeyword);
