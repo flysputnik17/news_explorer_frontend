@@ -49,7 +49,6 @@ export default class Api {
 
   deleteArticle(id) {
     const jwt = localStorage.getItem("jwt");
-    console.log("articles :", `${this.baseUrl}/articles`);
     return fetch(`${this.baseUrl}/articles/${id}`, {
       method: "DELETE",
       headers: {

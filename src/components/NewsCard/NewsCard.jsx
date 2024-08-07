@@ -34,7 +34,7 @@ const NewsCard = ({
   const handleLikedCard = () => {
     if (isLoggedIn === false) {
       return;
-    } else if (isLoggedIn === true && likedCard === "newsCard__saveButton") {
+    } else if (isLoggedIn && likedCard === "newsCard__saveButton") {
       setLikedCard("newsCard__saveButton-liked");
     } else {
       setLikedCard("newsCard__saveButton");
@@ -52,8 +52,12 @@ const NewsCard = ({
               isSaved ? "newsCard__saveButton-liked" : "newsCard__saveButton"
             }
             onClick={() => {
-              handleLikedCard();
-              handleSaveArticle(news, currKeyword);
+              if (isSaved) {
+                handleDeleteArticle(news);
+              } else {
+                handleLikedCard();
+                handleSaveArticle(news, currKeyword);
+              }
             }}
             onMouseEnter={() => {
               if (!isLoggedIn)

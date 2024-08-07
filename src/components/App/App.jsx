@@ -139,10 +139,10 @@ function App() {
       .login(data)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
-        resetState();
         setIsLoggedIn(true);
-        setCurrentUser(currentUser);
+        setCurrentUser(res);
         closeActiveModal();
+        checkloggedIn();
       })
       .catch((err) => {
         console.error("Error in handleLogin", err);
@@ -248,7 +248,7 @@ function App() {
     } else {
       setCurrKeyword((prevKeyword) => [...prevKeyword, keyword]);
       setEmptySearch(false);
-      setNewsData([]);
+      // setNewsData([]);
       getSearchResults(keyword)
         .then((res) => {
           setNewsData(res.articles);
@@ -295,7 +295,7 @@ function App() {
         .then(() => {
           setSavedArticles(
             savedArticles.filter(
-              (savedArticle) => savedArticle._id !== article._id
+              (savedArticle) => savedArticle.url !== article.url
             )
           );
         })
@@ -306,6 +306,19 @@ function App() {
       return;
     }
   };
+
+  // const handleUnlikeArticle = (article) => {
+  //   if (isLoggedIn) {
+  //     console.log("Unlike article with url: ", article.url);
+  //     setSavedArticles(
+  //       savedArticles.filter((savedArticle) => savedArticle.url !== article.url)
+  //     );
+
+  //     handleDeleteArticle(article);
+  //   } else {
+  //     return;
+  //   }
+  // };
 
   ////////////////////////////////////////////////////////////////////////////////////////////////
 
