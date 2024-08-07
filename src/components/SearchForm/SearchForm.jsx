@@ -38,6 +38,7 @@ const SearchForm = ({
           type="text"
           className="search__searchBar-input"
           placeholder="Enter topic"
+          value={keyWord}
           onChange={newsInput}
           name="keyWord"
           id="keyWord"

@@ -102,6 +102,7 @@ const SignupPopup = ({
           className="modal__input"
           id="email"
           placeholder="Enter email"
+          value={email}
           onChange={handleEmailChange}
           required
         />
@@ -115,6 +116,7 @@ const SignupPopup = ({
           name="password"
           type="password"
           placeholder="Password"
+          value={password}
           onChange={handlePasswordChange}
           required
         />
@@ -130,6 +132,7 @@ const SignupPopup = ({
           placeholder="Enter your username"
           minLength="2"
           maxLength="30"
+          value={name}
           onChange={handleUsernameChange}
           required
         />
