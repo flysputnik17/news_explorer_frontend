@@ -4,15 +4,20 @@ import NewsCard from "../NewsCard/NewsCard";
 import MainRouteContext from "../../contexts/MainRouteContext";
 import NewsDataContext from "../../contexts/NewsDataContext";
 import EmptySearchContext from "../../contexts/EmptySearchContext";
+import SavedArticles from "../../contexts/SavedArticles";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
+
 const NewsCardList = ({
   handleSaveArticle,
   handleDeleteArticle,
-  savedArticles,
   keywords,
+  handleUnsaveArticle,
 }) => {
   const mainRoute = useContext(MainRouteContext);
   const newsData = useContext(NewsDataContext);
   const emptySearch = useContext(EmptySearchContext);
+  const savedArticles = useContext(SavedArticles);
+  const currentUser = useContext(CurrentUserContext);
   const [visibleCardsCount, setVisibleCardsCount] = useState(3);
 
   const handleShowMore = () => {
@@ -42,6 +47,7 @@ const NewsCardList = ({
                     news={news}
                     handleSaveArticle={handleSaveArticle}
                     handleDeleteArticle={handleDeleteArticle}
+                    handleUnsaveArticle={handleUnsaveArticle}
                     isSaved={savedArticles.some(
                       (savedArticle) => savedArticle.title === news.title
                     )}
@@ -61,14 +67,21 @@ const NewsCardList = ({
           ) : (
             <>
               <div className="searchResult__section">
-                {savedArticles.map((news, index) => (
-                  <NewsCard
-                    key={index}
-                    news={news}
-                    handleDeleteArticle={handleDeleteArticle}
-                    keywords={keywords}
-                  />
-                ))}
+                {savedArticles.map((news) => {
+                  const isOwn = news.owner === currentUser._id;
+                  if (isOwn) {
+                    return (
+                      <NewsCard
+                        key={news._id}
+                        news={news}
+                        handleDeleteArticle={handleDeleteArticle}
+                        keywords={keywords}
+                      />
+                    );
+                  } else {
+                    return null;
+                  }
+                })}
               </div>
             </>
           )}

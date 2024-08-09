@@ -85,6 +85,15 @@
   margin-top: 9px;
 }
 
+.modal__error {
+  font-family: "inter", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14.5px;
+  color: #ff0000;
+  margin: 3px auto 0 auto;
+}
+
 .modal__add-button {
   width: 124px;
   height: 36px;

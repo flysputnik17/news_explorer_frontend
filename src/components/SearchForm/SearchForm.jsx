@@ -8,7 +8,7 @@ const SearchForm = ({
   searchClicked,
   handleSaveArticle,
   handleDeleteArticle,
-  savedArticles,
+  handleUnsaveArticle,
 }) => {
   const [keyWord, setKeyWord] = useState("");
 
@@ -32,22 +32,22 @@ const SearchForm = ({
           account.
         </p>
       </div>
-      <form className="search__searchBar">
+      <form className="search__searchBar" onSubmit={submitSearch}>
         <label htmlFor="topic" className="search__searchBar-label"></label>
         <input
           type="text"
           className="search__searchBar-input"
           placeholder="Enter topic"
+          value={keyWord}
           onChange={newsInput}
           name="keyWord"
           id="keyWord"
         ></input>
         <button
-          type="button"
+          type="submit"
           className={`${"search__searchBar-button"} ${
             loading ? "search__searchBar-button-click" : ""
           } `}
-          onClick={submitSearch}
         >
           Search
         </button>
@@ -56,7 +56,7 @@ const SearchForm = ({
         <NewsCardList
           handleSaveArticle={handleSaveArticle}
           handleDeleteArticle={handleDeleteArticle}
-          savedArticles={savedArticles}
+          handleUnsaveArticle={handleUnsaveArticle}
         />
       ) : (
         <></>

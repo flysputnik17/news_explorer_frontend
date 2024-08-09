@@ -2,31 +2,44 @@ import "./SavedNews.css";
 import NewsCardList from "../NewsCardList/NewsCardList";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import SavedArticles from "../../contexts/SavedArticles";
 
-const SavedNews = ({ keywords, handleDeleteArticle, savedArticles }) => {
+const SavedNews = ({ handleDeleteArticle }) => {
   const currentUser = useContext(CurrentUserContext);
+  const savedArticles = useContext(SavedArticles);
+
+  // Extract unique keywords
+  const uniqueKeywords = [
+    ...new Set(savedArticles.map((article) => article.keyword)),
+  ];
 
   return (
     <div className="saved">
       <div className="saved__title">
         <h2 className="saved__articals">Saved articles</h2>
         <h3 className="saved__username">
-          {currentUser.username}, you have {savedArticles.length} saved articles
+          {currentUser.name}, you have {savedArticles.length} saved articles
         </h3>
-        {savedArticles.length > 1 ? (
-          <h4 className="saved__cate">
-            By keywords: {keywords[0]}, {keywords[1]}, and {keywords.length - 1}{" "}
-            other
-          </h4>
-        ) : (
+        {savedArticles.length === 0 ? (
           <></>
+        ) : (
+          <>
+            {uniqueKeywords.length > 3 ? (
+              <h4 className="saved__cate">
+                By keywords: {uniqueKeywords[0]}, {uniqueKeywords[1]}, and{" "}
+                {uniqueKeywords.length - 2} other
+              </h4>
+            ) : (
+              <h4 className="saved__cate">
+                By keywords: {uniqueKeywords[0]}, {uniqueKeywords[1]},{" "}
+                {uniqueKeywords[2]}
+              </h4>
+            )}
+          </>
         )}
       </div>
       {savedArticles.length > 0 ? (
-        <NewsCardList
-          savedArticles={savedArticles}
-          handleDeleteArticle={handleDeleteArticle}
-        />
+        <NewsCardList handleDeleteArticle={handleDeleteArticle} />
       ) : (
         <></>
       )}

@@ -1,6 +1,6 @@
 /////////////////////////////////////////////////React Imports/////////////////////////////////////////////////
 import { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, Navigate } from "react-router-dom";
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 ////////////////////////////////////////////Context Imports////////////////////////////////////
@@ -12,6 +12,7 @@ import NewsDataContext from "../../contexts/NewsDataContext";
 import LoadingContext from "../../contexts/LoadingContext";
 import EmptySearchContext from "../../contexts/EmptySearchContext";
 import CurrentKeyWordContext from "../../contexts/CurrentKeyWordContext";
+import SavedArticles from "../../contexts/SavedArticles";
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////React Components Imports/////////////////////////////////
@@ -23,15 +24,17 @@ import SignupPopup from "../SignupPopup/SignupPopup";
 import SigninPopup from "../SigninPopup/SigninPopup";
 import ConfirmationPopup from "../ConfirmationPopup/ConfirmationPopup";
 import SavedNews from "../SavedNews/SavedNews";
+import ProtectedRoute from "../ProtectedRoute";
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////API Imports/////////////////////////////////////////
 import { getSearchResults } from "../../utils/ThirdPartyApi";
-import Auth from "../../utils/auth";
+import Auth from "../../utils/MainApi";
+import Api from "../../utils/api";
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 const auth = new Auth({ headers: { "Content-Type": "application/json" } });
-
+const api = new Api({ headers: { "Content-Type": "application/json" } });
 function App() {
   /////////////////////////////////////////////////////////////////////////////////////////
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,7 +43,6 @@ function App() {
   const [newsData, setNewsData] = useState([]);
   const [searchClicked, setSearchClicked] = useState(false);
   const [emptySearch, setEmptySearch] = useState(true);
-  const [keywords, setKeywords] = useState([]);
   const [currKeyword, setCurrKeyword] = useState("");
   const [savedArticles, setSavedArticles] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -48,10 +50,11 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 514);
   const [currentUser, setCurrentUser] = useState({
-    username: "",
+    name: "",
     _id: "",
     token: "",
   });
+  const [emailUsed, setEmailUsed] = useState(false);
   //////////////////////////////////////////////////////////////////////////////////////////////
 
   ////////////////////////////////////////Hooks/////////////////////////////////////////////
@@ -108,45 +111,59 @@ function App() {
 
   const closeActiveModal = () => {
     setActiveModal("");
+    setEmailUsed(false);
   };
   /////////////////////////////////////////////////////////////////////////////////////////////
 
   //////////////////////////////////////////User reg and login functions///////////////////////
   const handleRegistration = (data) => {
-    console.log("click");
-    console.log("data:", data);
     auth
       .register(data)
       .then(() => {
         setCurrentUser({
           email: data.email,
           password: data.password,
-          username: data.username,
+          name: data.name,
         });
         closeActiveModal();
         handleConfirm();
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error("error in handleRegistration:", err);
+        setEmailUsed(true);
+      });
   };
 
   const handleLogin = (data) => {
-    setIsLoggedIn(true);
     auth
       .login(data)
       .then((res) => {
         localStorage.setItem("jwt", res.token);
-        setCurrentUser(data);
+        setIsLoggedIn(true);
         closeActiveModal();
-        return checkloggedIn();
+        const jwt = localStorage.getItem("jwt");
+        auth.getUserInfo(jwt).then((res) => {
+          setCurrentUser(res);
+          setCurrKeyword(currKeyword);
+        });
+        api
+          .getArticles(jwt)
+          .then((res) => {
+            setSavedArticles(res);
+          })
+          .catch((err) => {
+            console.error("error in getArticles Hook:", err);
+          });
       })
       .catch((err) => {
         console.error("Error in handleLogin", err);
+        setEmailUsed(true);
       });
   };
 
   const handleSuccessRegistration = () => {
-    handleLogin(currentUser);
     closeActiveModal();
+    handleSignIn();
   };
 
   const checkloggedIn = () => {
@@ -154,17 +171,41 @@ function App() {
     return auth
       .getUserInfo(jwt)
       .then((res) => {
-        setIsLoggedIn(true);
         setCurrentUser(res);
-        navigate("/saved-news");
+        setIsLoggedIn(true);
+        closeActiveModal();
+        setMainRoute(true);
+        api
+          .getArticles(jwt)
+          .then((res) => {
+            setSavedArticles(res);
+            const keywords = res.map((article) => article.keyword);
+            setCurrKeyword(keywords);
+          })
+          .catch((err) => {
+            console.error("error in getArticles Hook:", err);
+          });
       })
       .catch((err) => {
         console.error("Error in checkloggedIn", err);
       });
   };
-  const logout = () => {
+
+  const resetState = () => {
     setIsLoggedIn(false);
     setMainRoute(true);
+    setSavedArticles([]);
+    setCurrentUser({
+      name: "",
+      _id: "",
+      token: "",
+    });
+    setEmailUsed(false);
+  };
+
+  const logout = () => {
+    localStorage.removeItem("jwt");
+    resetState();
     navigate("/");
   };
 
@@ -216,14 +257,13 @@ function App() {
       setEmptySearch(true);
       setLoading(false);
     } else {
-      setKeywords((prevKeyword) => [...prevKeyword, keyword]);
+      setCurrKeyword((prevKeyword) => [...prevKeyword, keyword]);
       setEmptySearch(false);
-      setNewsData([]);
+      // setNewsData([]);
       getSearchResults(keyword)
         .then((res) => {
           setNewsData(res.articles);
           setCurrKeyword(keyword);
-          console.log("res:", res);
         })
         .catch((err) => {
           console.log("error:", err);
@@ -237,27 +277,66 @@ function App() {
   //func to save articles
   const handleSaveArticle = (article, currKeyword) => {
     if (isLoggedIn) {
-      setSavedArticles((prevArticles) => [...prevArticles, article]);
-      setCurrKeyword(currKeyword);
+      api
+        .addArticle(currKeyword, {
+          title: article.title,
+          description: article.description,
+          publishedAt: article.publishedAt,
+          source: article.source.name,
+          url: article.url,
+          urlToImage: article.urlToImage,
+        })
+        .then((res) => {
+          setSavedArticles((prevArticles) => [res.data, ...prevArticles]);
+          setCurrKeyword(currKeyword);
+        })
+        .catch((err) => {
+          console.error("Error in handleSaveArticle:", err);
+        });
+    } else {
+      signUpPopup();
+    }
+  };
+
+  const handleDeleteArticle = (article) => {
+    if (isLoggedIn) {
+      console.log("Deleting article with ID:", article._id);
+      api
+        .deleteArticle(article._id)
+        .then(() => {
+          setSavedArticles(
+            savedArticles.filter(
+              (savedArticle) => savedArticle.url !== article.url
+            )
+          );
+        })
+        .catch((err) => {
+          console.error("Error in handleDeleteArticle:", err);
+        });
     } else {
       return;
     }
   };
 
-  //func to unsave title
-  const handleDeleteArticle = (article) => {
-    if (isLoggedIn) {
-      setSavedArticles((prevArticles) =>
-        prevArticles.filter(
-          (savedArticle) => savedArticle.title !== article.title
-        )
-      );
-      setKeywords((prevKeyword) =>
-        prevKeyword.filter((keyword) => keyword !== article.keyword)
-      );
-    } else {
-      return;
-    }
+  const handleUnsaveArticle = (newsItem) => {
+    const isArticleSaved = savedArticles.some((article) => {
+      return article.url === newsItem.url;
+    });
+    const articleBeingDeleted = isArticleSaved
+      ? savedArticles.find((article) => {
+          return article.url === newsItem.url;
+        })
+      : undefined;
+    api
+      .deleteArticle(articleBeingDeleted._id)
+      .then(() => {
+        setSavedArticles(
+          savedArticles.filter((article) => {
+            return article.url !== newsItem.url;
+          })
+        );
+      })
+      .catch((err) => console.error(err));
   };
 
   ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -295,37 +374,48 @@ function App() {
                     toggleMenu={toggleMenu}
                   />
                   <NewsDataContext.Provider value={newsData}>
-                    <Routes>
-                      <Route
-                        exact
-                        path="/"
-                        element={
-                          <LoadingContext.Provider value={loading}>
-                            <EmptySearchContext.Provider value={emptySearch}>
-                              <Main
-                                handleNewsSearch={handleNewsSearch}
-                                searchClicked={searchClicked}
-                                handleSaveArticle={handleSaveArticle}
+                    <SavedArticles.Provider value={savedArticles}>
+                      <Routes>
+                        <Route
+                          exact
+                          path="/"
+                          element={
+                            <LoadingContext.Provider value={loading}>
+                              <EmptySearchContext.Provider value={emptySearch}>
+                                <Main
+                                  handleNewsSearch={handleNewsSearch}
+                                  searchClicked={searchClicked}
+                                  handleSaveArticle={handleSaveArticle}
+                                  handleDeleteArticle={handleDeleteArticle}
+                                  handleUnsaveArticle={handleUnsaveArticle}
+                                />
+                              </EmptySearchContext.Provider>
+                            </LoadingContext.Provider>
+                          }
+                        ></Route>
+                        <Route
+                          exact
+                          path="/saved-news"
+                          element={
+                            <ProtectedRoute isLoggedIn={isLoggedIn}>
+                              <SavedNews
                                 handleDeleteArticle={handleDeleteArticle}
-                                savedArticles={savedArticles}
                               />
-                            </EmptySearchContext.Provider>
-                          </LoadingContext.Provider>
-                        }
-                      ></Route>
-                      <Route
-                        exact
-                        path="/saved-news"
-                        element={
-                          <SavedNews
-                            keywords={keywords}
-                            handleDeleteArticle={handleDeleteArticle}
-                            savedArticles={savedArticles}
-                            currKeyword={currKeyword}
-                          />
-                        }
-                      ></Route>
-                    </Routes>
+                            </ProtectedRoute>
+                          }
+                        ></Route>
+                        <Route
+                          path="*"
+                          element={
+                            isLoggedIn ? (
+                              <Navigate to="/saved-news" replace />
+                            ) : (
+                              <Navigate to="/" replace />
+                            )
+                          }
+                        />
+                      </Routes>
+                    </SavedArticles.Provider>
                   </NewsDataContext.Provider>
                 </div>
 
@@ -336,6 +426,7 @@ function App() {
                     onClose={closeActiveModal}
                     handleSignInButton={handleSignInButton}
                     handleRegistration={handleRegistration}
+                    emailUsed={emailUsed}
                   />
                 )}
                 {activeModal === "sign-in" && (
@@ -344,6 +435,7 @@ function App() {
                     onClose={closeActiveModal}
                     handleSignupButton={handleSignupButton}
                     handleLogin={handleLogin}
+                    emailUsed={emailUsed}
                   />
                 )}
                 {activeModal === "confirmation" && (

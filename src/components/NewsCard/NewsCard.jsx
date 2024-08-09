@@ -9,6 +9,7 @@ const NewsCard = ({
   handleSaveArticle,
   handleDeleteArticle,
   isSaved,
+  handleUnsaveArticle,
 }) => {
   const isLoggedIn = useContext(IsLoggedInContext);
   const mainRoute = useContext(MainRouteContext);
@@ -34,7 +35,7 @@ const NewsCard = ({
   const handleLikedCard = () => {
     if (isLoggedIn === false) {
       return;
-    } else if (isLoggedIn === true && likedCard === "newsCard__saveButton") {
+    } else if (isLoggedIn && likedCard === "newsCard__saveButton") {
       setLikedCard("newsCard__saveButton-liked");
     } else {
       setLikedCard("newsCard__saveButton");
@@ -52,8 +53,12 @@ const NewsCard = ({
               isSaved ? "newsCard__saveButton-liked" : "newsCard__saveButton"
             }
             onClick={() => {
-              handleLikedCard();
-              handleSaveArticle(news, currKeyword);
+              if (isSaved) {
+                handleUnsaveArticle(news);
+              } else {
+                handleLikedCard();
+                handleSaveArticle(news, currKeyword);
+              }
             }}
             onMouseEnter={() => {
               if (!isLoggedIn)
@@ -69,7 +74,7 @@ const NewsCard = ({
         </>
       ) : (
         <>
-          <div className="newsCard-keyword">{currKeyword}</div>
+          <div className="newsCard-keyword">{news.keyword}</div>
           <button
             type="button"
             className="newsCard__deleteButton"
@@ -95,7 +100,12 @@ const NewsCard = ({
         </p>
         <h2 className="newsCard__content-title">{news.title}</h2>
         <p className="newsCard__content-text">{news.description}</p>
-        <p className="newsCard__content-source">{news.source.name}</p>
+        <a
+          href={news.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="newsCard__content-source"
+        >{`${mainRoute ? news.source.name : news.source}`}</a>
       </div>
     </div>
   );
