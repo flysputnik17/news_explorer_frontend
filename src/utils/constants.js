@@ -36,5 +36,5 @@ export {
 
 export const baseUrl =
   import.meta.env.MODE === "production"
-    ? "https://api.newsexplorer.jumpingcrab.com"
+    ? "https://news-explorer-backend-five.vercel.app"
     : "http://localhost:3001";
