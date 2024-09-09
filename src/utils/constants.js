@@ -34,6 +34,8 @@ export {
   headerButtonHomeModBlack,
 };
 
+import process from "node";
+
 export const baseUrl =
   process.env.NODE_ENV === "production"
     ? "https://api.newsexplorer.jumpingcrab.com"
