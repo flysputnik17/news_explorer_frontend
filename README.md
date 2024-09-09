@@ -1,6 +1,6 @@
 # Project: NewsExplorer APP (React + Vite + Node.js + express.js + Mongod)
 
-<a href="https://newsexplorer.jumpingcrab.com" target="blank">newsexplorer.jumpingcrab.com</a>
+<a href="https://newsexplorer.jumpingcrab.com](https://news-explorer-frontend.vercel.app/" target="blank">newsexplorer</a>
 
 ## GitHub Repository link https://github.com/flysputnik17/news_explorer_frontend.git
 
